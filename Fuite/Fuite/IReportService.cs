@@ -17,7 +17,7 @@ namespace FuiteAPI
         /// <param name="report">Report à ajouter</param>
         /// <returns>True si opération réussie</returns>
         [OperationContract]
-        [WebInvoke]
+        [WebInvoke(Method ="*",ResponseFormat = WebMessageFormat.Json)]
         Result AddReport(Report report);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace FuiteAPI
         /// <param name="report">Nouvel état de la fuite</param>
         /// <returns>True si opération réussie</returns>
         [OperationContract]
-        [WebInvoke]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
         Result SetReport(Report report);
 
         /// <summary>
@@ -34,11 +34,11 @@ namespace FuiteAPI
         /// </summary>
         /// <returns>La liste de tous les reports de fuite</returns>
         [OperationContract]
-        [WebGet]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         Result GetReports(State state, int minIndex, int maxIndex);
 
         [OperationContract]
-        [WebGet]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         Result GetReport(int id);
     }
 
@@ -67,6 +67,15 @@ namespace FuiteAPI
         string description;
         State state = State.New;
         int? id;
+
+        public bool IsValid()
+        {
+            if(ip == null || latitude == null || longitude == null || picture == null)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public Report(Reports reports)
         {

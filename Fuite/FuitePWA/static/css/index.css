@@ -1,0 +1,55 @@
+:root {
+    --primary-color: #469cbf;
+    --background-color: #37536D;
+    --radius: 10px;
+    --shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
+    --space: 10px;
+}
+
+html 
+{
+    height: 100%;
+}
+
+body
+{
+    background-color: var(--background-color);
+    height: 100%;
+}
+
+body>div 
+{
+    background-color: white;
+}
+
+.camera 
+{
+    background-color: var(--primary-color);
+    height: 40%;
+}
+
+.round 
+{
+    border-radius: var(--radius);
+    padding: var(--space);
+    margin: var(--space);
+}
+
+button {
+    border: 0;
+    padding-left: calc(var(--space)*'2');
+    padding-right: calc(var(--space)*'2');
+}
+
+    button.submit {
+        display: block;
+        background-color: #50a750; /*var(--primary-color);*/
+        color: white;
+        width: 90%;
+        margin: auto;
+    }
+
+textarea
+{
+    resize:none;
+}

@@ -19,7 +19,7 @@ namespace FuiteAPI
         /// <param name="password">Mot de passe</param>
         /// <returns>True si connecté, False sinon</returns>
         [OperationContract]
-        [WebGet]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         Result Login(string username, string password);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace FuiteAPI
         /// <param name="guid">Guide pour connexion automatique</param>
         /// <returns>True si connecté</returns>
         [OperationContract]
-        [WebGet]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         bool LoginWindows();
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FuiteAPI
         /// </summary>
         /// <returns>True si déconnecté</returns>
         [OperationContract]
-        [WebGet]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
         bool Logout();
     }
 

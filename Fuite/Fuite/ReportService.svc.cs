@@ -5,18 +5,46 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Web.Security;
+using System.ServiceModel.Channels;
+using System.Net;
+using System.Web;
 
 namespace FuiteAPI
 {
     public class ReportService : IReportService
     {
+
+        private bool AddCORS()
+        {
+            WebOperationContext.Current.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
+            if (WebOperationContext.Current.IncomingRequest.Method == "OPTIONS")
+            {
+                WebOperationContext.Current.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "POST, GET");
+                WebOperationContext.Current.OutgoingResponse.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept");
+                return false;
+            }
+            return true;
+        }
+
         public Result AddReport(Report report)
         {
+            if (this.AddCORS() == false)
+                return null;
+            
             Result r = new Result();
             try
             {
                 if (report == null || report.Id != null)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite ne disposant pas d'ID.");
+                OperationContext context = OperationContext.Current;
+                MessageProperties prop = context.IncomingMessageProperties;
+                RemoteEndpointMessageProperty endpoint =
+                       prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+                string ip = endpoint.Address;
+                report.Ip = ip;
+                if (report.IsValid() == false)
+                    throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
                 FuiteEntities entities = new FuiteEntities();
                 entities.Reports.Add(report.Reports);
                 entities.SaveChanges();
@@ -31,6 +59,8 @@ namespace FuiteAPI
 
         public Result SetReport(Report report)
         {
+            if (this.AddCORS() == false)
+                return null;
             Result re = new Result();
             try
             {
@@ -71,6 +101,8 @@ namespace FuiteAPI
 
         public Result GetReport(int id)
         {
+            if (this.AddCORS() == false)
+                return null;
             Result r = new Result();
             try
             {
@@ -95,6 +127,8 @@ namespace FuiteAPI
 
         public Result GetReports(State state, int minIndex, int maxIndex)
         {
+            if (this.AddCORS() == false)
+                return null;
             Result re = new Result();
             try
             {
