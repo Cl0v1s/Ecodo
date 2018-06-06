@@ -4,5 +4,5 @@
     "sourceMap": true,
     "outFile": "static/js/index.js"
   },
-  "files": ["ts/Geolocator.ts", "ts/App.ts", "ts/AlertManager.ts", "ts/Report.ts"]
+  "files": ["ts/Geolocator.ts", "ts/App.ts", "ts/AlertManager.ts", "ts/Report.ts", "ts/Camera.ts"]
 }

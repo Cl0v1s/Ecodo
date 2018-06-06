@@ -2,7 +2,7 @@ class Report {
     public Latitude: number = null;
     public Longitude: number = null; 
     public Description: string = null;
-    public Picture: string = "zbleh";
+    public Picture: string = null;
 
     public Report() {
 

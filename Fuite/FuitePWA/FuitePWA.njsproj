@@ -8,7 +8,7 @@
     <EnableTypeScript>true</EnableTypeScript>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -37,6 +37,8 @@
     <Compile Include="static\js\index.js" />
     <Compile Include="requires.js" />
     <Compile Include="static\js\requires.js" />
+    <Compile Include="static\js\vendor\webcam.min.js" />
+    <Compile Include="ts\Camera.ts" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -44,9 +46,11 @@
     <Content Include="static\css\vendor\bootstrap.min.css" />
     <Content Include="static\css\index.css" />
     <Content Include="static\js\index.js.map" />
+    <Content Include="static\js\vendor\webcam.swf" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="static\js\vendor\" />
     <Folder Include="ts\" />
     <Folder Include="static\" />
     <Folder Include="static\css\" />

@@ -1,7 +1,7 @@
 class Geolocator {
     SubscribeLocation(func) {
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(func);
+            navigator.geolocation.getCurrentPosition(func);
             return true;
         }
         return false;
@@ -22,6 +22,7 @@ class Geolocator {
 Geolocator.Instance = new Geolocator();
 /// <reference path="Geolocator.ts">
 /// <reference path="Report.ts">
+/// <reference path="Camera.ts">
 class App {
     constructor() {
         this.geolocEnabled = false;
@@ -30,6 +31,7 @@ class App {
     Attach() {
         document.querySelector("#submit").addEventListener("click", (ev) => { this.Submit(ev.target); });
         document.querySelector("#submit span").addEventListener("click", (ev) => { this.Submit(ev.target.parentElement); });
+        Camera.Instance.Attach("#camera video", "#camera canvas");
     }
     Start() {
         this.report = new Report();
@@ -60,6 +62,8 @@ class App {
         return true;
     }
     Submit(target) {
+        this.report.Picture = Camera.Instance.Capture();
+        console.log(this.report);
         if (this.CheckForm() == false)
             return;
         target.classList.remove("clickable");
@@ -100,7 +104,7 @@ class Report {
         this.Latitude = null;
         this.Longitude = null;
         this.Description = null;
-        this.Picture = "zbleh";
+        this.Picture = null;
     }
     Report() {
     }
@@ -123,4 +127,51 @@ class Report {
         return data;
     }
 }
+class Camera {
+    Attach(videot, canvast) {
+        let streaming = false;
+        this.video = document.querySelector(videot);
+        this.canvas = document.querySelector(canvast);
+        let video = this.video;
+        let canvas = this.canvas;
+        navigator.getMedia = (navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia);
+        let width = 320;
+        let height = 0;
+        navigator.getMedia({
+            video: true,
+            audio: false
+        }, function (stream) {
+            if (navigator.mozGetUserMedia) {
+                video.mozSrcObject = stream;
+            }
+            else {
+                var vendorURL = window.URL || window.webkitURL;
+                video.srcObject = stream;
+            }
+            video.play();
+        }, function (err) {
+            console.log("An error occured! " + err);
+        });
+        video.addEventListener('canplay', function (ev) {
+            if (!streaming) {
+                height = video.videoHeight / (video.videoWidth / width);
+                video.setAttribute('width', width.toString());
+                video.setAttribute('height', height.toString());
+                canvas.setAttribute('width', width.toString());
+                canvas.setAttribute('height', height.toString());
+                streaming = true;
+            }
+        }, false);
+    }
+    Capture() {
+        let width = parseInt(this.video.getAttribute("width"));
+        let height = parseInt(this.video.getAttribute("height"));
+        this.canvas.getContext('2d').drawImage(this.video, 0, 0, width, height);
+        return this.canvas.toDataURL('image/png');
+    }
+}
+Camera.Instance = new Camera();
 //# sourceMappingURL=index.js.map

@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="static/css/index.css" />
 </head>
 <body>
-    <div class="round camera" div="camera"></div>
+    <div class="round camera" id="camera">
+        <video id="video"></video>
+        <canvas id="canvas"></canvas>
+    </div>
+
+
     <div class="round">
         <div class="input-group">
             <div class="input-group-prepend">
@@ -32,16 +37,17 @@
 
     <div class="text-center no-bg round">
         Vous affirmez avoir pris confiance de notre politique de confidentialité.<br />
-        Vous pouvez demander la récupération ou la suppression de vos données en envoyant un e-mail à 
-        thierry.fernandez@zbleh.com
+        Vous pouvez demander la récupération ou la suppression de vos données en envoyant un e-mail à
+        thierry.fernandez@sgacub.fr
 
-     </div>
+    </div>
 
-        <button class="round submit clickable" id="submit">
-            <span>Envoyer</span>
-            <div class="loading"></div>
-        </button>
-        <script src="static/js/requires.js"></script>
-        <script src="static/js/index.js"></script>
+    <button class="round submit clickable" id="submit">
+        <span>Envoyer</span>
+        <div class="loading"></div>
+    </button>
+
+    <script src="static/js/requires.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /// <reference path="Geolocator.ts">
 /// <reference path="Report.ts">
-
+/// <reference path="Camera.ts">
 
 class App {
     public static readonly Instance: App = new App();
@@ -15,8 +15,9 @@ class App {
     }
 
     public Attach(): void {
-        document.querySelector("#submit").addEventListener("click", (ev: Event) => { this.Submit(<HTMLElement>ev.target); })
-        document.querySelector("#submit span").addEventListener("click", (ev: Event) => { this.Submit((<HTMLElement>ev.target).parentElement); })
+        document.querySelector("#submit").addEventListener("click", (ev: Event) => { this.Submit(<HTMLElement>ev.target); });
+        document.querySelector("#submit span").addEventListener("click", (ev: Event) => { this.Submit((<HTMLElement>ev.target).parentElement); });
+        Camera.Instance.Attach("#camera video", "#camera canvas")
     }
 
     public Start(): void {
@@ -52,10 +53,14 @@ class App {
         return true;
     }
 
+
     public Submit(target: HTMLElement): void {
+        this.report.Picture = Camera.Instance.Capture();
+        console.log(this.report);
+
+
         if (this.CheckForm() == false)
             return;
-
 
         target.classList.remove("clickable");
        fetch(App.Endpoint + "/Reports/AddReport", {
