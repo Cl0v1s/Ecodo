@@ -1,4 +1,4 @@
-/// <reference path="Geolocator.ts">
+Ôªø/// <reference path="Geolocator.ts">
 /// <reference path="Report.ts">
 /// <reference path="Camera.ts">
 
@@ -8,7 +8,6 @@ class App {
     private static readonly Endpoint: string = "http://localhost:8000";
 
     private report: Report;
-    private geolocEnabled: boolean = false;
 
     constructor() {
         window.addEventListener("load", () => { this.Attach(); this.Start() });
@@ -24,20 +23,25 @@ class App {
         this.report = new Report();
         if (Geolocator.Instance.SubscribeLocation((p) => {
             this.report.UpdatePosition(p)
-        }))
-            this.geolocEnabled = true;
-        else 
-            AlertManager.Instance.Error("Vous devez autoriser la gÈolocalisation pour pouvoir signaler une fuite.");
+        }) == false)
+            AlertManager.Instance.Error("Vous devez autoriser la g√©olocalisation pour pouvoir signaler une fuite.");
     }
 
     private CheckForm(): boolean {
-        if (this.geolocEnabled == false) {
-            AlertManager.Instance.Error("Vous devez autoriser la gÈolocalisation pour pouvoir signaler une fuite.");
+
+
+        if (Geolocator.Instance.enabled == false) {
+            AlertManager.Instance.Error("Vous devez autoriser la g√©olocalisation pour pouvoir signaler une fuite.");
+            return false;
+        }
+
+        if (Camera.Instance.enabled == false) {
+            AlertManager.Instance.Error("Vous devez autoriser l'acc√®s √† la cam√©ra pour pouvoir signaler une fuite.");
             return false;
         }
 
         if (this.report == null || Report.IsValid(this.report) == false) {
-            AlertManager.Instance.Error("Des donnÈes sont manquantes pour pouvoir signaler la fuite. Pouvez-vous rÈessayer s'il vous plaÓt ? :3");
+            AlertManager.Instance.Error("Des donn√©es sont manquantes pour pouvoir signaler la fuite. Pouvez-vous r√©essayer s'il vous pla√Æt ? :3");
             return false;
         }
 
@@ -53,11 +57,15 @@ class App {
         return true;
     }
 
+    private FillReport(): void {
+        this.report.Picture = Camera.Instance.Capture();
+        this.report.Description = (<HTMLTextAreaElement>document.querySelector("#description")).value;
+        console.log(this.report);
+    }
+
 
     public Submit(target: HTMLElement): void {
-        this.report.Picture = Camera.Instance.Capture();
-        console.log(this.report);
-
+        this.FillReport();
 
         if (this.CheckForm() == false)
             return;
@@ -73,11 +81,11 @@ class App {
             return response.json();
            }, (error) => {
             target.classList.add("clickable");
-            AlertManager.Instance.Error("Une erreur rÈseau a eu lieu. Veuillez vÈrifier votre connexion ‡ internet.");
+            AlertManager.Instance.Error("Une erreur r√©seau a eu lieu. Veuillez v√©rifier votre connexion √† internet.");
            }).then((json) => {
             target.classList.add("clickable");
             if (json.Code == 0)
-                AlertManager.Instance.Show("Votre rapport de fuite a bien ÈtÈ pris en compte ! Merci beaucoup :D");
+                AlertManager.Instance.Success("Votre rapport de fuite a bien √©t√© pris en compte ! Merci beaucoup :D");
             else
                 AlertManager.Instance.Error(json.Message);
             this.Start();

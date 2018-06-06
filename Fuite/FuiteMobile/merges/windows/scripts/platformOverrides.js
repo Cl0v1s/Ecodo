@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿(function () {
     // Ajouter le polyfill safeHTML
     var scriptElem = document.createElement('script');
     scriptElem.setAttribute('src', 'scripts/winstore-jscompat.js');
@@ -7,4 +7,4 @@
     } else {
         document.head.appendChild(scriptElem);
     }
-});
+}());

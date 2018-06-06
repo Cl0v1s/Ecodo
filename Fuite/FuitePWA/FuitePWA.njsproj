@@ -37,16 +37,16 @@
     <Compile Include="static\js\index.js" />
     <Compile Include="requires.js" />
     <Compile Include="static\js\requires.js" />
-    <Compile Include="static\js\vendor\webcam.min.js" />
+    <Compile Include="static\js\vendor\alertify.js" />
     <Compile Include="ts\Camera.ts" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="static\css\vendor\alertify.css" />
     <Content Include="static\css\vendor\bootstrap-checkbox.css" />
     <Content Include="static\css\vendor\bootstrap.min.css" />
     <Content Include="static\css\index.css" />
     <Content Include="static\js\index.js.map" />
-    <Content Include="static\js\vendor\webcam.swf" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,7 @@
     <Folder Include="static\js\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ts\Alertify.d.ts" />
     <TypeScriptCompile Include="ts\AlertManager.ts" />
     <TypeScriptCompile Include="ts\App.ts" />
     <TypeScriptCompile Include="ts\Geolocator.ts" />

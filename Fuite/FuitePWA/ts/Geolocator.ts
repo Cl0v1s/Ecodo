@@ -3,9 +3,14 @@ class Geolocator
     public static readonly Instance: Geolocator = new Geolocator();
 
 
+    public enabled: boolean = false;
+
     public SubscribeLocation(func): boolean {
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(func);
+            navigator.geolocation.watchPosition((position) => {
+                this.enabled = true;
+                func(position);
+            });
             return true;
         }
         return false;

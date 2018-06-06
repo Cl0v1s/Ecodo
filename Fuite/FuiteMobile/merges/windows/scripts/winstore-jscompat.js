@@ -1,14 +1,14 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. 
-// See http://www.apache.org/licenses/LICENSE-2.0.html.
-// JavaScript Dynamic Content shim for Windows Store apps
+﻿// Copyright (c) Microsoft Open Technologies, Inc. Tous droits réservés.
+// Sous licence Apache, version 2.0. 
+// Consultez http://www.apache.org/licenses/LICENSE-2.0.html.
+// Shim de contenu dynamique JavaScript pour applications du Windows Store
 (function () {
 
     if (window.MSApp && MSApp.execUnsafeLocalFunction) {
 
-        // Some nodes will have an "attributes" property which shadows the Node.prototype.attributes property
-        //  and means we don't actually see the attributes of the Node (interestingly the VS debug console
-        //  appears to suffer from the same issue).
+        // Certains nœuds ont une propriété "attributes" qui masque la propriété Node.prototype.attributes
+        //  ce qui signifie que nous ne voyons pas réellement les attributs de Node (curieusement, la console de débogage VS
+        //  semble affectée par le même problème).
         //
         var Element_setAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "setAttribute").value;
         var Element_removeAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "removeAttribute").value;
@@ -25,7 +25,7 @@
             try {
                 Element_setAttribute.call(element, attribute, value);
             } catch (e) {
-                // ignore
+                // ignorer
             }
         }
 
@@ -96,7 +96,7 @@
             function cleanseAttributes(element) {
                 var attributes = getAttributes(element);
                 if (attributes && attributes.length) {
-                    // because the attributes collection is live it is simpler to queue up the renames
+                    // comme la collection d'attributs est dynamique, il est plus simple de mettre en file d'attente les changements de noms
                     var events;
                     for (var i = 0, len = attributes.length; i < len; i++) {
                         var attribute = attributes[i];

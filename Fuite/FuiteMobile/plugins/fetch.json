@@ -1,16 +1,8 @@
 {
-    "cordova-plugin-camera": {
+    "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-camera@4.0.3"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-geolocation": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-geolocation@4.0.1"
+            "id": "cordova-plugin-whitelist@1.2.2"
         },
         "is_top_level": true,
         "variables": {}

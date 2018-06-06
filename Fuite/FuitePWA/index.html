@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/vendor/bootstrap-checkbox.css" />
     <link rel="stylesheet" href="static/css/index.css" />
+    <link rel="stylesheet" href="static/css/vendor/alertify.css" />
 </head>
 <body>
     <div class="round camera" id="camera">
@@ -14,14 +15,14 @@
     </div>
 
 
-    <div class="round">
+    <div class="block round">
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
                     Informations<br />supplémentaires
                 </span>
             </div>
-            <textarea class="form-control" aria-label="Informations supplémentaires" a></textarea>
+            <textarea class="form-control" aria-label="Informations supplémentaires" id="description"></textarea>
         </div>
 
     </div>
@@ -46,7 +47,7 @@
         <span>Envoyer</span>
         <div class="loading"></div>
     </button>
-
+    <script src="static/js/vendor/alertify.js"></script>
     <script src="static/js/requires.js"></script>
     <script src="static/js/index.js"></script>
 </body>

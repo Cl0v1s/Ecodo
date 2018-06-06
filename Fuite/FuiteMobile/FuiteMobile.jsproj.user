@@ -2,9 +2,6 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <DebuggerFlavor>AndroidEmulator</DebuggerFlavor>
-    <AndroidEmulatorID>AndroidInstallEmulators;Installer les émulateurs Android...</AndroidEmulatorID>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ToolsVersionPromptShown>2.3</ToolsVersionPromptShown>
+    <AndroidEmulatorID>AndroidDevice;Appareil</AndroidEmulatorID>
   </PropertyGroup>
 </Project>

@@ -5,6 +5,8 @@ class Camera
     private canvas: HTMLCanvasElement;
     private video: HTMLVideoElement;
 
+    public enabled: boolean = false;
+
     public Attach(videot: string, canvast : string): void {
         let streaming = false;
         this.video = document.querySelector(videot);
@@ -30,6 +32,7 @@ class Camera
                     var vendorURL = window.URL || (<any>window).webkitURL;
                     video.srcObject = stream;
                 }
+                this.enabled = true;
                 video.play();
             },
             function (err) {
