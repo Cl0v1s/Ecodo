@@ -26,7 +26,7 @@ namespace FuiteAPI
         }
 
         [DataMember]
-        public Report[] Data
+        public ReportContract[] Data
         {
             get;set;
         }

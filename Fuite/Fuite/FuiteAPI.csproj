@@ -47,19 +47,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="LdeLib">
-      <HintPath>..\LdeLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Portal.Bll">
-      <HintPath>..\Portal.Bll.dll</HintPath>
-    </Reference>
-    <Reference Include="Portal.Core">
-      <HintPath>..\Portal.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Portal.Dal">
-      <HintPath>..\Portal.Dal.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -82,6 +70,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthService.svc" />
+    <None Include="Connected Services\WebSrvPortal.Auth\AuthService.disco" />
+    <None Include="Connected Services\WebSrvPortal.Auth\configuration91.svcinfo" />
+    <None Include="Connected Services\WebSrvPortal.Auth\configuration.svcinfo" />
+    <Content Include="Connected Services\WebSrvPortal.Auth\FuiteAPI.WebSrvPortal.Auth.Droits.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebSrvPortal.Auth\FuiteAPI.WebSrvPortal.Auth.ElementAnnuaire.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebSrvPortal.Auth\FuiteAPI.WebSrvPortal.Auth.ObtenirAppartenancesEntreeAnnuaireResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebSrvPortal.Auth\FuiteAPI.WebSrvPortal.Auth.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\WebSrvPortal.Auth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
@@ -96,6 +103,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ban.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Change.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WebSrvPortal.Auth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Result.cs" />
     <Compile Include="IAuthService.cs" />
     <Compile Include="AuthService.svc.cs">
@@ -116,9 +137,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Reports.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="ReportService.svc.cs">
       <DependentUpon>ReportService.svc</DependentUpon>
     </Compile>
@@ -136,6 +154,7 @@
     <Content Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <None Include="Connected Services\WebSrvPortal.Auth\AuthService.wsdl" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -149,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\WebSrvPortal.Auth\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

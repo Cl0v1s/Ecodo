@@ -27,9 +27,9 @@ namespace FuiteAPI
         /// </summary>
         /// <param name="guid">Guide pour connexion automatique</param>
         /// <returns>True si connecté</returns>
-        [OperationContract]
+        /*[OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        bool LoginWindows();
+        bool LoginWindows();*/
 
         /// <summary>
         /// Permet à un employé de se déconnecter

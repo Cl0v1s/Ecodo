@@ -5,7 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1c1ad428ef764a0ba14de91768b75c9f" Name="Diagram1">
-        <EntityTypeShape EntityType="FuiteModel.Reports" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FuiteModel.Report" Width="1.5" PointX="1.125" PointY="3.5" />
+        <EntityTypeShape EntityType="FuiteModel.Ban" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FuiteModel.Change" Width="1.5" PointX="3.75" PointY="3.75" />
+        <AssociationConnector Association="FuiteModel.FK_Change_Report" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

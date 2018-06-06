@@ -27,7 +27,7 @@ namespace FuiteAPI
             return true;
         }
 
-        public Result AddReport(Report report)
+        public Result AddReport(ReportContract report)
         {
             if (this.AddCORS() == false)
                 return null;
@@ -37,17 +37,29 @@ namespace FuiteAPI
             {
                 if (report == null || report.Id != null)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite ne disposant pas d'ID.");
+                FuiteEntities entities = new FuiteEntities();
                 OperationContext context = OperationContext.Current;
                 MessageProperties prop = context.IncomingMessageProperties;
                 RemoteEndpointMessageProperty endpoint =
                        prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
                 string ip = endpoint.Address;
+
+                if (entities.Bans.Where(x => x.ip == ip).Count() > 0)
+                    throw new Exception("Vous ne pouvez plus publier de signalements.");
+
                 report.Ip = ip;
                 if (report.IsValid() == false)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
-                FuiteEntities entities = new FuiteEntities();
-                entities.Reports.Add(report.Reports);
+                Report res = report.Reports;
+                entities.Reports.Add(res);
                 entities.SaveChanges();
+
+                Change change = new Change();
+                change.Report_id = res.id;
+                change.state = (int)State.New;
+                entities.Changes.Add(change);
+                entities.SaveChanges();
+
             }
             catch(Exception e)
             {
@@ -57,14 +69,15 @@ namespace FuiteAPI
             return r;
         }
 
-        public Result SetReport(Report report)
+        public Result SetReport(ReportContract report)
         {
             if (this.AddCORS() == false)
                 return null;
             Result re = new Result();
             try
             {
-                if (AuthService.isLogged() == false)
+                WebSrvPortal.Auth.User user = AuthService.isLogged();
+                if (user == null)
                 {
                     re.Code = 2;
                     throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
@@ -75,10 +88,10 @@ namespace FuiteAPI
                     throw new ArgumentException("Vous devez préciser un rapport de fuite disposant d'un ID.");
                 }
                 FuiteEntities entities = new FuiteEntities();
-                Reports[] reports = entities.Reports.Where(x => x.id == report.Id).ToArray();
+                Report[] reports = entities.Reports.Where(x => x.id == report.Id).ToArray();
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
-                Reports r = reports[0];
+                Report r = reports[0];
                 if (report.Ip != null)
                     r.ip = report.Ip;
                 if (report.Latitude != null)
@@ -91,6 +104,16 @@ namespace FuiteAPI
                     r.state = (int)report.State;
                 if (report.Description != null)
                     r.description = report.Description;
+
+                Change change = new Change();
+                change.Report_id = r.id;
+                change.state = r.state;
+                change.Operator_id = user.IdUser;
+
+                entities.Changes.Add(change);
+
+                entities.SaveChanges();
+               
             }
             catch(Exception e)
             {
@@ -106,14 +129,14 @@ namespace FuiteAPI
             Result r = new Result();
             try
             {
-                if (AuthService.isLogged() == false)
+                if (AuthService.isLogged() == null)
                     throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
                 FuiteEntities entities = new FuiteEntities();
-                Reports[] reports = entities.Reports.Where(x => x.id == id).ToArray();
+                Report[] reports = entities.Reports.Where(x => x.id == id).ToArray();
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
-                Report report = new Report(reports[0]);
-                r.Data = new Report[] { report };
+                ReportContract report = new ReportContract(reports[0]);
+                r.Data = new ReportContract[] { report };
             }
             catch(Exception e)
             {
@@ -132,17 +155,17 @@ namespace FuiteAPI
             Result re = new Result();
             try
             {
-                if (AuthService.isLogged() == false)
+                if (AuthService.isLogged() == null)
                 {
                     re.Code = 2;
                     throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
                 }
                 FuiteEntities entities = new FuiteEntities();
-                Reports[] reports = entities.Reports.Where(x => x.state == (int)state && x.id >= minIndex && x.id <= maxIndex).ToArray();
-                List<Report> results = new List<Report>();
-                foreach (Reports r in reports)
+                Report[] reports = entities.Reports.Where(x => x.state == (int)state && x.id >= minIndex && x.id <= maxIndex).ToArray();
+                List<ReportContract> results = new List<ReportContract>();
+                foreach (Report r in reports)
                 {
-                    results.Add(new Report(r));
+                    results.Add(new ReportContract(r));
                 }
                 re.Data = results.ToArray();
             }

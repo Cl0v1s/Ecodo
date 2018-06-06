@@ -18,7 +18,7 @@ namespace FuiteAPI
         /// <returns>True si opération réussie</returns>
         [OperationContract]
         [WebInvoke(Method ="*",ResponseFormat = WebMessageFormat.Json)]
-        Result AddReport(Report report);
+        Result AddReport(ReportContract report);
 
         /// <summary>
         /// Modifie l'état d'une fuite 
@@ -27,7 +27,7 @@ namespace FuiteAPI
         /// <returns>True si opération réussie</returns>
         [OperationContract]
         [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
-        Result SetReport(Report report);
+        Result SetReport(ReportContract report);
 
         /// <summary>
         /// Récupère la liste de tous les repots de fuite dans la base de données
@@ -58,7 +58,7 @@ namespace FuiteAPI
     /// <summary>
     /// Représente un signalement de fuite
     /// </summary>
-    public class Report
+    public class ReportContract
     {
         string ip;
         double? latitude;
@@ -77,7 +77,7 @@ namespace FuiteAPI
             return true;
         }
 
-        public Report(Reports reports)
+        public ReportContract(Report reports)
         {
             this.Id = reports.id;
             this.Latitude = reports.latitude;
@@ -88,11 +88,11 @@ namespace FuiteAPI
             this.Ip = reports.ip;
         }
 
-        public Reports Reports
+        public Report Reports
         {
             get
             {
-                Reports r = new Reports();
+                Report r = new Report();
                 if(this.Id != null)
                     r.id = (int)this.Id;
                 if(this.Latitude != null)

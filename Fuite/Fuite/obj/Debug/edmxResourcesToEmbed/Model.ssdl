@@ -1,6 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Reports">
+  <EntityType Name="Ban">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ip" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Change">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Report_id" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="state" Type="int" Nullable="false" />
+    <Property Name="Operator_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Report">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -11,8 +28,27 @@
     <Property Name="latitude" Type="float" Nullable="false" />
     <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Change_Report">
+    <End Role="Report" Type="Self.Report" Multiplicity="1" />
+    <End Role="Change" Type="Self.Change" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Change">
+        <PropertyRef Name="Report_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="FuiteModelStoreContainer">
-    <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ban" EntityType="Self.Ban" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Change" EntityType="Self.Change" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
+      <End Role="Report" EntitySet="Report" />
+      <End Role="Change" EntitySet="Change" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -2,14 +2,34 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FuiteModelStoreContainer" CdmEntityContainer="FuiteEntities">
     <EntitySetMapping Name="Reports">
-      <EntityTypeMapping TypeName="FuiteModel.Reports">
-        <MappingFragment StoreEntitySet="Reports">
-          <ScalarProperty Name="state" ColumnName="state" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="picture" ColumnName="picture" />
-          <ScalarProperty Name="longitude" ColumnName="longitude" />
-          <ScalarProperty Name="latitude" ColumnName="latitude" />
+      <EntityTypeMapping TypeName="FuiteModel.Report">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bans">
+      <EntityTypeMapping TypeName="FuiteModel.Ban">
+        <MappingFragment StoreEntitySet="Ban">
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Changes">
+      <EntityTypeMapping TypeName="FuiteModel.Change">
+        <MappingFragment StoreEntitySet="Change">
+          <ScalarProperty Name="Operator_id" ColumnName="Operator_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

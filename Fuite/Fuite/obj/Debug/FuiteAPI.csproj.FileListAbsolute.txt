@@ -11,7 +11,3 @@ D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csproj.CopyComplete
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.dll
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.pdb
 D:\Fuite\Fuite\Fuite\bin\fr\EntityFramework.SqlServer.resources.dll
-D:\Fuite\Fuite\Fuite\bin\LdeLib.dll
-D:\Fuite\Fuite\Fuite\bin\Portal.Bll.dll
-D:\Fuite\Fuite\Fuite\bin\Portal.Dal.dll
-D:\Fuite\Fuite\Fuite\bin\Portal.Core.dll

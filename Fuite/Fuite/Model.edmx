@@ -5,7 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Reports">
+        <EntityType Name="Ban">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ip" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Change">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="state" Type="int" Nullable="false" />
+          <Property Name="Operator_id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Report">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -16,29 +33,86 @@
           <Property Name="latitude" Type="float" Nullable="false" />
           <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Change_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Change" Type="Self.Change" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Change">
+              <PropertyRef Name="Report_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FuiteModelStoreContainer">
-          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ban" EntityType="Self.Ban" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Change" EntityType="Self.Change" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="Change" EntitySet="Change" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FuiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Reports">
+        <EntityContainer Name="FuiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Reports" EntityType="FuiteModel.Report" />
+          <EntitySet Name="Bans" EntityType="FuiteModel.Ban" />
+          <EntitySet Name="Changes" EntityType="FuiteModel.Change" />
+          <AssociationSet Name="FK_Change_Report" Association="FuiteModel.FK_Change_Report">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Change" EntitySet="Changes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Report">
           <Key>
             <PropertyRef Name="id" />
           </Key>
+          <Property Name="state" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="picture" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="longitude" Type="Double" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Changes" Relationship="FuiteModel.FK_Change_Report" FromRole="Report" ToRole="Change" />
         </EntityType>
-        <EntityContainer Name="FuiteEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Reports" EntityType="Self.Reports" />
-        </EntityContainer>
+        <EntityType Name="Ban">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Change">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="Operator_id" Type="Guid" />
+          <NavigationProperty Name="Report" Relationship="FuiteModel.FK_Change_Report" FromRole="Change" ToRole="Report" />
+        </EntityType>
+        <Association Name="FK_Change_Report">
+          <End Type="FuiteModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="FuiteModel.Change" Role="Change" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Change">
+              <PropertyRef Name="Report_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -46,14 +120,34 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FuiteModelStoreContainer" CdmEntityContainer="FuiteEntities">
           <EntitySetMapping Name="Reports">
-            <EntityTypeMapping TypeName="FuiteModel.Reports">
-              <MappingFragment StoreEntitySet="Reports">
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="picture" ColumnName="picture" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
+            <EntityTypeMapping TypeName="FuiteModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bans">
+            <EntityTypeMapping TypeName="FuiteModel.Ban">
+              <MappingFragment StoreEntitySet="Ban">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Changes">
+            <EntityTypeMapping TypeName="FuiteModel.Change">
+              <MappingFragment StoreEntitySet="Change">
+                <ScalarProperty Name="Operator_id" ColumnName="Operator_id" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -72,7 +166,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />

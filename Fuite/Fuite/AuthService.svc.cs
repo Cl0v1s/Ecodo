@@ -15,29 +15,26 @@ namespace FuiteAPI
     public class AuthService : IAuthService
     {
 
-        public static bool isLogged()
+        public static WebSrvPortal.Auth.User isLogged()
         {
             HttpRequestMessageProperty httpRequest = OperationContext.Current.IncomingMessageProperties[HttpRequestMessageProperty.Name]
             as HttpRequestMessageProperty;
             if (httpRequest == null)
-                return false;
+                return null;
             string cookie = httpRequest.Headers[HttpRequestHeader.Cookie];
             if (String.IsNullOrEmpty(cookie))
-                return false;
+                return null;
             cookie = cookie.Split('=')[1];
             string user = cookie;
-
-            Portal.Bll.User usr = Portal.Bll.Fabriques.Users.Instance.ObtenirUtilisateurSurTicket(user);
-            if (usr != null)
-                return true;
-
-            return false;
+            WebSrvPortal.Auth.AuthServiceSoapClient client = new WebSrvPortal.Auth.AuthServiceSoapClient();
+            return client.ObtenirUtilisateur(user);
         }
 
         public Result Login(string username, string password)
         {
             Result r = new Result();
-            Portal.Bll.User user = Portal.Bll.Fabriques.Users.Instance.ObtenirUtilisateurSurLogin(username, password, true);
+            WebSrvPortal.Auth.AuthServiceSoapClient client = new WebSrvPortal.Auth.AuthServiceSoapClient();
+            WebSrvPortal.Auth.User user = client.ObtenirUtilisateurAvecLogin(username, password);
             if (user != null)
             {
                 HttpCookie cookie = FormsAuthentication.GetAuthCookie(user.Matricule, true);
@@ -49,7 +46,7 @@ namespace FuiteAPI
             return r;
         }
 
-        public bool LoginWindows()
+        /*public bool LoginWindows()
         {
             if (!string.IsNullOrEmpty(OperationContext.Current.ClaimsPrincipal.Identity.Name))
             {
@@ -61,7 +58,7 @@ namespace FuiteAPI
                 }
             }
             return false;
-        }
+        }*/
 
         public bool Logout()
         {

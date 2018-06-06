@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://10.17.100.182/portal/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://10.17.100.182/portal/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10.17.100.182/portal/webservices/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="ObtenirTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirTicketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirDroitSurApplication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strTicket" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strTypeApplication" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strApplication" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirDroitSurApplicationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenirDroitSurApplicationResult" type="tns:Droits" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="Droits">
+        <s:restriction base="s:string">
+          <s:enumeration value="Aucun" />
+          <s:enumeration value="Lecture" />
+          <s:enumeration value="Proprietaire" />
+          <s:enumeration value="Ecriture" />
+          <s:enumeration value="Approbateur" />
+          <s:enumeration value="Concepteur" />
+          <s:enumeration value="Admin" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ObtenirDroitSurApplicationAvecLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strTypeApplication" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strApplication" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirDroitSurApplicationAvecLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenirDroitSurApplicationAvecLoginResult" type="tns:Droits" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateur">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strTicket" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirUtilisateurResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IdUser" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Matricule" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NomComplet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginMaximo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdService" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdAgence" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TicketAuth" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenirUtilisateurAvecLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurAvecLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirUtilisateurAvecLoginResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurGID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurGIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirUtilisateurSurGIDResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurIdentifiant">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="guidIdUser" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurIdentifiantResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirUtilisateurSurIdentifiantResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurMatricule">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strMatricule" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirUtilisateurSurMatriculeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirUtilisateurSurMatriculeResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirAppartenancesEntreeAnnuaire">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="guidIdAnnuaire" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenirAppartenancesEntreeAnnuaireResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenirAppartenancesEntreeAnnuaireResult" type="tns:ElementsAnnuaire" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ElementsAnnuaire">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Elements" type="tns:ElementAnnuaire" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ElementAnnuaire">
+        <s:attribute name="IdAnnuaire" type="s1:guid" use="required" />
+        <s:attribute name="Nom" type="s:string" />
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenirTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirTicket" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirDroitSurApplicationSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirDroitSurApplication" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirDroitSurApplicationSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirDroitSurApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirDroitSurApplicationAvecLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirDroitSurApplicationAvecLogin" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirDroitSurApplicationAvecLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirDroitSurApplicationAvecLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateur" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurAvecLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurAvecLogin" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurAvecLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurAvecLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurGIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurGID" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurGIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurGIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurIdentifiantSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurIdentifiant" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurIdentifiantSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurIdentifiantResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurMatriculeSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurMatricule" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirUtilisateurSurMatriculeSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirUtilisateurSurMatriculeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirAppartenancesEntreeAnnuaireSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenirAppartenancesEntreeAnnuaire" />
+  </wsdl:message>
+  <wsdl:message name="ObtenirAppartenancesEntreeAnnuaireSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenirAppartenancesEntreeAnnuaireResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AuthServiceSoap">
+    <wsdl:operation name="ObtenirTicket">
+      <wsdl:input message="tns:ObtenirTicketSoapIn" />
+      <wsdl:output message="tns:ObtenirTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplication">
+      <wsdl:input message="tns:ObtenirDroitSurApplicationSoapIn" />
+      <wsdl:output message="tns:ObtenirDroitSurApplicationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplicationAvecLogin">
+      <wsdl:input message="tns:ObtenirDroitSurApplicationAvecLoginSoapIn" />
+      <wsdl:output message="tns:ObtenirDroitSurApplicationAvecLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateur">
+      <wsdl:input message="tns:ObtenirUtilisateurSoapIn" />
+      <wsdl:output message="tns:ObtenirUtilisateurSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurAvecLogin">
+      <wsdl:input message="tns:ObtenirUtilisateurAvecLoginSoapIn" />
+      <wsdl:output message="tns:ObtenirUtilisateurAvecLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurGID">
+      <wsdl:input message="tns:ObtenirUtilisateurSurGIDSoapIn" />
+      <wsdl:output message="tns:ObtenirUtilisateurSurGIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurIdentifiant">
+      <wsdl:input message="tns:ObtenirUtilisateurSurIdentifiantSoapIn" />
+      <wsdl:output message="tns:ObtenirUtilisateurSurIdentifiantSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurMatricule">
+      <wsdl:input message="tns:ObtenirUtilisateurSurMatriculeSoapIn" />
+      <wsdl:output message="tns:ObtenirUtilisateurSurMatriculeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirAppartenancesEntreeAnnuaire">
+      <wsdl:input message="tns:ObtenirAppartenancesEntreeAnnuaireSoapIn" />
+      <wsdl:output message="tns:ObtenirAppartenancesEntreeAnnuaireSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthServiceSoap" type="tns:AuthServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenirTicket">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplication">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirDroitSurApplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplicationAvecLogin">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirDroitSurApplicationAvecLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateur">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurAvecLogin">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurAvecLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurGID">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurGID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurIdentifiant">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurIdentifiant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurMatricule">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurMatricule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirAppartenancesEntreeAnnuaire">
+      <soap:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirAppartenancesEntreeAnnuaire" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthServiceSoap12" type="tns:AuthServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenirTicket">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplication">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirDroitSurApplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirDroitSurApplicationAvecLogin">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirDroitSurApplicationAvecLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateur">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateur" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurAvecLogin">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurAvecLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurGID">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurGID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurIdentifiant">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurIdentifiant" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirUtilisateurSurMatricule">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirUtilisateurSurMatricule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenirAppartenancesEntreeAnnuaire">
+      <soap12:operation soapAction="http://10.17.100.182/portal/webservices/ObtenirAppartenancesEntreeAnnuaire" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthService">
+    <wsdl:port name="AuthServiceSoap" binding="tns:AuthServiceSoap">
+      <soap:address location="http://10.17.100.182/portal/web/Webservices/AuthService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthServiceSoap12" binding="tns:AuthServiceSoap12">
+      <soap12:address location="http://10.17.100.182/portal/web/Webservices/AuthService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

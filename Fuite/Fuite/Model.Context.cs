@@ -24,8 +24,9 @@ namespace FuiteAPI
         {
             throw new UnintentionalCodeFirstException();
         }
-        
-
-        public virtual DbSet<Reports> Reports { get; set; }
+    
+        public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<Ban> Bans { get; set; }
+        public virtual DbSet<Change> Changes { get; set; }
     }
 }
