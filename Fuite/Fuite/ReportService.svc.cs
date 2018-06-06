@@ -37,7 +37,7 @@ namespace FuiteAPI
             {
                 if (report == null || report.Id != null)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite ne disposant pas d'ID.");
-                FuiteEntities entities = new FuiteEntities();
+                FuiteKey entities = new FuiteKey();
                 OperationContext context = OperationContext.Current;
                 MessageProperties prop = context.IncomingMessageProperties;
                 RemoteEndpointMessageProperty endpoint =
@@ -69,14 +69,14 @@ namespace FuiteAPI
             return r;
         }
 
-        public Result SetReport(ReportContract report)
+        public Result SetReport(string ticket, ReportContract report)
         {
             if (this.AddCORS() == false)
                 return null;
             Result re = new Result();
             try
             {
-                WebSrvPortal.Auth.User user = AuthService.isLogged();
+                WebSrvPortal.Auth.User user = Auth.WithTicket(ticket);
                 if (user == null)
                 {
                     re.Code = 2;
@@ -87,7 +87,7 @@ namespace FuiteAPI
                     re.Code = 1;
                     throw new ArgumentException("Vous devez préciser un rapport de fuite disposant d'un ID.");
                 }
-                FuiteEntities entities = new FuiteEntities();
+                FuiteKey entities = new FuiteKey();
                 Report[] reports = entities.Reports.Where(x => x.id == report.Id).ToArray();
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
@@ -122,16 +122,16 @@ namespace FuiteAPI
             return re;
         }
 
-        public Result GetReport(int id)
+        public Result GetReport(string ticket, int id)
         {
             if (this.AddCORS() == false)
                 return null;
             Result r = new Result();
             try
             {
-                if (AuthService.isLogged() == null)
+                if (Auth.WithTicket(ticket) == null)
                     throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
-                FuiteEntities entities = new FuiteEntities();
+                FuiteKey entities = new FuiteKey();
                 Report[] reports = entities.Reports.Where(x => x.id == id).ToArray();
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
@@ -148,19 +148,19 @@ namespace FuiteAPI
 
 
 
-        public Result GetReports(State state, int minIndex, int maxIndex)
+        public Result GetReports(string ticket, State state, int minIndex, int maxIndex)
         {
             if (this.AddCORS() == false)
                 return null;
             Result re = new Result();
             try
             {
-                if (AuthService.isLogged() == null)
+                if (Auth.WithTicket(ticket) == null)
                 {
                     re.Code = 2;
                     throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
                 }
-                FuiteEntities entities = new FuiteEntities();
+                FuiteKey entities = new FuiteKey();
                 Report[] reports = entities.Reports.Where(x => x.state == (int)state && x.id >= minIndex && x.id <= maxIndex).ToArray();
                 List<ReportContract> results = new List<ReportContract>();
                 foreach (Report r in reports)

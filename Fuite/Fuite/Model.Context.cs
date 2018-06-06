@@ -13,10 +13,10 @@ namespace FuiteAPI
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FuiteEntities : DbContext
+    public partial class FuiteKey : DbContext
     {
-        public FuiteEntities()
-            : base("name=FuiteEntities")
+        public FuiteKey()
+            : base("name=FuiteKey")
         {
         }
     
@@ -25,8 +25,8 @@ namespace FuiteAPI
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Ban> Bans { get; set; }
         public virtual DbSet<Change> Changes { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
     }
 }

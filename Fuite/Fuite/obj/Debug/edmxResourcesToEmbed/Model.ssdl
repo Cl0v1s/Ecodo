@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="FuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="FuiteData.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Ban">
     <Key>
       <PropertyRef Name="id" />
@@ -15,7 +15,7 @@
     <Property Name="Report_id" Type="int" Nullable="false" />
     <Property Name="date" Type="date" Nullable="false" />
     <Property Name="state" Type="int" Nullable="false" />
-    <Property Name="Operator_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Operator_id" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Report">
     <Key>
@@ -42,7 +42,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="FuiteModelStoreContainer">
+  <EntityContainer Name="FuiteDataStoreContainer">
     <EntitySet Name="Ban" EntityType="Self.Ban" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Change" EntityType="Self.Change" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />

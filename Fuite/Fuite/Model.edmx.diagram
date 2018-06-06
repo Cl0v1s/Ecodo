@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1c1ad428ef764a0ba14de91768b75c9f" Name="Diagram1">
-        <EntityTypeShape EntityType="FuiteModel.Report" Width="1.5" PointX="1.125" PointY="3.5" />
-        <EntityTypeShape EntityType="FuiteModel.Ban" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FuiteModel.Change" Width="1.5" PointX="3.75" PointY="3.75" />
-        <AssociationConnector Association="FuiteModel.FK_Change_Report" />
+      <Diagram DiagramId="1018701e9cb24cb793c33854a7f9803c" Name="Diagram1">
+        <EntityTypeShape EntityType="FuiteData.Ban" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FuiteData.Change" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FuiteData.Report" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="FuiteData.FK_Change_Report" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

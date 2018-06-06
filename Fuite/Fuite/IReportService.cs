@@ -27,19 +27,19 @@ namespace FuiteAPI
         /// <returns>True si opération réussie</returns>
         [OperationContract]
         [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
-        Result SetReport(ReportContract report);
+        Result SetReport(string ticket, ReportContract report);
 
         /// <summary>
         /// Récupère la liste de tous les repots de fuite dans la base de données
         /// </summary>
         /// <returns>La liste de tous les reports de fuite</returns>
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        Result GetReports(State state, int minIndex, int maxIndex);
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        Result GetReports(string ticket, State state, int minIndex, int maxIndex);
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        Result GetReport(int id);
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        Result GetReport(string ticket, int id);
     }
 
     /// <summary>
@@ -66,6 +66,7 @@ namespace FuiteAPI
         string picture;
         string description;
         State state = State.New;
+        DateTime date;
         int? id;
 
         public bool IsValid()
@@ -85,6 +86,7 @@ namespace FuiteAPI
             this.Picture = reports.picture;
             this.Description = reports.description;
             this.state = (State)reports.state;
+            this.date = reports.date;
             this.Ip = reports.ip;
         }
 
@@ -102,8 +104,22 @@ namespace FuiteAPI
                 r.picture = this.Picture;
                 r.description = this.Description;
                 r.state = (int)this.State;
+                r.date = this.Date;
                 r.ip = this.Ip;
                 return r;
+            }
+        }
+
+        [DataMember]
+        public DateTime Date
+        {
+            get
+            {
+                return this.date;
+            }
+            set
+            {
+                this.date = value;
             }
         }
 

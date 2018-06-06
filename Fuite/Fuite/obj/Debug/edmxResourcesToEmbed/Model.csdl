@@ -1,34 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="FuiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="FuiteEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Reports" EntityType="FuiteModel.Report" />
-    <EntitySet Name="Bans" EntityType="FuiteModel.Ban" />
-    <EntitySet Name="Changes" EntityType="FuiteModel.Change" />
-    <AssociationSet Name="FK_Change_Report" Association="FuiteModel.FK_Change_Report">
-      <End Role="Report" EntitySet="Reports" />
-      <End Role="Change" EntitySet="Changes" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Report">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="state" Type="Int32" Nullable="false" />
-    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="picture" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="longitude" Type="Double" Nullable="false" />
-    <Property Name="latitude" Type="Double" Nullable="false" />
-    <Property Name="ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Changes" Relationship="FuiteModel.FK_Change_Report" FromRole="Report" ToRole="Change" />
-  </EntityType>
+<Schema Namespace="FuiteData" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Ban">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="Change">
     <Key>
@@ -38,12 +15,26 @@
     <Property Name="Report_id" Type="Int32" Nullable="false" />
     <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="state" Type="Int32" Nullable="false" />
-    <Property Name="Operator_id" Type="Guid" Nullable="false" />
-    <NavigationProperty Name="Report" Relationship="FuiteModel.FK_Change_Report" FromRole="Change" ToRole="Report" />
+    <Property Name="Operator_id" Type="Guid" />
+    <NavigationProperty Name="Report" Relationship="Self.FK_Change_Report" FromRole="Change" ToRole="Report" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="state" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="longitude" Type="Double" Nullable="false" />
+    <Property Name="latitude" Type="Double" Nullable="false" />
+    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Changes" Relationship="Self.FK_Change_Report" FromRole="Report" ToRole="Change" />
   </EntityType>
   <Association Name="FK_Change_Report">
-    <End Type="FuiteModel.Report" Role="Report" Multiplicity="1" />
-    <End Type="FuiteModel.Change" Role="Change" Multiplicity="*" />
+    <End Role="Report" Type="Self.Report" Multiplicity="1" />
+    <End Role="Change" Type="Self.Change" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Report">
         <PropertyRef Name="id" />
@@ -53,4 +44,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="FuiteKey" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bans" EntityType="Self.Ban" />
+    <EntitySet Name="Changes" EntityType="Self.Change" />
+    <EntitySet Name="Reports" EntityType="Self.Report" />
+    <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
+      <End Role="Report" EntitySet="Reports" />
+      <End Role="Change" EntitySet="Changes" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>
