@@ -28,7 +28,8 @@ class App {
         window.addEventListener("load", () => { this.Attach(); this.Start(); });
     }
     Attach() {
-        document.querySelector("#submit").addEventListener("click", () => { this.Submit(); });
+        document.querySelector("#submit").addEventListener("click", (ev) => { this.Submit(ev.target); });
+        document.querySelector("#submit span").addEventListener("click", (ev) => { this.Submit(ev.target.parentElement); });
     }
     Start() {
         this.report = new Report();
@@ -39,27 +40,42 @@ class App {
         else
             AlertManager.Instance.Error("Vous devez autoriser la g�olocalisation pour pouvoir signaler une fuite.");
     }
-    Submit() {
+    CheckForm() {
         if (this.geolocEnabled == false) {
             AlertManager.Instance.Error("Vous devez autoriser la g�olocalisation pour pouvoir signaler une fuite.");
-            return;
+            return false;
         }
         if (this.report == null || Report.IsValid(this.report) == false) {
             AlertManager.Instance.Error("Des donn�es sont manquantes pour pouvoir signaler la fuite. Pouvez-vous r�essayer s'il vous pla�t ? :3");
-            return;
+            return false;
         }
+        let rgpd = document.querySelector("#rgpd");
+        if (rgpd.checked == false) {
+            rgpd.parentElement.classList.remove("attention");
+            setTimeout(() => {
+                rgpd.parentElement.classList.add("attention");
+            }, 50);
+            return false;
+        }
+        return true;
+    }
+    Submit(target) {
+        if (this.CheckForm() == false)
+            return;
+        target.classList.remove("clickable");
         fetch(App.Endpoint + "/Reports/AddReport", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "Origin": "aca"
             },
-            body: JSON.stringify(this.report)
+            body: JSON.stringify(this.report),
         }).then((response) => {
             return response.json();
         }, (error) => {
+            target.classList.add("clickable");
             AlertManager.Instance.Error("Une erreur r�seau a eu lieu. Veuillez v�rifier votre connexion � internet.");
         }).then((json) => {
+            target.classList.add("clickable");
             if (json.Code == 0)
                 AlertManager.Instance.Show("Votre rapport de fuite a bien �t� pris en compte ! Merci beaucoup :D");
             else

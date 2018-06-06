@@ -15,7 +15,8 @@ class App {
     }
 
     public Attach(): void {
-        document.querySelector("#submit").addEventListener("click", () => { this.Submit(); })
+        document.querySelector("#submit").addEventListener("click", (ev: Event) => { this.Submit(<HTMLElement>ev.target); })
+        document.querySelector("#submit span").addEventListener("click", (ev: Event) => { this.Submit((<HTMLElement>ev.target).parentElement); })
     }
 
     public Start(): void {
@@ -28,29 +29,48 @@ class App {
             AlertManager.Instance.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
     }
 
-    public Submit(): void {
+    private CheckForm(): boolean {
         if (this.geolocEnabled == false) {
             AlertManager.Instance.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
-            return;
+            return false;
         }
 
         if (this.report == null || Report.IsValid(this.report) == false) {
             AlertManager.Instance.Error("Des données sont manquantes pour pouvoir signaler la fuite. Pouvez-vous réessayer s'il vous plaît ? :3");
-            return;
+            return false;
         }
 
+        let rgpd: HTMLInputElement = document.querySelector("#rgpd");
+        if (rgpd.checked == false) {
+            rgpd.parentElement.classList.remove("attention");
+            setTimeout(() => {
+                rgpd.parentElement.classList.add("attention");
+            }, 50);
+            return false;
+        }
+
+        return true;
+    }
+
+    public Submit(target: HTMLElement): void {
+        if (this.CheckForm() == false)
+            return;
+
+
+        target.classList.remove("clickable");
        fetch(App.Endpoint + "/Reports/AddReport", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
-                    "Origin": "aca"
                 },
-                body: JSON.stringify(this.report)
+                body: JSON.stringify(this.report),
        }).then((response: any) => {
             return response.json();
-       }, (error) => {
+           }, (error) => {
+            target.classList.add("clickable");
             AlertManager.Instance.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-       }).then((json) => {
+           }).then((json) => {
+            target.classList.add("clickable");
             if (json.Code == 0)
                 AlertManager.Instance.Show("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
             else

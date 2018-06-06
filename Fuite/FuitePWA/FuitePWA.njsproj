@@ -40,6 +40,7 @@
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="static\css\vendor\bootstrap-checkbox.css" />
     <Content Include="static\css\vendor\bootstrap.min.css" />
     <Content Include="static\css\index.css" />
     <Content Include="static\js\index.js.map" />

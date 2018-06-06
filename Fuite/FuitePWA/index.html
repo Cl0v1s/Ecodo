@@ -4,6 +4,7 @@
     <title>Fuite</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="static/css/vendor/bootstrap-checkbox.css" />
     <link rel="stylesheet" href="static/css/index.css" />
 </head>
 <body>
@@ -12,15 +13,35 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">
-                    Informations supplémentaires
+                    Informations<br />supplémentaires
                 </span>
             </div>
             <textarea class="form-control" aria-label="Informations supplémentaires" a></textarea>
         </div>
 
     </div>
-    <button class="round submit" id="submit">Envoyer</button>
-    <script src="static/js/requires.js"></script>
-    <script src="static/js/index.js"></script>
+
+
+    <div class="text-center no-bg round">
+        <label class="checkbox-bootstrap checkbox-lg">
+            <input type="checkbox" id="rgpd">
+            <span class="checkbox-placeholder"></span>
+            J'autorise l'Eau de Bordeaux à enregistrer les données transmises dans mon signalement
+        </label>
+    </div>
+
+    <div class="text-center no-bg round">
+        Vous affirmez avoir pris confiance de notre politique de confidentialité.<br />
+        Vous pouvez demander la récupération ou la suppression de vos données en envoyant un e-mail à 
+        thierry.fernandez@zbleh.com
+
+     </div>
+
+        <button class="round submit clickable" id="submit">
+            <span>Envoyer</span>
+            <div class="loading"></div>
+        </button>
+        <script src="static/js/requires.js"></script>
+        <script src="static/js/index.js"></script>
 </body>
 </html>
