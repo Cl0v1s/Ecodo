@@ -48,6 +48,14 @@ namespace FuiteAPI
         [OperationContract]
         [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
         ResultReports GetReport(string ticket, int id);
+
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        Result SetBanIp(string ticket, string ip);
+
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        ResultIp IsIpBan(string ticket, string ip);
     }
 
     /// <summary>

@@ -74,4 +74,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Change" nillable="true" type="tns:Change" />
+  <xs:complexType name="ResultIp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ResultIp" nillable="true" type="tns:ResultIp" />
 </xs:schema>

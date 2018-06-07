@@ -28,10 +28,21 @@ namespace FuiteAdmin
             if (result.Data.Length <= 0)
                 throw new HttpException(404, "Il n'existe pas de signalement possédant cet Id.");
             this.Report = (ReportService.ReportContract)result.Data[0];
+
+            ReportService.ResultIp response = client.IsIpBan(ticket, this.Report.Ip);
+            if (response.Code != 0)
+                throw new HttpException(500, response.Message);
+            if (response.Data)
+                this.ban.Visible = false;
+
         }
 
         public ReportService.ReportContract Report
         {
+            get
+            {
+                return (ReportService.ReportContract)ViewState["Report"];
+            }
             set
             {
                 string ticket = (string)Session["Ticket"];
@@ -87,6 +98,17 @@ namespace FuiteAdmin
             ReportService.Result response =  client.SetReport(ticket, nreport);
             if (response.Code != 0)
                 throw new HttpException(500, response.Message);
+            this.Update();
+            //TODO: ajouter un message de validation
+        }
+
+        protected void ban_Click(object sender, EventArgs e)
+        {
+            string ticket = (string)Session["Ticket"];
+            ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
+            ReportService.Result result = client.SetBanIp(ticket, this.Report.Ip);
+            if (result.Code != 0)
+                throw new HttpException(500, result.Message);
             this.Update();
             //TODO: ajouter un message de validation
         }

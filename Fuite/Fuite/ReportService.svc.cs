@@ -118,6 +118,8 @@ namespace FuiteAPI
             }
             catch(Exception e)
             {
+                if (re.Code == 0)
+                    re.Code = -1;
                 re.Message = e.Message;
             }
             return re;
@@ -171,6 +173,8 @@ namespace FuiteAPI
             }
             catch(Exception e)
             {
+                if (re.Code == 0)
+                    re.Code = -1;
                 re.Message = e.Message;
             }
             return re;
@@ -178,11 +182,80 @@ namespace FuiteAPI
 
         public ResultChanges GetChanges(string ticket, int reportid)
         {
-            FuiteKey entities = new FuiteKey();
-            Change[] changes = entities.Changes.Where(x => x.Report_id == reportid).ToArray();
-            ResultChanges result = new ResultChanges();
-            result.Data = changes;
-            return result;
+            if (this.AddCORS() == false)
+                return null;
+            ResultChanges re = new ResultChanges();
+            try
+            {
+                if (Auth.WithTicket(ticket) == null)
+                {
+                    re.Code = 2;
+                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
+                }
+                FuiteKey entities = new FuiteKey();
+                Change[] changes = entities.Changes.Where(x => x.Report_id == reportid).ToArray();
+                re.Data = changes;
+            }
+            catch (Exception e)
+            {
+                if (re.Code == 0)
+                    re.Code = -1;
+                re.Message = e.Message;
+            }
+            return re;
+        }
+
+        public Result SetBanIp(string ticket, string ip)
+        {
+            if (this.AddCORS() == false)
+                return null;
+            Result re = new Result();
+            try
+            {
+                if (Auth.WithTicket(ticket) == null)
+                {
+                    re.Code = 2;
+                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
+                }
+                FuiteKey entities = new FuiteKey();
+                Ban ban = new Ban();
+                ban.ip = ip;
+                entities.Bans.Add(ban);
+                entities.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                if (re.Code == 0)
+                    re.Code = -1;
+                re.Message = e.Message;
+            }
+            return re;
+        }
+
+        public ResultIp IsIpBan(string ticket, string ip)
+        {
+            if (this.AddCORS() == false)
+                return null;
+            ResultIp re = new ResultIp();
+            re.Data = false;
+            try
+            {
+                if (Auth.WithTicket(ticket) == null)
+                {
+                    re.Code = 2;
+                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
+                }
+                FuiteKey entities = new FuiteKey();
+                if (entities.Bans.Where(x => x.ip == ip).Count() > 0)
+                    re.Data = true;
+            }
+            catch (Exception e)
+            {
+                if (re.Code == 0)
+                    re.Code = -1;
+                re.Message = e.Message;
+            }
+            return re;
         }
     }
 }

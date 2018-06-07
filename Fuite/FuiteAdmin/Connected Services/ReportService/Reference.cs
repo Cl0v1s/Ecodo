@@ -193,6 +193,7 @@ namespace FuiteAdmin.ReportService {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultReports))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultChanges))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultIp))]
     public partial class Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -289,6 +290,29 @@ namespace FuiteAdmin.ReportService {
             }
             set {
                 if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultIp", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class ResultIp : FuiteAdmin.ReportService.Result {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool DataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((this.DataField.Equals(value) != true)) {
                     this.DataField = value;
                     this.RaisePropertyChanged("Data");
                 }
@@ -633,6 +657,18 @@ namespace FuiteAdmin.ReportService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
         System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
+        FuiteAdmin.ReportService.Result SetBanIp(string ticket, string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(string ticket, string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
+        FuiteAdmin.ReportService.ResultIp IsIpBan(string ticket, string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(string ticket, string ip);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -700,6 +736,22 @@ namespace FuiteAdmin.ReportService {
         
         public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id) {
             return base.Channel.GetReportAsync(ticket, id);
+        }
+        
+        public FuiteAdmin.ReportService.Result SetBanIp(string ticket, string ip) {
+            return base.Channel.SetBanIp(ticket, ip);
+        }
+        
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(string ticket, string ip) {
+            return base.Channel.SetBanIpAsync(ticket, ip);
+        }
+        
+        public FuiteAdmin.ReportService.ResultIp IsIpBan(string ticket, string ip) {
+            return base.Channel.IsIpBan(ticket, ip);
+        }
+        
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(string ticket, string ip) {
+            return base.Channel.IsIpBanAsync(ticket, ip);
         }
     }
 }

@@ -40,6 +40,18 @@
   <wsdl:message name="IReportService_GetReport_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportResponse" />
   </wsdl:message>
+  <wsdl:message name="IReportService_SetBanIp_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBanIp" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_SetBanIp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBanIpResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_IsIpBan_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsIpBan" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_IsIpBan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsIpBanResponse" />
+  </wsdl:message>
   <wsdl:portType name="IReportService">
     <wsdl:operation name="AddReport">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/AddReport" message="tns:IReportService_AddReport_InputMessage" />
@@ -60,6 +72,14 @@
     <wsdl:operation name="GetReport">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/GetReport" message="tns:IReportService_GetReport_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportService/GetReportResponse" message="tns:IReportService_GetReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBanIp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/SetBanIp" message="tns:IReportService_SetBanIp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/SetBanIpResponse" message="tns:IReportService_SetBanIp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsIpBan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/IsIpBan" message="tns:IReportService_IsIpBan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/IsIpBanResponse" message="tns:IReportService_IsIpBan_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IReportService" type="tns:IReportService">
@@ -102,6 +122,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetReport">
       <soap:operation soapAction="http://tempuri.org/IReportService/GetReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBanIp">
+      <soap:operation soapAction="http://tempuri.org/IReportService/SetBanIp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsIpBan">
+      <soap:operation soapAction="http://tempuri.org/IReportService/IsIpBan" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

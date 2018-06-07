@@ -29,6 +29,11 @@
             <asp:Label runat="server" ID="reportGeolocation"></asp:Label>
         </span>
 
+        <span class="info ban">
+            <asp:Button runat="server" ID="ban" Text="Bannir cet utilisateur" OnClientClick="return confirm('Etes-vous sûr de vouloir bannir cet utilisateur ?')" OnClick="ban_Click" />
+        </span>
+    </div>
+
         <div class="report-map">
 
         </div>

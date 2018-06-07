@@ -60,4 +60,15 @@ namespace FuiteAPI
             get; set;
         }
     }
+
+    [DataContract]
+    public class ResultIp : Result
+    {
+
+        [DataMember]
+        public bool Data
+        {
+            get; set;
+        }
+    }
 }
