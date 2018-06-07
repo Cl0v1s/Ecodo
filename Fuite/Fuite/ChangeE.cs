@@ -7,14 +7,17 @@ namespace FuiteAPI
 {
     public partial class Change
     {
-        public WebSrvPortal.Auth.User Operator
-        {
+        public WebSrvPortal.Auth.User Operator {
             get
             {
                 if (this.Operator_id == null)
                     return null;
                 WebSrvPortal.Auth.AuthServiceSoapClient client = new WebSrvPortal.Auth.AuthServiceSoapClient();
-                return client.ObtenirUtilisateurSurGID(this.Operator_id.ToString());
+                return client.ObtenirUtilisateurSurIdentifiant((Guid)this.Operator_id);
+            }
+            set
+            {
+
             }
         }
     }

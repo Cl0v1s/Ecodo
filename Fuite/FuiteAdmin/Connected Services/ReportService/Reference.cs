@@ -306,6 +306,9 @@ namespace FuiteAdmin.ReportService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.User OperatorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> Operator_idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -327,6 +330,19 @@ namespace FuiteAdmin.ReportService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FuiteAdmin.ReportService.User Operator {
+            get {
+                return this.OperatorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OperatorField, value) != true)) {
+                    this.OperatorField = value;
+                    this.RaisePropertyChanged("Operator");
+                }
             }
         }
         
@@ -391,6 +407,185 @@ namespace FuiteAdmin.ReportService {
                 if ((this.stateField.Equals(value) != true)) {
                     this.stateField = value;
                     this.RaisePropertyChanged("state");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI.WebSrvPortal.Auth")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.ComponentModel.PropertyChangedEventHandler PropertyChanged1Field;
+        
+        private string idAgenceFieldField;
+        
+        private string idServiceFieldField;
+        
+        private System.Guid idUserFieldField;
+        
+        private string loginFieldField;
+        
+        private string loginMaximoFieldField;
+        
+        private string mailFieldField;
+        
+        private string matriculeFieldField;
+        
+        private string nomCompletFieldField;
+        
+        private string ticketAuthFieldField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Name="PropertyChanged", IsRequired=true)]
+        public System.ComponentModel.PropertyChangedEventHandler PropertyChanged1 {
+            get {
+                return this.PropertyChanged1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PropertyChanged1Field, value) != true)) {
+                    this.PropertyChanged1Field = value;
+                    this.RaisePropertyChanged("PropertyChanged1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string idAgenceField {
+            get {
+                return this.idAgenceFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.idAgenceFieldField, value) != true)) {
+                    this.idAgenceFieldField = value;
+                    this.RaisePropertyChanged("idAgenceField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string idServiceField {
+            get {
+                return this.idServiceFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.idServiceFieldField, value) != true)) {
+                    this.idServiceFieldField = value;
+                    this.RaisePropertyChanged("idServiceField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Guid idUserField {
+            get {
+                return this.idUserFieldField;
+            }
+            set {
+                if ((this.idUserFieldField.Equals(value) != true)) {
+                    this.idUserFieldField = value;
+                    this.RaisePropertyChanged("idUserField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string loginField {
+            get {
+                return this.loginFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.loginFieldField, value) != true)) {
+                    this.loginFieldField = value;
+                    this.RaisePropertyChanged("loginField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string loginMaximoField {
+            get {
+                return this.loginMaximoFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.loginMaximoFieldField, value) != true)) {
+                    this.loginMaximoFieldField = value;
+                    this.RaisePropertyChanged("loginMaximoField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string mailField {
+            get {
+                return this.mailFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mailFieldField, value) != true)) {
+                    this.mailFieldField = value;
+                    this.RaisePropertyChanged("mailField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string matriculeField {
+            get {
+                return this.matriculeFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.matriculeFieldField, value) != true)) {
+                    this.matriculeFieldField = value;
+                    this.RaisePropertyChanged("matriculeField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string nomCompletField {
+            get {
+                return this.nomCompletFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nomCompletFieldField, value) != true)) {
+                    this.nomCompletFieldField = value;
+                    this.RaisePropertyChanged("nomCompletField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string ticketAuthField {
+            get {
+                return this.ticketAuthFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ticketAuthFieldField, value) != true)) {
+                    this.ticketAuthFieldField = value;
+                    this.RaisePropertyChanged("ticketAuthField");
                 }
             }
         }

@@ -10,11 +10,15 @@ namespace FuiteAdmin
     public partial class Details : System.Web.UI.Page
     {
 
-        private ReportService.ReportContract report;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+                return;
+            this.Update();
+        }
 
+        private void Update()
+        {
             string ticket = (string)Session["Ticket"];
             int id = Int32.Parse(Request.QueryString["id"]);
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
@@ -31,19 +35,18 @@ namespace FuiteAdmin
             set
             {
                 string ticket = (string)Session["Ticket"];
-                this.report = value;
-
-                this.reportIp.Text = this.report.Ip;
-                this.reportDate.Text = this.report.Date.ToString("dd/MM/yy hh:mm");
-                this.reportGeolocation.Text = this.report.Latitude + " " + this.report.Longitude;
-                this.reportState.Value = ((int)this.report.State).ToString();
+                ViewState["Report"] = value;
+                this.reportIp.Text = value.Ip;
+                this.reportDate.Text = value.Date.ToString("dd/MM/yy hh:mm");
+                this.reportGeolocation.Text = value.Latitude + " " + value.Longitude;
+                this.reportState.Value = ((int)value.State).ToString();
 
                 string[] states = new string[]
                 {
-                    "Nouveau", "Affecté", "En cours"
+                    "Nouveau", "Affecté", "Traité"
                 };
                 ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-                ReportService.ResultChanges response = client.GetChanges(ticket, (int)this.report.Id);
+                ReportService.ResultChanges response = client.GetChanges(ticket, (int)value.Id);
 
                 if (response.Code != 0)
                     throw new HttpException(500, response.Message);
@@ -58,12 +61,12 @@ namespace FuiteAdmin
                     td.InnerText = states[(int)change.state];
                     tr.Controls.Add(td);
                     td = new HtmlTableCell();
-                    /*ReportService.User op = change.Operator;
+                    ReportService.User op = change.Operator;
                     if (op == null)
                         td.InnerText = "N/A";
                     else
                         td.InnerText = op.nomCompletField;
-                    tr.Controls.Add(td);*/
+                    tr.Controls.Add(td);
                     this.reportHistory.Controls.Add(tr);
                 }
             }
@@ -71,7 +74,21 @@ namespace FuiteAdmin
 
         protected void updateState_Click(object sender, EventArgs e)
         {
+            ReportService.ReportContract report = (ReportService.ReportContract)ViewState["Report"];
 
+            string ticket = (string)Session["Ticket"];
+            int value = Int32.Parse(this.reportState.Items[this.reportState.SelectedIndex].Value);
+            if (value == (int)report.State)
+                return;
+            ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
+            ReportService.ReportContract nreport = new ReportService.ReportContract();
+            nreport.State = (ReportService.State)value;
+            nreport.Id = report.Id;
+            ReportService.Result response =  client.SetReport(ticket, nreport);
+            if (response.Code != 0)
+                throw new HttpException(500, response.Message);
+            this.Update();
+            //TODO: ajouter un message de validation
         }
     }
 }

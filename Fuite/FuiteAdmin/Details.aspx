@@ -12,17 +12,17 @@
     <div class="report-details">
         <span class="info state">
             <select id="reportState" name="reportState" runat="server">
-            <option value="0">
-                Nouveau
-            </option>
-            <option value="1">
-                Affecté
-            </option>
-            <option value="2">
-                Traité
-            </option>
-        </select>
-        <asp:Button runat="server" Text="Mettre à jour" ID="updateState" OnClick="updateState_Click" />
+                <option value="0">
+                    Nouveau
+                </option>
+                <option value="1">
+                    Affecté
+                </option>
+                <option value="2">
+                    Traité
+                </option>
+            </select>
+            <asp:Button runat="server" Text="Mettre à jour" ID="updateState" OnClick="updateState_Click" />
         </span>
 
         <span class="info geolocation">

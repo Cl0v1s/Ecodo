@@ -5,6 +5,9 @@
       <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FuiteAPI" />
+      <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/FuiteAPI.WebSrvPortal.Auth" />
+      <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
+      <xsd:import schemaLocation="http://localhost:49280/ReportService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IReportService_AddReport_InputMessage">

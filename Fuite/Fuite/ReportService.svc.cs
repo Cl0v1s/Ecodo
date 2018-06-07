@@ -108,6 +108,7 @@ namespace FuiteAPI
                 Change change = new Change();
                 change.Report_id = r.id;
                 change.state = r.state;
+                change.date = DateTime.Now;
                 change.Operator_id = user.IdUser;
 
                 entities.Changes.Add(change);
