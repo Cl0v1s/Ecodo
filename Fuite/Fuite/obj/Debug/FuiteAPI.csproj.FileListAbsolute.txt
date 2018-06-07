@@ -6,8 +6,8 @@ D:\Fuite\Fuite\Fuite\bin\EntityFramework.SqlServer.dll
 D:\Fuite\Fuite\Fuite\bin\EntityFramework.xml
 D:\Fuite\Fuite\Fuite\bin\EntityFramework.SqlServer.xml
 D:\Fuite\Fuite\Fuite\bin\fr\EntityFramework.resources.dll
+D:\Fuite\Fuite\Fuite\bin\fr\EntityFramework.SqlServer.resources.dll
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csproj.CoreCompileInputs.cache
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csproj.CopyComplete
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.dll
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.pdb
-D:\Fuite\Fuite\Fuite\bin\fr\EntityFramework.SqlServer.resources.dll

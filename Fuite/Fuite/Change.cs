@@ -19,7 +19,5 @@ namespace FuiteAPI
         public System.DateTime date { get; set; }
         public int state { get; set; }
         public Nullable<System.Guid> Operator_id { get; set; }
-    
-        public virtual Report Report { get; set; }
     }
 }

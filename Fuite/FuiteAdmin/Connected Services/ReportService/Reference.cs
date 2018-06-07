@@ -191,6 +191,8 @@ namespace FuiteAdmin.ReportService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Result", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultReports))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultChanges))]
     public partial class Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -198,9 +200,6 @@ namespace FuiteAdmin.ReportService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FuiteAdmin.ReportService.ReportContract[] DataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
@@ -229,6 +228,38 @@ namespace FuiteAdmin.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultReports", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class ResultReports : FuiteAdmin.ReportService.Result {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.ReportContract[] DataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public FuiteAdmin.ReportService.ReportContract[] Data {
             get {
                 return this.DataField;
@@ -240,16 +271,126 @@ namespace FuiteAdmin.ReportService {
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultChanges", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class ResultChanges : FuiteAdmin.ReportService.Result {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.Change[] DataField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
+        public FuiteAdmin.ReportService.Change[] Data {
             get {
-                return this.MessageField;
+                return this.DataField;
             }
             set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Change", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class Change : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> Operator_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Report_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int stateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> Operator_id {
+            get {
+                return this.Operator_idField;
+            }
+            set {
+                if ((this.Operator_idField.Equals(value) != true)) {
+                    this.Operator_idField = value;
+                    this.RaisePropertyChanged("Operator_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Report_id {
+            get {
+                return this.Report_idField;
+            }
+            set {
+                if ((this.Report_idField.Equals(value) != true)) {
+                    this.Report_idField = value;
+                    this.RaisePropertyChanged("Report_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime date {
+            get {
+                return this.dateField;
+            }
+            set {
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int state {
+            get {
+                return this.stateField;
+            }
+            set {
+                if ((this.stateField.Equals(value) != true)) {
+                    this.stateField = value;
+                    this.RaisePropertyChanged("state");
                 }
             }
         }
@@ -281,16 +422,22 @@ namespace FuiteAdmin.ReportService {
         System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetReportAsync(string ticket, FuiteAdmin.ReportService.ReportContract report);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReports", ReplyAction="http://tempuri.org/IReportService/GetReportsResponse")]
-        FuiteAdmin.ReportService.Result GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
+        FuiteAdmin.ReportService.ResultReports GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReports", ReplyAction="http://tempuri.org/IReportService/GetReportsResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetChanges", ReplyAction="http://tempuri.org/IReportService/GetChangesResponse")]
+        FuiteAdmin.ReportService.ResultChanges GetChanges(string ticket, int reportid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetChanges", ReplyAction="http://tempuri.org/IReportService/GetChangesResponse")]
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(string ticket, int reportid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
-        FuiteAdmin.ReportService.Result GetReport(string ticket, int id);
+        FuiteAdmin.ReportService.ResultReports GetReport(string ticket, int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> GetReportAsync(string ticket, int id);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -336,19 +483,27 @@ namespace FuiteAdmin.ReportService {
             return base.Channel.SetReportAsync(ticket, report);
         }
         
-        public FuiteAdmin.ReportService.Result GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
+        public FuiteAdmin.ReportService.ResultReports GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
             return base.Channel.GetReports(ticket, state, minIndex, maxIndex);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
             return base.Channel.GetReportsAsync(ticket, state, minIndex, maxIndex);
         }
         
-        public FuiteAdmin.ReportService.Result GetReport(string ticket, int id) {
+        public FuiteAdmin.ReportService.ResultChanges GetChanges(string ticket, int reportid) {
+            return base.Channel.GetChanges(ticket, reportid);
+        }
+        
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(string ticket, int reportid) {
+            return base.Channel.GetChangesAsync(ticket, reportid);
+        }
+        
+        public FuiteAdmin.ReportService.ResultReports GetReport(string ticket, int id) {
             return base.Channel.GetReport(ticket, id);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> GetReportAsync(string ticket, int id) {
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id) {
             return base.Channel.GetReportAsync(ticket, id);
         }
     }

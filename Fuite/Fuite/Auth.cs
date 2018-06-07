@@ -12,10 +12,16 @@ namespace FuiteAPI
     {
         public static WebSrvPortal.Auth.User WithTicket(string ticket)
         {
-            Result r = new Result();
-            WebSrvPortal.Auth.AuthServiceSoapClient client = new WebSrvPortal.Auth.AuthServiceSoapClient();
-            WebSrvPortal.Auth.User user = client.ObtenirUtilisateur(ticket);
-            return user;
+            try
+            {
+                WebSrvPortal.Auth.AuthServiceSoapClient client = new WebSrvPortal.Auth.AuthServiceSoapClient();
+                WebSrvPortal.Auth.User user = client.ObtenirUtilisateur(ticket);
+                return user;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
     }
     

@@ -50,7 +50,7 @@ namespace FuiteAPI
                 report.Ip = ip;
                 if (report.IsValid() == false)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
-                Report res = report.Reports;
+                Report res = report.Report;
                 entities.Reports.Add(res);
                 entities.SaveChanges();
 
@@ -69,7 +69,7 @@ namespace FuiteAPI
             return r;
         }
 
-        public Result SetReport(string ticket, ReportContract report)
+        public Result SetReport(string ticket,ReportContract report)
         {
             if (this.AddCORS() == false)
                 return null;
@@ -122,11 +122,11 @@ namespace FuiteAPI
             return re;
         }
 
-        public Result GetReport(string ticket, int id)
+        public ResultReports GetReport(string ticket, int id)
         {
             if (this.AddCORS() == false)
                 return null;
-            Result r = new Result();
+            ResultReports r = new ResultReports();
             try
             {
                 if (Auth.WithTicket(ticket) == null)
@@ -146,13 +146,11 @@ namespace FuiteAPI
             return r;
         }
 
-
-
-        public Result GetReports(string ticket, State state, int minIndex, int maxIndex)
+        public ResultReports GetReports(string ticket, State state, int minIndex, int maxIndex)
         {
             if (this.AddCORS() == false)
                 return null;
-            Result re = new Result();
+            ResultReports re = new ResultReports();
             try
             {
                 if (Auth.WithTicket(ticket) == null)
@@ -165,7 +163,8 @@ namespace FuiteAPI
                 List<ReportContract> results = new List<ReportContract>();
                 foreach (Report r in reports)
                 {
-                    results.Add(new ReportContract(r));
+                    ReportContract rep = new ReportContract(r);
+                    results.Add(rep);
                 }
                 re.Data = results.ToArray();
             }
@@ -176,6 +175,13 @@ namespace FuiteAPI
             return re;
         }
 
-
+        public ResultChanges GetChanges(string ticket, int reportid)
+        {
+            FuiteKey entities = new FuiteKey();
+            Change[] changes = entities.Changes.Where(x => x.Report_id == reportid).ToArray();
+            ResultChanges result = new ResultChanges();
+            result.Data = changes;
+            return result;
+        }
     }
 }

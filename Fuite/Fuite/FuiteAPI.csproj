@@ -108,6 +108,7 @@
     <Compile Include="Change.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangeExtend.cs" />
     <Compile Include="Connected Services\WebSrvPortal.Auth\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,6 +132,7 @@
     <Compile Include="Report.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReportContract.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Auth.cs" />
     <Compile Include="ReportService.svc.cs">

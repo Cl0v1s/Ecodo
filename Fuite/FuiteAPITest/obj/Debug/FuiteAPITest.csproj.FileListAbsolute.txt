@@ -15,7 +15,3 @@ D:\Fuite\Fuite\FuiteAPITest\obj\Debug\FuiteAPITest.pdb
 D:\Fuite\Fuite\FuiteAPITest\bin\Debug\EntityFramework.SqlServer.dll
 D:\Fuite\Fuite\FuiteAPITest\bin\Debug\EntityFramework.SqlServer.xml
 D:\Fuite\Fuite\FuiteAPITest\bin\Debug\fr\EntityFramework.SqlServer.resources.dll
-D:\Fuite\Fuite\FuiteAPITest\bin\Debug\Portal.Bll.dll
-D:\Fuite\Fuite\FuiteAPITest\bin\Debug\Portal.Dal.dll
-D:\Fuite\Fuite\FuiteAPITest\bin\Debug\LdeLib.dll
-D:\Fuite\Fuite\FuiteAPITest\bin\Debug\Portal.Core.dll

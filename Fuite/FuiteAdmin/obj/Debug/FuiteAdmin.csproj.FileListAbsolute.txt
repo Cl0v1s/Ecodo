@@ -51,7 +51,6 @@ D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\VBCSCompiler.exe
 D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\VBCSCompiler.exe.config
 D:\Fuite\Fuite\FuiteAdmin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Fuite\Fuite\FuiteAdmin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csprojAssemblyReference.cache
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csproj.CoreCompileInputs.cache
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csproj.CopyComplete
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.dll

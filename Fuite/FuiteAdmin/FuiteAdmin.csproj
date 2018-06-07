@@ -73,6 +73,12 @@
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultReports.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultChanges.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ReportService\ReportService.disco" />
     <None Include="Connected Services\ReportService\configuration91.svcinfo" />
     <None Include="Connected Services\ReportService\configuration.svcinfo" />
@@ -84,6 +90,7 @@
     <Content Include="Global.asax" />
     <Content Include="Default.aspx" />
     <Content Include="History.aspx" />
+    <Content Include="redirect.aspx" />
     <Content Include="Report\ReportItem.ascx" />
     <Content Include="Web.config" />
     <None Include="Connected Services\ReportService\ReportService.wsdl" />
@@ -136,6 +143,13 @@
       <DependentUpon>Index.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="redirect.aspx.cs">
+      <DependentUpon>redirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="redirect.aspx.designer.cs">
+      <DependentUpon>redirect.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Report\ReportItem.ascx.cs">
       <DependentUpon>ReportItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
