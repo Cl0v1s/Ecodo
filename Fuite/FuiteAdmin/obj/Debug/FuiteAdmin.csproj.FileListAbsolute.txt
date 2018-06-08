@@ -55,3 +55,4 @@ D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csproj.CoreCompileInputs.cache
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csproj.CopyComplete
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.dll
 D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.pdb
+D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csprojAssemblyReference.cache
