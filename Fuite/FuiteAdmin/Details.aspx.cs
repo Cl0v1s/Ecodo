@@ -47,9 +47,6 @@ namespace FuiteAdmin
             {
                 string ticket = (string)Session["Ticket"];
                 ViewState["Report"] = value;
-                this.reportIp.Text = value.Ip;
-                this.reportDate.Text = value.Date.ToString("dd/MM/yy hh:mm");
-                this.reportGeolocation.Text = value.Latitude + " " + value.Longitude;
                 this.reportState.Value = ((int)value.State).ToString();
 
                 string[] states = new string[]
@@ -62,7 +59,7 @@ namespace FuiteAdmin
                 if (response.Code != 0)
                     throw new HttpException(500, response.Message);
 
-                foreach (ReportService.Change change in response.Data)
+                foreach (ReportService.Change change in response.Data.Reverse())
                 {
                     HtmlTableRow tr = new HtmlTableRow();
                     HtmlTableCell td = new HtmlTableCell();

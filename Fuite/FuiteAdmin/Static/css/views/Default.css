@@ -29,7 +29,7 @@ header+div
     padding: var(--small-space);
     position: absolute;
     top: 0;
-    right: calc(var(--width) * -0.95);
+    right: calc(var(--width) * -0.85);
     height: 100%;
     width: var(--width);
     text-align: center;

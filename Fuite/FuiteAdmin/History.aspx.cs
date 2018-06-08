@@ -13,8 +13,6 @@ namespace FuiteAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                return;
             this.Update();
         }
 
@@ -52,7 +50,7 @@ namespace FuiteAdmin
                 td = new HtmlTableCell();
                 HtmlAnchor a = new HtmlAnchor();
                 a.InnerText = "Voir";
-                a.Attributes["class"] = "button";
+                a.Attributes["class"] = "button small";
                 a.HRef = "Details.aspx?id=" + report.Id;
                 td.Controls.Add(a);
                 tr.Controls.Add(td);

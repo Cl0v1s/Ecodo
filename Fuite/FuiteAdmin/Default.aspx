@@ -24,13 +24,13 @@
         { 
             %>
             markers[<%= report.Id %>] = L.marker([<%= ((double)report.Latitude).ToString().Replace(",",".") %>, <%= ((double)report.Longitude).ToString().Replace(",",".") %>]);
-        markers[<%= report.Id %>].addTo(map).bindPopup("#<%= report.Id %>  <%= report.Date.ToString("dd/MM/yy hh:mm") %>");
-        markers[<%= report.Id %>].on("mouseover", function () {
-            markers[<%= report.Id %>].openPopup();
-        });
-                markers[<%= report.Id %>].on("mouseout", function () {
-            markers[<%= report.Id %>].closePopup();
-        });
+            markers[<%= report.Id %>].addTo(map).bindPopup("#<%= report.Id %>  <%= report.Date.ToString("dd/MM/yy hh:mm") %>");
+            markers[<%= report.Id %>].on("mouseover", function () {
+                markers[<%= report.Id %>].openPopup();
+            });
+            markers[<%= report.Id %>].on("mouseout", function () {
+                markers[<%= report.Id %>].closePopup();
+            });
             markers[<%= report.Id %>].on("click", function () { window.location.href = "Details.aspx?id=<%= report.Id %>" });
             <%
         }
@@ -43,7 +43,7 @@
     <label for="toggle-menu">
         <input type="checkbox" id="toggle-menu">
         <div id="menu">
-            <a class="button" href="History.aspx">Voir tout les signalements</a>
+            <a class="button" href="History.aspx">Voir tous les signalements</a>
             <div runat="server" id="reportList">
             </div>
         </div>

@@ -4,31 +4,24 @@
     <script src="Static/js/leaflet.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="report-header">
-        <asp:Label runat="server" CssClass="info ip" ID="reportIp"></asp:Label>
-        <asp:Label runat="server" CssClass="info date" ID="reportDate"></asp:Label>
+    <div class="report-header text-center">
+        <span class="round info float-left ip">
+            <label class="font-weight-bold">IP:</label> <%= this.Report.Ip %>
+        </span>
+        <span class="round info ip">
+            <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>
+        </span>
+        <span class="round float-right info date">
+            <label class="font-weight-bold">Date:</label> <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %>
+        </span>
     </div>
     <div class="report-picture">
-        <asp:Image runat="server" ID="reportPicture" />
+        <img class="picture" src="<%= this.Report.Picture %>"
     </div>
-    <div class="report-details">
-        <span class="info state">
-            <select id="reportState" name="reportState" runat="server">
-                <option value="0">
-                    Nouveau
-                </option>
-                <option value="1">
-                    Affecté
-                </option>
-                <option value="2">
-                    Traité
-                </option>
-            </select>
-            <asp:Button runat="server" Text="Mettre à jour" CssClass="button" ID="updateState" OnClick="updateState_Click" />
-        </span>
-
-        <span class="info geolocation">
-            <asp:Label runat="server" ID="reportGeolocation"></asp:Label>
+    <div class="report-details text-center">
+        <br />
+        <span class="round info d-inline-block geolocation">
+            <label class="font-weight-bold">Géolocalisation:</label> <%= this.Report.Latitude+" "+this.Report.Longitude %>
         </span>
 
         <span class="info ban">
@@ -49,14 +42,27 @@
         L.marker([<%= ((double)this.Report.Latitude).ToString().Replace(",",".") %>, <%= ((double)this.Report.Longitude).ToString().Replace(",",".") %>]).addTo(map)
         .bindPopup('Signalement de fuite');
     </script>
-
-    <div class="report-history">
-        <table>
-            <thead>
+            <span class="round info state">
+            <select id="reportState" name="reportState" runat="server">
+                <option value="0">
+                    Nouveau
+                </option>
+                <option value="1">
+                    Affecté
+                </option>
+                <option value="2">
+                    Traité
+                </option>
+            </select>
+            <asp:Button runat="server" Text="Mettre à jour" CssClass="button" ID="updateState" OnClick="updateState_Click" />
+        </span>
+    <div class="report-history round mx-auto w-75">
+        <table class="table">
+            <thead class="thead-light">
                 <tr>
-                    <td>Date</td>
-                    <td>Etat</td>
-                    <td>Opérateur</td>
+                    <th scope="col">Date</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Opérateur</th>
                 </tr>
             </thead>
             <tbody runat="server" id="reportHistory">

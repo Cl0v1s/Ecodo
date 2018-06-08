@@ -13,31 +13,13 @@ namespace FuiteAdmin {
     public partial class Details {
         
         /// <summary>
-        /// Contrôle reportIp.
+        /// Contrôle ban.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label reportIp;
-        
-        /// <summary>
-        /// Contrôle reportDate.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label reportDate;
-        
-        /// <summary>
-        /// Contrôle reportPicture.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image reportPicture;
+        protected global::System.Web.UI.WebControls.Button ban;
         
         /// <summary>
         /// Contrôle reportState.
@@ -56,24 +38,6 @@ namespace FuiteAdmin {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button updateState;
-        
-        /// <summary>
-        /// Contrôle reportGeolocation.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label reportGeolocation;
-        
-        /// <summary>
-        /// Contrôle ban.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ban;
         
         /// <summary>
         /// Contrôle reportHistory.

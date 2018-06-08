@@ -2,6 +2,7 @@
 {
     position: relative;
     cursor: pointer;
+    padding-top: 50px;;
 }
 
 .report-item a
@@ -20,16 +21,11 @@
     margin: 0;
 }
 
-    .report-item span.show {
-        position: absolute;
-        top: var(--small-space);
-        right: var(--small-space);
+   .report-item span.show {
         text-decoration: underline;
-        margin: 0;
     }
 
 .report-item span
 {
     display: block;
-    margin-top: 10px;
 }

@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <link rel="stylesheet" href="Static/css/vendor/reset.css" />
+    <link rel="stylesheet" href="Static/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="Static/css/index.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -14,7 +15,7 @@
 <body>
     <form id="form1" runat="server">
         <header>
-            <h1>Fuite</h1>
+            <h1><a href="Default.aspx">Fuite</a></h1>
         </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
