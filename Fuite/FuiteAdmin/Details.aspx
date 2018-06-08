@@ -48,7 +48,6 @@
         map.addLayer(OpenStreetMap_Mapnik);
         L.marker([<%= ((double)this.Report.Latitude).ToString().Replace(",",".") %>, <%= ((double)this.Report.Longitude).ToString().Replace(",",".") %>]).addTo(map)
         .bindPopup('Signalement de fuite');
-
     </script>
 
     <div class="report-history">
