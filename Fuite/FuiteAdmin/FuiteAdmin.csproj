@@ -95,7 +95,16 @@
     <Content Include="History.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Report\ReportItem.ascx" />
-    <Content Include="Static\css\leaflet.css" />
+    <Content Include="Static\css\index.css" />
+    <Content Include="Static\css\vendor\images\layers-2x.png" />
+    <Content Include="Static\css\vendor\images\layers.png" />
+    <Content Include="Static\css\vendor\images\marker-icon-2x.png" />
+    <Content Include="Static\css\vendor\images\marker-icon.png" />
+    <Content Include="Static\css\vendor\images\marker-shadow.png" />
+    <Content Include="Static\css\vendor\leaflet.css" />
+    <Content Include="Static\css\vendor\reset.css" />
+    <Content Include="Static\css\views\Default.css" />
+    <Content Include="Static\css\views\ReportItem.css" />
     <Content Include="Static\images\layers-2x.png" />
     <Content Include="Static\images\layers.png" />
     <Content Include="Static\images\marker-icon-2x.png" />
@@ -186,10 +195,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

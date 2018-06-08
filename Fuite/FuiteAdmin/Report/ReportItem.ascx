@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportItem.ascx.cs" Inherits="FuiteAdmin.Report.ReportItem" %>
-<div class="report-item">
+<div class="report-item round">
     <a runat="server" id="link" href="../Details.aspx">
-        <span class="id"><asp:Label runat="server" ID="reportId"></asp:Label></span><span class="ip"><asp:Label runat="server" ID="reportIp"></asp:Label></span>
+        <span class="id">#<%= this.Report.Id %></span><span class="date">Le <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %></span><span class="ip">Par <%= this.Report.Ip %></span>
     </a>
 </div>

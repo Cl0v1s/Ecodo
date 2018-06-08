@@ -1,0 +1,60 @@
+﻿#form1
+{
+    height: 100%;
+}
+
+header+div 
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.map 
+{
+    position: absolute;
+    width: 100%;
+    max-height:100%;
+    height: 1500px;
+    top:0;
+    left:0;
+    z-index:0;
+}
+
+#menu {
+    --width: 300px;
+    background-color: var(--background-color);
+    padding: var(--small-space);
+    position: absolute;
+    top: 0;
+    right: calc(var(--width) * -0.95);
+    height: 100%;
+    width: var(--width);
+    text-align: center;
+    z-index: 2;
+    transition: all 0.2s ease;
+
+}
+
+    #menu::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        content: "";
+        display: block;
+        width: 50px;
+        height: 50px;
+        background-image: url("../../images/arrow.svg");
+        background-repeat: no-repeat;
+        background-position: 0 center;
+        -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+        animation: heartbeat 1.5s ease-in-out infinite both;
+        background-size: contain;
+    }
+
+
+#menu.opened, #menu:hover {
+    right: 0;
+}

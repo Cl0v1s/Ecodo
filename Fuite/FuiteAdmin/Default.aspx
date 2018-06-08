@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FuiteAdmin.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="Static/css/leaflet.css" />
+    <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
+    <link rel="stylesheet" href="Static/css/views/Default.css" />
     <script src="Static/js/leaflet.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <a class="button" href="History.aspx">Voir tout les signalements</a>
-    <div class="map" id="map" style="height:600px"></div>
+    <div class="map" id="map"></div>
     <script>
         var map = L.map('map').setView([44.8369002,-0.576331], 12);
         //let map = L.map('map').setView([44, -0.5], 13);
@@ -26,6 +26,9 @@
         %>
 
     </script>
-    <div runat="server" id="reportList">
+    <div id="menu">
+        <a class="button" href="History.aspx">Voir tout les signalements</a>
+        <div runat="server" id="reportList">
+        </div>
     </div>
 </asp:Content>

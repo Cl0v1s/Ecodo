@@ -1,0 +1,299 @@
+/**
+ * ----------------------------------------
+ * animation heartbeat
+ * ----------------------------------------
+ */
+@-webkit-keyframes heartbeat {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    10% {
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    17% {
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    33% {
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    45% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+}
+
+@keyframes heartbeat {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    10% {
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    17% {
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    33% {
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    45% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+}
+
+.heartbeat {
+    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+    animation: heartbeat 1.5s ease-in-out infinite both;
+}
+/**
+     * ----------------------------------------
+     * animation shake-horizontal
+     * ----------------------------------------
+     */
+    @-webkit-keyframes shake-horizontal {
+        0%, 100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        10%, 30%, 50%, 70% {
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+        }
+
+        20%, 40%, 60% {
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+        }
+
+        80% {
+            -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+        }
+
+        90% {
+            -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+        }
+    }
+
+    @keyframes shake-horizontal {
+        0%, 100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        10%, 30%, 50%, 70% {
+            -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+        }
+
+        20%, 40%, 60% {
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+        }
+
+        80% {
+            -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+        }
+
+        90% {
+            -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+        }
+    }
+
+    .attention {
+        -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+        animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    }
+
+
+    /**
+     * ----------------------------------------
+     * animation loading
+     * ----------------------------------------
+     */
+    @-webkit-keyframes sk-scaleout {
+        0% {
+            -webkit-transform: scale(0)
+        }
+
+        100% {
+            -webkit-transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+
+    @keyframes sk-scaleout {
+        0% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        100% {
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+
+    .loading {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin: auto;
+        background-color: #333;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+    }
+
+
+
+:root {
+    --primary-color: #4384C0;
+    --background-color: #37536D;
+    --primary-gradient: linear-gradient(rgba(77, 203, 249, 0.8), #4384C0);
+    --primary-gradient-hover: linear-gradient(rgba(77, 203, 249, 1), #4384C0);
+    --radius: 10px;
+    --shadow: 0px 2px 10px 5px rgba(0,0,0,0.2);
+    --space: 30px;
+    --small-space: 15px;
+}
+
+    html 
+    {
+        height: 100%;
+    }
+
+    body
+    {
+        background-color: var(--background-color);
+        height: 100%;
+    }
+
+    .round 
+    {
+        display: block;
+        background-color: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: var(--space);
+        margin: var(--space);
+    }
+
+    .info 
+    {
+        display: inline-block;
+        padding: var(--small-space);
+    }
+
+    .button {
+        display: inline-block;
+        border-radius: var(--radius);
+        background: var(--primary-gradient);
+        color: white;
+        padding: var(--small-space);
+        margin: var(--small-space);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .button:hover {
+        background: var(--primary-gradient-hover);
+    }
+
+    .button.selector {
+        margin: 0;
+        border-radius: 0;
+        border: 0;
+        position: relative;
+    }
+
+    .button.selector.selected
+    {
+        background: none;
+        background-color: var(--primary-color);
+    }
+
+
+
+    .button.selector:first-of-type {
+        margin: 0;
+        margin-left: var(--small-space);
+        border-top-left-radius: var(--radius);
+        border-bottom-left-radius: var(--radius);
+        border: 0;
+    }
+
+    .button.selector:last-of-type {
+        margin: 0;
+        margin-right: var(--small-space);
+        border-top-right-radius: var(--radius);
+        border-bottom-right-radius: var(--radius);
+        border: 0;
+    }
+
+
+    header
+    {
+        text-align: center;
+        margin: 0;
+        padding: var(--space);
+        box-shadow: var(--shadow);
+        z-index:3;
+        position: relative;
+    }
+
+    header h1
+    {
+        display: inline-block;
+        color: white;
+
+    }
+
+
+ 
+

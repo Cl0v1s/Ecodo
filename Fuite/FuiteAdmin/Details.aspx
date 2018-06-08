@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="FuiteAdmin.Details" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="Static/css/leaflet.css" />
+    <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
     <script src="Static/js/leaflet.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -24,7 +24,7 @@
                     Traité
                 </option>
             </select>
-            <asp:Button runat="server" Text="Mettre à jour" ID="updateState" OnClick="updateState_Click" />
+            <asp:Button runat="server" Text="Mettre à jour" CssClass="button" ID="updateState" OnClick="updateState_Click" />
         </span>
 
         <span class="info geolocation">
@@ -32,7 +32,7 @@
         </span>
 
         <span class="info ban">
-            <asp:Button runat="server" ID="ban" Text="Bannir cet utilisateur" OnClientClick="return confirm('Etes-vous sûr de vouloir bannir cet utilisateur ?')" OnClick="ban_Click" />
+            <asp:Button runat="server" ID="ban" CssClass="button" Text="Bannir cet utilisateur" OnClientClick="return confirm('Etes-vous sûr de vouloir bannir cet utilisateur ?')" OnClick="ban_Click" />
         </span>
     </div>
 

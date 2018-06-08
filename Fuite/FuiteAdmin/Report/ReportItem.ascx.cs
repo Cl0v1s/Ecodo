@@ -26,12 +26,7 @@ namespace FuiteAdmin.Report
             set
             {
                 this.report = value;
-                if (this.report.Id != null)
-                    this.reportId.Text = this.report.Id.ToString();
-                else
-                    this.reportId.Text = "N/A";
-                this.reportIp.Text = this.report.Ip;
-                this.link.HRef = this.link.HRef + "?id=" + this.report.Id;
+                this.link.HRef += "?id=" + value.Id;
             }
         }
     }

@@ -2,9 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Button runat="server" ID="new" OnClick="new_Click" Text="Nouvelle" />
-    <asp:Button runat="server" ID="current" OnClick="current_Click" Text="En cours" />
-    <asp:Button runat="server" ID="closed" OnClick="closed_Click" Text="Fermé" />
+    <asp:Button runat="server" CssClass="button selector" ID="new" OnClick="new_Click" Text="Nouvelle" /><!--
+    --><asp:Button runat="server" CssClass="button selector" ID="current" OnClick="current_Click" Text="En cours" /><!--
+    --><asp:Button runat="server" CssClass="button selector" ID="closed" OnClick="closed_Click" Text="Fermé" />
     <table>
         <thead>
             <tr>

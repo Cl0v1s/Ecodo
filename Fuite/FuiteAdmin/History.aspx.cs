@@ -64,16 +64,25 @@ namespace FuiteAdmin
         protected void new_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.New);
+            this.@new.CssClass += " selected";
+            this.current.CssClass = this.current.CssClass.Replace(" selected", "");
+            this.closed.CssClass = this.closed.CssClass.Replace(" selected", "");
         }
 
         protected void current_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.Affected);
+            this.current.CssClass += " selected";
+            this.@new.CssClass = this.@new.CssClass.Replace(" selected", "");
+            this.closed.CssClass = this.closed.CssClass.Replace(" selected", "");
         }
 
         protected void closed_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.Closed);
+            this.closed.CssClass += " selected";
+            this.@new.CssClass = this.@new.CssClass.Replace(" selected", "");
+            this.current.CssClass = this.current.CssClass.Replace(" selected", "");
         }
     }
 }
