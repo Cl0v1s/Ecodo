@@ -35,6 +35,7 @@ header+div
     text-align: center;
     z-index: 2;
     transition: all 0.2s ease;
+    padding-left: var(--space);
 
 }
 
@@ -53,8 +54,15 @@ header+div
         animation: heartbeat 1.5s ease-in-out infinite both;
         background-size: contain;
     }
+    #toggle-menu {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        /* For mobile, it's typically better to position checkbox on top of clickable
+          area and turn opacity to 0 instead. */
+    }
 
 
-#menu.opened, #menu:hover {
-    right: 0;
-}
+        #menu.opened, #menu:hover, #toggle-menu:checked ~ #menu {
+            right: 0;
+        }

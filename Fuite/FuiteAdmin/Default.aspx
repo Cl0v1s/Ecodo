@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FuiteAdmin.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
+    <link rel="stylesheet" href="Static/css/views/ReportItem.css" />
     <link rel="stylesheet" href="Static/css/views/Default.css" />
     <script src="Static/js/leaflet.js"></script>
+    <script src="Static/js/MarkerHighlighter.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="map" id="map"></div>
@@ -15,20 +17,35 @@
         });
         map.addLayer(OpenStreetMap_Mapnik);
 
+        var markers = {};
+
         <% 
         foreach(var report in this.Reports)
         { 
             %>
-                L.marker([<%= ((double)report.Latitude).ToString().Replace(",",".") %>, <%= ((double)report.Longitude).ToString().Replace(",",".") %>]).addTo(map)
-                .bindPopup("<%= report.Date.ToString("dd/MM/yy hh:mm") %>");
+            markers[<%= report.Id %>] = L.marker([<%= ((double)report.Latitude).ToString().Replace(",",".") %>, <%= ((double)report.Longitude).ToString().Replace(",",".") %>]);
+        markers[<%= report.Id %>].addTo(map).bindPopup("#<%= report.Id %>  <%= report.Date.ToString("dd/MM/yy hh:mm") %>");
+        markers[<%= report.Id %>].on("mouseover", function () {
+            markers[<%= report.Id %>].openPopup();
+        });
+                markers[<%= report.Id %>].on("mouseout", function () {
+            markers[<%= report.Id %>].closePopup();
+        });
+            markers[<%= report.Id %>].on("click", function () { window.location.href = "Details.aspx?id=<%= report.Id %>" });
             <%
         }
         %>
 
+        MarkerHightlighter.Instance.SetMarkers(markers);
+
     </script>
-    <div id="menu">
-        <a class="button" href="History.aspx">Voir tout les signalements</a>
-        <div runat="server" id="reportList">
+    
+    <label for="toggle-menu">
+        <input type="checkbox" id="toggle-menu">
+        <div id="menu">
+            <a class="button" href="History.aspx">Voir tout les signalements</a>
+            <div runat="server" id="reportList">
+            </div>
         </div>
-    </div>
+     </label>
 </asp:Content>

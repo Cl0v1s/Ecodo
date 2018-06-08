@@ -1,2 +1,35 @@
-﻿body {
+﻿.report-item
+{
+    position: relative;
+    cursor: pointer;
+}
+
+.report-item a
+{
+    text-decoration:none;
+}
+
+.report-item span.id
+{
+    position: absolute;
+    top:var(--small-space);
+    left: var(--small-space);
+    color: rgba(0,0,0,0.4);
+    font-weight: bold;
+    font-size: 23px;
+    margin: 0;
+}
+
+    .report-item span.show {
+        position: absolute;
+        top: var(--small-space);
+        right: var(--small-space);
+        text-decoration: underline;
+        margin: 0;
+    }
+
+.report-item span
+{
+    display: block;
+    margin-top: 10px;
 }

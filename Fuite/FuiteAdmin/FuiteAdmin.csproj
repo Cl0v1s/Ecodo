@@ -111,6 +111,7 @@
     <Content Include="Static\images\marker-icon.png" />
     <Content Include="Static\images\marker-shadow.png" />
     <Content Include="Static\js\leaflet.js" />
+    <Content Include="Static\js\MarkerHighlighter.js" />
     <Content Include="Web.config" />
     <None Include="Connected Services\ReportService\ReportService.wsdl" />
     <None Include="Connected Services\ReportService\ReportService.xsd">
