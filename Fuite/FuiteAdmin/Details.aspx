@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="FuiteAdmin.Details" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="Static/css/leaflet.css" />
+    <script src="Static/js/leaflet.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="report-header">
@@ -34,22 +36,32 @@
         </span>
     </div>
 
-        <div class="report-map">
+    <div class="report-map" id="map" style="height:280px">
+    </div>
+    <script>
+        var map = L.map('map').setView([<%= ((double)this.Report.Latitude).ToString().Replace(",",".") %>, <%= ((double)this.Report.Longitude).ToString().Replace(",",".") %>], 16);
+        //let map = L.map('map').setView([44, -0.5], 13);
+        var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	        maxZoom: 19,
+	        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+        map.addLayer(OpenStreetMap_Mapnik);
+        L.marker([<%= ((double)this.Report.Latitude).ToString().Replace(",",".") %>, <%= ((double)this.Report.Longitude).ToString().Replace(",",".") %>]).addTo(map)
+        .bindPopup('Signalement de fuite');
 
-        </div>
+    </script>
 
-        <div class="report-history">
-            <table>
-                <thead>
-                    <tr>
-                        <td>Date</td>
-                        <td>Etat</td>
-                        <td>Opérateur</td>
-                    </tr>
-                </thead>
-                <tbody runat="server" id="reportHistory">
-                </tbody>
-            </table>
-        </div>
+    <div class="report-history">
+        <table>
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Etat</td>
+                    <td>Opérateur</td>
+                </tr>
+            </thead>
+            <tbody runat="server" id="reportHistory">
+            </tbody>
+        </table>
     </div>
 </asp:Content>

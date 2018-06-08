@@ -95,6 +95,13 @@
     <Content Include="History.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Report\ReportItem.ascx" />
+    <Content Include="Static\css\leaflet.css" />
+    <Content Include="Static\images\layers-2x.png" />
+    <Content Include="Static\images\layers.png" />
+    <Content Include="Static\images\marker-icon-2x.png" />
+    <Content Include="Static\images\marker-icon.png" />
+    <Content Include="Static\images\marker-shadow.png" />
+    <Content Include="Static\js\leaflet.js" />
     <Content Include="Web.config" />
     <None Include="Connected Services\ReportService\ReportService.wsdl" />
     <None Include="Connected Services\ReportService\ReportService.xsd">
