@@ -111,6 +111,7 @@
     --radius: 10px;
     --shadow: 0px 2px 5px 5px rgba(0,0,0,0.1);
     --space: 30px;
+    --primary-gradient: linear-gradient(rgba(77,203,249,1), #4384C0);
 }
 
 html 
@@ -122,6 +123,34 @@ body
 {
     background-color: var(--background-color);
     height: 100%;
+}
+
+header {
+    height:50px;
+    text-align: center;
+    display: inline-block;
+    margin: var(--space);
+    margin-bottom: 0;
+    /*background-color: rgba(77,203,249,1);*/
+    /*background: var(--primary-gradient);*/
+}
+
+    header span {
+        display: inline-block;
+        height: 50px;
+        width: 70px;
+        vertical-align: middle;
+    }
+
+header .logo {
+    background: white;
+}
+
+header .name 
+{
+    color: white;
+    border:1px solid white;
+    line-height: 50px;
 }
 
 .block
@@ -139,23 +168,42 @@ body
 
 .camera 
 {
-    background-color: var(--primary-color);
-    height: 40%;
+    background: var(--primary-gradient);
+    height: 250px;
     position: relative;
     overflow: hidden;
 }
 
-.camera video {
+    .camera::before {
+        content: "Appuyez ici pour prendre une photographie de la fuite";
+        bottom: var(--space);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+    }
+
+.camera::after {
+    content: "";
+    background-image: url("../images/camera.svg");
     position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+}
+
+.camera #picture {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: auto;
-    overflow: hidden;
+    width: 100%;
+
 }
 
 .round 
@@ -171,16 +219,20 @@ button {
     padding-left: calc(var(--space)*'2');
     padding-right: calc(var(--space)*'2');
     border-radius: 40px;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
-button.submit {
-    display: block;
-    background-color: var(--primary-color); /*#50a750; /**/
-    color: white;
-    width: 90%;
-    margin: auto;
-    min-height: 100px;
-}
+    button.submit {
+        display: block;
+        /*background-color: var(--primary-color); /*#50a750; /**/
+        background: var(--primary-gradient);
+        color: white;
+        width: 90%;
+        margin: auto;
+        margin-bottom: 25px;
+        min-height: 100px;
+    }
 
 button.clickable .loading
 {
@@ -194,6 +246,34 @@ button.clickable span {
 button:not(.clickable) span {
     display: none;
 }
+
+    button.error {
+        background: #cb2d3e; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    button.error::after 
+    {
+        content: "";
+        transition: all 10s ease;
+        background-color: rgba(0,0,0,0.3);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 10px;
+    }
+
+        button.error.started::after {
+            width: 0;
+        }
+
+    button.success {
+        background: #56ab2f; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #a8e063, #56ab2f); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
 
 
 textarea

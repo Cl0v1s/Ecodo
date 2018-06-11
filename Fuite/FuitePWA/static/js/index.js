@@ -31,12 +31,25 @@ Geolocator.Instance = new Geolocator();
 /// <reference path="Camera.ts">
 class App {
     constructor() {
-        window.addEventListener("load", () => { this.Attach(); this.Start(); });
+        this.ready = false;
+        if (App.DEBUG)
+            window.addEventListener("load", () => { this.Launch(); });
+        else
+            document.addEventListener("deviceready", () => { this.Launch(); });
+    }
+    Launch() {
+        if (this.ready)
+            return;
+        AlertManager.Instance.Error("caca");
+        this.Attach();
+        this.Start();
+        this.ready = true;
     }
     Attach() {
         document.querySelector("#submit").addEventListener("click", (ev) => { this.Submit(ev.target); });
         document.querySelector("#submit span").addEventListener("click", (ev) => { this.Submit(ev.target.parentElement); });
-        Camera.Instance.Attach("#camera video", "#camera canvas");
+        Camera.Instance.Attach("#camera #picture");
+        AlertManager.Instance.Attach("#submit");
     }
     Start() {
         this.report = new Report();
@@ -55,7 +68,10 @@ class App {
             return false;
         }
         if (this.report == null || Report.IsValid(this.report) == false) {
-            AlertManager.Instance.Error("Des données sont manquantes pour pouvoir signaler la fuite. Pouvez-vous réessayer s'il vous plaît ? :3");
+            if (this.report.Picture == null)
+                AlertManager.Instance.Error("Votre signalement doit inclure une photo de la fuite. :/");
+            if (this.report.Latitude == null || this.report.Longitude == null)
+                AlertManager.Instance.Error("Il y a un problème avec les coordonnées GPS... :/");
             return false;
         }
         let rgpd = document.querySelector("#rgpd");
@@ -69,7 +85,7 @@ class App {
         return true;
     }
     FillReport() {
-        this.report.Picture = Camera.Instance.Capture();
+        this.report.Picture = document.querySelector("#picture").src;
         this.report.Description = document.querySelector("#description").value;
         console.log(this.report);
     }
@@ -99,24 +115,39 @@ class App {
         });
     }
 }
+App.DEBUG = true;
 App.Instance = new App();
 App.Endpoint = "http://localhost:8000";
 /// <reference path="Alertify.d.ts">
 class AlertManager {
-    Success(message) {
-        alertify.logPosition("top right");
-        alertify.success(message);
-        console.log(message);
+    Attach(target) {
+        this.target = document.querySelector(target);
     }
-    Show(message) {
-        alertify.logPosition("top right");
-        alertify.log(message);
+    Success(message) {
+        this.Push(message, "success");
         console.log(message);
     }
     Error(message) {
-        alertify.logPosition("top right");
-        alertify.error(message);
+        this.Push(message, "error");
         console.error(message);
+    }
+    Push(message, type) {
+        if (this.target == null || this.target.classList.contains("attention"))
+            return;
+        var content = this.target.querySelector(".content");
+        var saved = "Envoyer";
+        content.innerHTML = message;
+        this.target.classList.add("attention");
+        this.target.classList.add(type);
+        setTimeout(() => {
+            this.target.classList.add("started");
+        }, 10);
+        setTimeout(() => {
+            content.innerHTML = saved;
+            this.target.classList.remove("attention");
+            this.target.classList.remove(type);
+            this.target.classList.remove("started");
+        }, 10000);
     }
 }
 AlertManager.Instance = new AlertManager();
@@ -131,6 +162,8 @@ class Report {
     }
     static IsValid(report) {
         if (report.Latitude == null || report.Longitude == null || report.Picture == null)
+            return false;
+        if (report.Picture.indexOf("base64") == -1)
             return false;
         return true;
     }
@@ -152,50 +185,28 @@ class Camera {
     constructor() {
         this.enabled = false;
     }
-    Attach(videot, canvast) {
-        let streaming = false;
-        this.video = document.querySelector(videot);
-        this.canvas = document.querySelector(canvast);
-        let video = this.video;
-        let canvas = this.canvas;
-        navigator.getMedia = (navigator.getUserMedia ||
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia ||
-            navigator.msGetUserMedia);
-        let width = 320;
-        let height = 0;
-        navigator.getMedia({
-            video: true,
-            audio: false
-        }, function (stream) {
-            if (navigator.mozGetUserMedia) {
-                video.mozSrcObject = stream;
-            }
-            else {
-                var vendorURL = window.URL || window.webkitURL;
-                video.srcObject = stream;
-            }
-            this.enabled = true;
-            video.play();
-        }, function (err) {
-            console.log("An error occured! " + err);
+    Attach(picture) {
+        this.picture = document.querySelector(picture);
+        if (!navigator.camera) {
+            this.enabled = false;
+            return;
+        }
+        this.enabled = true;
+        this.picture = document.querySelector(picture);
+        this.picture.addEventListener("click", () => {
+            this.Capture();
         });
-        video.addEventListener('canplay', function (ev) {
-            if (!streaming) {
-                height = video.videoHeight / (video.videoWidth / width);
-                video.setAttribute('width', width.toString());
-                video.setAttribute('height', height.toString());
-                canvas.setAttribute('width', width.toString());
-                canvas.setAttribute('height', height.toString());
-                streaming = true;
-            }
-        }, false);
     }
     Capture() {
-        let width = parseInt(this.video.getAttribute("width"));
-        let height = parseInt(this.video.getAttribute("height"));
-        this.canvas.getContext('2d').drawImage(this.video, 0, 0, width, height);
-        return this.canvas.toDataURL('image/png');
+        var options = {
+            quality: 50,
+            destinationType: navigator.camera.DestinationType.DATA_URL,
+            sourceType: 1,
+            encodingType: 0,
+        };
+        navigator.camera.getPicture((data) => {
+            this.picture.src = "data:image/jpeg;base64," + data;
+        }, function () { }, options);
     }
 }
 Camera.Instance = new Camera();

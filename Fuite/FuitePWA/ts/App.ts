@@ -3,23 +3,39 @@
 /// <reference path="Camera.ts">
 
 class App {
+    public static readonly DEBUG: boolean = true;
     public static readonly Instance: App = new App();
 
     private static readonly Endpoint: string = "http://localhost:8000";
 
+
     private report: Report;
+    private ready: boolean = false;
 
     constructor() {
-        window.addEventListener("load", () => { this.Attach(); this.Start() });
+        if (App.DEBUG)
+            window.addEventListener("load", () => { this.Launch() });
+        else
+            document.addEventListener("deviceready", () => { this.Launch() });
     }
 
-    public Attach(): void {
+    public Launch() {
+        if (this.ready)
+            return;
+        AlertManager.Instance.Error("caca");
+        this.Attach();
+        this.Start();
+        this.ready = true;
+    }
+
+    private Attach(): void {
         document.querySelector("#submit").addEventListener("click", (ev: Event) => { this.Submit(<HTMLElement>ev.target); });
         document.querySelector("#submit span").addEventListener("click", (ev: Event) => { this.Submit((<HTMLElement>ev.target).parentElement); });
-        Camera.Instance.Attach("#camera video", "#camera canvas")
+        Camera.Instance.Attach("#camera #picture")
+        AlertManager.Instance.Attach("#submit");
     }
 
-    public Start(): void {
+    private Start(): void {
         this.report = new Report();
         if (Geolocator.Instance.SubscribeLocation((p) => {
             this.report.UpdatePosition(p)
@@ -41,7 +57,10 @@ class App {
         }
 
         if (this.report == null || Report.IsValid(this.report) == false) {
-            AlertManager.Instance.Error("Des données sont manquantes pour pouvoir signaler la fuite. Pouvez-vous réessayer s'il vous plaît ? :3");
+            if (this.report.Picture == null)
+                AlertManager.Instance.Error("Votre signalement doit inclure une photo de la fuite. :/");
+            if (this.report.Latitude == null || this.report.Longitude == null)
+                AlertManager.Instance.Error("Il y a un problème avec les coordonnées GPS... :/");
             return false;
         }
 
@@ -58,7 +77,7 @@ class App {
     }
 
     private FillReport(): void {
-        this.report.Picture = Camera.Instance.Capture();
+        this.report.Picture = (<HTMLImageElement>document.querySelector("#picture")).src;
         this.report.Description = (<HTMLTextAreaElement>document.querySelector("#description")).value;
         console.log(this.report);
     }
@@ -71,25 +90,25 @@ class App {
             return;
 
         target.classList.remove("clickable");
-       fetch(App.Endpoint + "/Reports/AddReport", {
+        fetch(App.Endpoint + "/Reports/AddReport", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
                 body: JSON.stringify(this.report),
-       }).then((response: any) => {
+        }).then((response: any) => {
             return response.json();
-           }, (error) => {
+            }, (error) => {
             target.classList.add("clickable");
             AlertManager.Instance.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-           }).then((json) => {
+            }).then((json) => {
             target.classList.add("clickable");
             if (json.Code == 0)
                 AlertManager.Instance.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
             else
                 AlertManager.Instance.Error(json.Message);
             this.Start();
-       });
+        });
 
 
         
