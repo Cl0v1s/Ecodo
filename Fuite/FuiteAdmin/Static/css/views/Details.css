@@ -1,0 +1,26 @@
+﻿
+.picture 
+{
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (max-width: 775px) {
+    .id,.ip,.date,.geolocation
+    {
+        display: block !important;
+        float: none !important;
+        text-align: left;
+    }
+
+    .state .info 
+    {
+        width: 100% !important;
+    }
+
+
+
+
+
+
+}

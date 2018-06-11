@@ -105,6 +105,7 @@
     <Content Include="Static\css\vendor\leaflet.css" />
     <Content Include="Static\css\vendor\reset.css" />
     <Content Include="Static\css\views\Default.css" />
+    <Content Include="Static\css\views\Details.css" />
     <Content Include="Static\css\views\History.css" />
     <Content Include="Static\css\views\ReportItem.css" />
     <Content Include="Static\images\layers-2x.png" />

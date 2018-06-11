@@ -1,34 +1,60 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="FuiteAdmin.Details" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
+    <link rel="stylesheet" href="Static/css/views/Details.css" />
     <script src="Static/js/leaflet.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="report-header text-center">
-        <span class="round info float-left ip">
-            <label class="font-weight-bold">IP:</label> <%= this.Report.Ip %>
-        </span>
-        <span class="round info ip">
-            <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>
-        </span>
-        <span class="round float-right info date">
-            <label class="font-weight-bold">Date:</label> <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %>
-        </span>
-    </div>
-    <div class="report-picture">
-        <img class="picture" src="<%= this.Report.Picture %>"
-    </div>
-    <div class="report-details text-center">
-        <br />
-        <span class="round info d-inline-block geolocation">
-            <label class="font-weight-bold">Géolocalisation:</label> <%= this.Report.Latitude+" "+this.Report.Longitude %>
-        </span>
+    <div class="report-header  clearfix">
+        <div class="round text-center">
+            <span class="info id float-left">
+                <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>
+            </span>
 
-        <span class="info ban">
-            <asp:Button runat="server" ID="ban" CssClass="button" Text="Bannir cet utilisateur" OnClientClick="return confirm('Etes-vous sûr de vouloir bannir cet utilisateur ?')" OnClick="ban_Click" />
-        </span>
-    </div>
+            <div class="info geolocation ">
+                <label class="font-weight-bold">Géolocalisation:</label> <%= this.Report.Latitude+" "+this.Report.Longitude %>
+            </div>
 
+            <span class="float-right info date">
+                <label class="font-weight-bold">Date:</label> <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %>
+            </span>
+
+            <hr />
+
+            <div class="report-picture">
+                <img class="picture" width="100%" height="auto" src="<%= this.Report.Picture %>" />
+            </div>
+
+
+            <hr />
+
+            <div class="ip text-left clearfix">
+                <span class="ban float-right">
+                    <asp:Button runat="server" ID="ban" CssClass="button" Text="Bannir cet utilisateur" OnClientClick="return confirm('Etes-vous sûr de vouloir bannir cet utilisateur ?')" OnClick="ban_Click" />
+                </span>
+                <label class="font-weight-bold">IP:</label><br /> <%= this.Report.Ip %>
+            </div>
+            <hr />
+            <div class="state text-left clearfix">
+                <span class="form-group">
+                    <label class="font-weight-bold" for="reportState">Statut:</label>
+                    <select id="reportState" class="form-control" name="reportState" runat="server">
+                        <option value="0">
+                            Nouveau
+                        </option>
+                        <option value="1">
+                            Affecté
+                        </option>
+                        <option value="2">
+                            Traité
+                        </option>
+                    </select>
+                </span>
+                <asp:Button runat="server" Text="Mettre à jour" CssClass="button mx-auto d-block" ID="updateState" OnClick="updateState_Click" />
+            </div>
+
+        </div>
+    </div>
     <div class="report-map" id="map" style="height:280px">
     </div>
     <script>
@@ -42,20 +68,6 @@
         L.marker([<%= ((double)this.Report.Latitude).ToString().Replace(",",".") %>, <%= ((double)this.Report.Longitude).ToString().Replace(",",".") %>]).addTo(map)
         .bindPopup('Signalement de fuite');
     </script>
-            <span class="round info state">
-            <select id="reportState" name="reportState" runat="server">
-                <option value="0">
-                    Nouveau
-                </option>
-                <option value="1">
-                    Affecté
-                </option>
-                <option value="2">
-                    Traité
-                </option>
-            </select>
-            <asp:Button runat="server" Text="Mettre à jour" CssClass="button" ID="updateState" OnClick="updateState_Click" />
-        </span>
     <div class="report-history round mx-auto w-75">
         <table class="table">
             <thead class="thead-light">

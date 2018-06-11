@@ -167,6 +167,7 @@ namespace FuiteAPI
                 foreach (Report r in reports)
                 {
                     ReportContract rep = new ReportContract(r);
+                    rep.Picture = "";
                     results.Add(rep);
                 }
                 re.Data = results.ToArray();

@@ -240,6 +240,8 @@
         text-decoration: none;
         transition: all 0.2s ease;
         text-decoration: none;
+        border:0;
+        cursor: pointer;
     }
 
     .button.small
