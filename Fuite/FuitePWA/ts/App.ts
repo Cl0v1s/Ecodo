@@ -22,7 +22,7 @@ class App {
     public Launch() {
         if (this.ready)
             return;
-        AlertManager.Instance.Error("caca");
+        document.querySelector("#loading").classList.add("d-none");
         this.Attach();
         this.Start();
         this.ready = true;

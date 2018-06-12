@@ -46,10 +46,13 @@
     <Content Include="static\css\vendor\bootstrap-checkbox.css" />
     <Content Include="static\css\vendor\bootstrap.min.css" />
     <Content Include="static\css\index.css" />
+    <Content Include="static\images\camera.svg" />
+    <Content Include="static\images\fuite.png" />
     <Content Include="static\js\index.js.map" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="static\images\" />
     <Folder Include="static\js\vendor\" />
     <Folder Include="ts\" />
     <Folder Include="static\" />
