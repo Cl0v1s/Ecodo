@@ -9,18 +9,19 @@ class Camera
     public Attach(picture: string): void {
         this.picture = document.querySelector(picture);
         if (!(<any>navigator).camera) {
-            this.enabled = false;
+            this.enabled = false
+            alert("no camera");
             return;
         }
         this.enabled = true;
-        this.picture = document.querySelector(picture);
-        this.picture.addEventListener("click", () => {
+        this.picture.parentElement.addEventListener("click", () => {
             this.Capture();
         });
 
     }
 
     public Capture(): void {
+        alert("capture");
         var options = {
             quality: 50,
             destinationType: (<any>navigator).camera.DestinationType.DATA_URL,

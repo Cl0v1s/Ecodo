@@ -32,18 +32,25 @@ Geolocator.Instance = new Geolocator();
 class App {
     constructor() {
         this.ready = false;
-        if (App.DEBUG)
+        alert("start");
+        if (App.DEBUG) {
+            alert("load");
             window.addEventListener("load", () => { this.Launch(); });
-        else
+        }
+        else {
+            alert("ready");
             document.addEventListener("deviceready", () => { this.Launch(); });
+        }
     }
     Launch() {
+        alert("launch");
         if (this.ready)
             return;
         document.querySelector("#loading").classList.add("d-none");
         this.Attach();
         this.Start();
         this.ready = true;
+        alert("launched");
     }
     Attach() {
         document.querySelector("#submit").addEventListener("click", (ev) => { this.Submit(ev.target); });
@@ -115,7 +122,7 @@ class App {
         });
     }
 }
-App.DEBUG = true;
+App.DEBUG = false;
 App.Instance = new App();
 App.Endpoint = "http://localhost:8000";
 /// <reference path="Alertify.d.ts">
@@ -189,15 +196,16 @@ class Camera {
         this.picture = document.querySelector(picture);
         if (!navigator.camera) {
             this.enabled = false;
+            alert("no camera");
             return;
         }
         this.enabled = true;
-        this.picture = document.querySelector(picture);
-        this.picture.addEventListener("click", () => {
+        this.picture.parentElement.addEventListener("click", () => {
             this.Capture();
         });
     }
     Capture() {
+        alert("capture");
         var options = {
             quality: 50,
             destinationType: navigator.camera.DestinationType.DATA_URL,

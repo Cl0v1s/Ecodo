@@ -3,7 +3,7 @@
 /// <reference path="Camera.ts">
 
 class App {
-    public static readonly DEBUG: boolean = true;
+    public static readonly DEBUG: boolean = false;
     public static readonly Instance: App = new App();
 
     private static readonly Endpoint: string = "http://localhost:8000";
@@ -13,19 +13,26 @@ class App {
     private ready: boolean = false;
 
     constructor() {
-        if (App.DEBUG)
+        alert("start");
+        if (App.DEBUG) {
+            alert("load");
             window.addEventListener("load", () => { this.Launch() });
-        else
+        }
+        else {
+            alert("ready");
             document.addEventListener("deviceready", () => { this.Launch() });
+        }
     }
 
     public Launch() {
+        alert("launch");
         if (this.ready)
             return;
         document.querySelector("#loading").classList.add("d-none");
         this.Attach();
         this.Start();
         this.ready = true;
+        alert("launched");
     }
 
     private Attach(): void {
