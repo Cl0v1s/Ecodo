@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.ServiceModel.Channels;
 using System.Net;
 using System.Web;
+using System.IO;
 
 namespace FuiteAPI
 {
@@ -65,8 +66,69 @@ namespace FuiteAPI
             {
                 r.Code = 1;
                 r.Message = e.Message;
+                while(e.InnerException != null)
+                {
+                    r.Message += "<br>" + e.InnerException.Message;
+                    e = e.InnerException;
+                }
             }
             return r;
+        }
+
+        public void UploadPicture(string fileName, Stream stream)
+        {
+            if (this.AddCORS() == false)
+                return ;
+            string pFileName = "picture";
+            Result r = new Result();
+            if(stream == null ||stream.Length <=0 )
+            {
+                r.Code = 3;
+                r.Message = "Le nom de fichier ne peut être vide.";
+                return;
+            }
+            FileStream fileStream = null;
+            //Get the file upload path store in web services web.config file.  
+            string strTempFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("FileUploadPath");
+            try
+            {
+
+                if (!string.IsNullOrEmpty(strTempFolderPath))
+                {
+                    if (!string.IsNullOrEmpty(pFileName))
+                    {
+                        string strFileFullPath = strTempFolderPath + pFileName;
+                        fileStream = new FileStream(strFileFullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        // write file stream into the specified file  
+                        using (System.IO.FileStream fs = fileStream)
+                        {
+                            int readCount;
+                            var buffer = new byte[8192];
+                            while ((readCount = stream.Read(buffer, 0, buffer.Length)) != 0)
+                            {
+                                fs.Write(buffer, 0, readCount);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        r.Code = 3;
+                        r.Message = "Le nom de fichier ne peut être vide.";
+                    }
+                }
+                else
+                {
+                    r.Code = 3;
+                    r.Message = "Chemin invalide.";
+                }
+            }
+            catch (Exception ex)
+            {
+                r.Code = 3;
+                r.Message = ex.Message;
+                return;
+            }
+            return ;
         }
 
         public Result SetReport(string ticket,ReportContract report)

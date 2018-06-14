@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FuiteDataStoreContainer" CdmEntityContainer="FuiteKey">
+    <EntitySetMapping Name="Bans">
+      <EntityTypeMapping TypeName="FuiteData.Ban">
+        <MappingFragment StoreEntitySet="Ban">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Changes">
+      <EntityTypeMapping TypeName="FuiteData.Change">
+        <MappingFragment StoreEntitySet="Change">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="Operator_id" ColumnName="Operator_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="FuiteData.Report">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

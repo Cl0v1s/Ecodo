@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.IO;
 
 namespace FuiteAPI
 {
@@ -20,13 +21,17 @@ namespace FuiteAPI
         [WebInvoke(Method ="*",ResponseFormat = WebMessageFormat.Json)]
         Result AddReport(ReportContract report);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/UploadPicture?fileName={fileName}")]
+        void UploadPicture(string fileName, Stream stream);
+
         /// <summary>
         /// Modifie l'état d'une fuite 
         /// </summary>
         /// <param name="report">Nouvel état de la fuite</param>
         /// <returns>True si opération réussie</returns>
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         Result SetReport(string ticket, ReportContract report);
 
         /// <summary>
@@ -34,7 +39,7 @@ namespace FuiteAPI
         /// </summary>
         /// <returns>La liste de tous les reports de fuite</returns>
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "*", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ResultReports GetReports(string ticket, State state, int minIndex, int maxIndex);
 
         /// <summary>
@@ -42,19 +47,19 @@ namespace FuiteAPI
         /// </summary>
         /// <returns>La liste de tous les reports de fuite</returns>
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ResultChanges GetChanges(string ticket, int reportid);
 
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ResultReports GetReport(string ticket, int id);
 
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         Result SetBanIp(string ticket, string ip);
 
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ResultIp IsIpBan(string ticket, string ip);
     }
 

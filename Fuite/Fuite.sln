@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuiteAdmin", "FuiteAdmin\Fu
 		{6CFBE996-4413-4BE4-A989-5B0A2ED94824} = {6CFBE996-4413-4BE4-A989-5B0A2ED94824}
 	EndProjectSection
 EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "FuiteCordova", "FuiteCordova\FuiteCordova.jsproj", "{022FB858-2C6E-4444-BA65-5366476CBDF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android
@@ -160,6 +162,38 @@ Global
 		{A71CBAE2-F256-4B06-B247-DB78A42D3E8A}.Release|Windows-x64.Build.0 = Release|Any CPU
 		{A71CBAE2-F256-4B06-B247-DB78A42D3E8A}.Release|Windows-x86.ActiveCfg = Release|Any CPU
 		{A71CBAE2-F256-4B06-B247-DB78A42D3E8A}.Release|Windows-x86.Build.0 = Release|Any CPU
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Android.ActiveCfg = Debug|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Android.Build.0 = Debug|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Android.Deploy.0 = Debug|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Any CPU.ActiveCfg = Debug|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|iOS.ActiveCfg = Debug|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|iOS.Build.0 = Debug|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|iOS.Deploy.0 = Debug|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-ARM.ActiveCfg = Debug|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-ARM.Build.0 = Debug|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-ARM.Deploy.0 = Debug|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x64.ActiveCfg = Debug|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x64.Build.0 = Debug|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x64.Deploy.0 = Debug|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x86.ActiveCfg = Debug|Windows-x86
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x86.Build.0 = Debug|Windows-x86
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Debug|Windows-x86.Deploy.0 = Debug|Windows-x86
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Android.ActiveCfg = Release|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Android.Build.0 = Release|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Android.Deploy.0 = Release|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Any CPU.ActiveCfg = Release|Android
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|iOS.ActiveCfg = Release|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|iOS.Build.0 = Release|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|iOS.Deploy.0 = Release|iOS
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-ARM.ActiveCfg = Release|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-ARM.Build.0 = Release|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-ARM.Deploy.0 = Release|Windows-ARM
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x64.ActiveCfg = Release|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x64.Build.0 = Release|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x64.Deploy.0 = Release|Windows-x64
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x86.ActiveCfg = Release|Windows-x86
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x86.Build.0 = Release|Windows-x86
+		{022FB858-2C6E-4444-BA65-5366476CBDF4}.Release|Windows-x86.Deploy.0 = Release|Windows-x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

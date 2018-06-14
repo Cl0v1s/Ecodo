@@ -1,0 +1,2 @@
+D:\Fuite\Fuite\FuitePWA\obj\Release\FuitePWA.njsproj.CoreCompileInputs.cache
+D:\Fuite\Fuite\FuitePWA\bin\Microsoft.NodejsTools.WebRole.dll

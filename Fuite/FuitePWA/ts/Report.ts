@@ -11,8 +11,6 @@ class Report {
     public static IsValid(report: Report) {
         if (report.Latitude == null || report.Longitude == null || report.Picture == null)
             return false;
-        if (report.Picture.indexOf("base64") == -1)
-            return false;
         return true;
     }
 

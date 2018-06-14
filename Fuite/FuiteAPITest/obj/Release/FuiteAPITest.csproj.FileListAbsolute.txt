@@ -1,0 +1,17 @@
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPITest.exe.config
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPITest.exe
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPITest.pdb
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\EntityFramework.dll
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\EntityFramework.SqlServer.dll
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPI.dll
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPI.pdb
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\FuiteAPI.dll.config
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\EntityFramework.xml
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\EntityFramework.SqlServer.xml
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\fr\EntityFramework.resources.dll
+D:\Fuite\Fuite\FuiteAPITest\bin\Release\fr\EntityFramework.SqlServer.resources.dll
+D:\Fuite\Fuite\FuiteAPITest\obj\Release\FuiteAPITest.csprojAssemblyReference.cache
+D:\Fuite\Fuite\FuiteAPITest\obj\Release\FuiteAPITest.csproj.CoreCompileInputs.cache
+D:\Fuite\Fuite\FuiteAPITest\obj\Release\FuiteAPITest.csproj.CopyComplete
+D:\Fuite\Fuite\FuiteAPITest\obj\Release\FuiteAPITest.exe
+D:\Fuite\Fuite\FuiteAPITest\obj\Release\FuiteAPITest.pdb

@@ -13,7 +13,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Report_id" Type="int" Nullable="false" />
-    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="state" Type="int" Nullable="false" />
     <Property Name="Operator_id" Type="uniqueidentifier" />
   </EntityType>
@@ -23,12 +23,12 @@
     </Key>
     <Property Name="state" Type="int" Nullable="false" />
     <Property Name="description" Type="text" />
-    <Property Name="picture" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="picture" Type="text" Nullable="false" />
     <Property Name="longitude" Type="float" Nullable="false" />
     <Property Name="latitude" Type="float" Nullable="false" />
     <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
   <Association Name="FK_Change_Report">
     <End Role="Report" Type="Self.Report" Multiplicity="1" />
