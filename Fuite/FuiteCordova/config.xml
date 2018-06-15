@@ -106,4 +106,5 @@
   <plugin name="cordova-plugin-camera" spec="~2.4.1" />
   <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
   <hook type="before_prepare" src="copy.bat" />
+  <plugin name="cordova-plugin-httpd" spec="~0.9.3" />
 </widget>

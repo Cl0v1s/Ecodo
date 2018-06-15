@@ -138,7 +138,7 @@
 
 :root {
     --primary-color: #4384C0;
-    --background-color: #37536D;
+    --background-color: white;
     --radius: 10px;
     --shadow: 0px 2px 5px 5px rgba(0,0,0,0.1);
     --space: 30px;
@@ -208,34 +208,6 @@ div#loading .fuite::after {
 
 
 
-header {
-    height:50px;
-    text-align: center;
-    display: inline-block;
-    margin: var(--space);
-    margin-bottom: 0;
-    /*background-color: rgba(77,203,249,1);*/
-    /*background: var(--primary-gradient);*/
-}
-
-    header span {
-        display: inline-block;
-        height: 50px;
-        width: 70px;
-        vertical-align: middle;
-    }
-
-header .logo {
-    background: white;
-}
-
-header .name 
-{
-    color: white;
-    border:1px solid white;
-    line-height: 50px;
-}
-
 .block
 {
     background-color: white;
@@ -244,7 +216,6 @@ header .name
 .no-bg 
 {
     background-color: rgba(0,0,0,0);
-    color: white;
     box-shadow: none !important;
     padding: 0 !important;
 }
@@ -304,6 +275,7 @@ button {
     border-radius: 40px;
     transition: all 0.2s ease;
     position: relative;
+    outline: none;
 }
 
     button.submit {

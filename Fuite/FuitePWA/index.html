@@ -5,53 +5,21 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/vendor/bootstrap-checkbox.css" />
+    <link rel="stylesheet" href="static/css/vendor/ratchet.min.css" />
     <link rel="stylesheet" href="static/css/index.css" />
-    <link rel="stylesheet" href="static/css/vendor/alertify.css" />
+    <script src="cordova.js"></script>
+    <script src="static/js/vendor/ratchet.min.js"></script>
+    <script src="static/js/index.js"></script>
 </head>
 <body>
-    <div id="loading">
-        <span class="fuite"></span>
-    </div>
-    <header>
-        <span class="logo"></span>
-        <!--
-        -->
-        <span class="name">Netfuite</span>
+    <header class="bar bar-nav">
+        <h1 class="title">Ecodo</h1>
     </header>
-
-    <div class="round camera" id="camera">
-        <img id="picture">
+    <div class="content">
+        <div id="loading">
+            <span class="fuite"></span>
+        </div>
     </div>
 
-    <div class="block round">
-        <textarea type="text" id="description" class="form-control" placeholder="Informations supplémentaires" aria-label="Informations supplémentaires"></textarea>
-    </div>
-
-    <div class="text-center no-bg round">
-        <label class="checkbox-bootstrap checkbox-lg">
-            <input type="checkbox" id="rgpd">
-            <span class="checkbox-placeholder"></span>
-            J'autorise l'Eau de Bordeaux à enregistrer les données transmises dans mon signalement.<br />
-            <span class="font-italic">Ces données rassemblent : coordonnées GPS, adresse IP, photographie et texte d'informations supplémentaires.</span>
-        </label>
-    </div>
-
-    <div class="text-center no-bg round">
-        Vous affirmez avoir pris connaissance de notre politique relatives à vos données.<br />
-    </div>
-
-    <button class="round submit clickable" id="submit">
-        <span class="content">Envoyer</span>
-        <div class="loading"></div>
-    </button>
-    <div class="text-center no-bg round">
-        Les informations portées sur ce formulaire sont obligatoires pour signaler une fuite. Elles font l’objet d’un traitement informatisé destiné à gérer au mieux les fuites existantes sur le réseau d'eau potable de Bordeaux Métropôle. Les destinataires des données sont : les services du pôle eau et le service informatique de Suez Bordeaux.
-        Conformément à la loi "informatique et libertés" du 6 janvier 1978 modifiée, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent. Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant, veuillez vous adresser à Thierry Fernandez (thierry.fernandez@sgacub.fr).
-    </div>
-    <script src="cordova.js"></script>
-    <script src="static/js/vendor/alertify.js"></script>
-    <script src="static/js/vendor/lz-string.min.js"></script>
-    <script src="static/js/requires.js"></script>
-    <script src="static/js/index.js"></script>
 </body>
 </html>

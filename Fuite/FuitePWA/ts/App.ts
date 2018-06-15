@@ -2,7 +2,76 @@
 /// <reference path="Report.ts">
 /// <reference path="Camera.ts">
 
+
 class App {
+
+    public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
+    public static Local: string = ".";
+
+    public static readonly DEBUG: boolean = false;
+    public report: Report;
+
+
+    public static readonly Instance: App = new App();
+
+
+    constructor() {
+        //this.report = new Report();
+        if (App.DEBUG) {
+            window.addEventListener("load", () => {
+                this.Init().then(() => { this.Route() }) });
+        }
+        else {
+            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route() }) });
+        }
+        window.addEventListener("push", () => { this.Route() });
+    }
+
+    private Init(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.report = new Report();
+            Geolocator.Instance.SubscribeLocation((p) => {
+                App.Instance.report.UpdatePosition(p)
+            });
+            if (App.DEBUG == false) {
+                var httpd = ((<any>window).cordova && (<any>window).cordova.plugins && (<any>window).cordova.plugins.CorHttpd) ? (<any>window).cordova.plugins.CorHttpd : null;
+                var options = {
+                    www_root: '', // relative path to app's www directory
+                    port: 8055,
+                    localhost_only: true
+                };
+                alert(httpd);
+                httpd.startServer(options,(url) => {
+                    App.Local = url;
+                    resolve();
+                }, (error) => {
+                    alert(error);
+                });
+            }
+            else
+                resolve();
+        });
+    }
+
+    private Route() {
+        var screen: Page;
+        if (window.location.href.indexOf("picture") != -1) {
+            screen = new PicturePage();
+        }
+        else if (window.location.href.indexOf("description") != -1) {
+            screen = new DescriptionPage();
+        }
+        else if (window.location.href.indexOf("rgpd") != -1)
+            screen = new RGPDPage();
+        else 
+            screen = new LoadingPage();
+
+        screen.GoTo();
+    }
+}
+
+
+/*class App {
     private static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
     //private static readonly Endpoint: string = "http://localhost:49280/ReportService.svc";
     
@@ -100,7 +169,7 @@ class App {
         /*Compression
         var pic = this.report.Picture;
         pic = pic.replace("data:image/jpeg;base64,", "");
-        this.report.Picture = window.LZString.compress(pic);*/
+        this.report.Picture = window.LZString.compress(pic);
         fetch(App.Endpoint + "/AddReport", {
             method: "POST",
             headers: {
@@ -124,4 +193,4 @@ class App {
             this.Start();
         });
     }
-}
+}*/

@@ -1,10 +1,9 @@
 /// <reference path="Alertify.d.ts">
-class AlertManager {
-    public static readonly Instance: AlertManager = new AlertManager();
+class AlertButton {
 
     private target: HTMLButtonElement;
 
-    public Attach(target: string) {
+    constructor(target: string) {
         this.target = document.querySelector(target);
     }
 
@@ -22,7 +21,7 @@ class AlertManager {
     private Push(message: string, type: string) {
         if (this.target == null || this.target.classList.contains("attention"))
             return;
-        var content = this.target.querySelector(".content");
+        var content = this.target.querySelector("span");
         var saved = "Envoyer";
         content.innerHTML = message;
         this.target.classList.add("attention");
