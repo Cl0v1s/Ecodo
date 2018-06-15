@@ -26,6 +26,7 @@ header+div
 #menu {
     --width: 300px;
     background-color: var(--background-color);
+    background: var(--background-gradient);
     padding: var(--small-space);
     position: absolute;
     top: 0;

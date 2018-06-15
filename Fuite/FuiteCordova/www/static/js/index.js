@@ -87,14 +87,25 @@ class App {
         return true;
     }
     FillReport() {
-        this.report.Picture = Camera.Instance.data;
+        var pic = document.querySelector("#picture").src;
+        this.report.Picture = pic;
         this.report.Description = document.querySelector("#description").value;
     }
     Submit(target) {
-        this.FillReport();
-        if (this.CheckForm() == false)
+        if (this.ready == false)
             return;
+        this.ready = false;
         target.classList.remove("clickable");
+        this.FillReport();
+        if (this.CheckForm() == false) {
+            target.classList.add("clickable");
+            this.ready = true;
+            return;
+        }
+        /*Compression
+        var pic = this.report.Picture;
+        pic = pic.replace("data:image/jpeg;base64,", "");
+        this.report.Picture = window.LZString.compress(pic);*/
         fetch(App.Endpoint + "/AddReport", {
             method: "POST",
             headers: {
@@ -105,10 +116,12 @@ class App {
             return response.json();
         }, (error) => {
             target.classList.add("clickable");
+            this.ready = true;
             AlertManager.Instance.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
             alert(error);
         }).then((json) => {
             target.classList.add("clickable");
+            this.ready = true;
             if (json.Code == 0)
                 AlertManager.Instance.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
             else
@@ -119,7 +132,7 @@ class App {
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
 //private static readonly Endpoint: string = "http://localhost:49280/ReportService.svc";
-App.DEBUG = false;
+App.DEBUG = true;
 App.Instance = new App();
 /// <reference path="Alertify.d.ts">
 class AlertManager {
@@ -207,10 +220,10 @@ class Camera {
             encodingType: 0,
         };
         navigator.camera.getPicture((data) => {
-            var string = data;
-            var compressed = window.LZString.compress(string);
+            //var string = data;
+            //var compressed = (<any>window).LZString.compress(string);
             this.picture.src = "data:image/jpeg;base64," + data;
-            this.data = compressed;
+            //this.data = compressed;
         }, function () { }, options);
     }
 }

@@ -10,6 +10,7 @@ using System.ServiceModel.Channels;
 using System.Net;
 using System.Web;
 using System.IO;
+using System.Data.Entity;
 
 namespace FuiteAPI
 {
@@ -50,6 +51,13 @@ namespace FuiteAPI
 
                 report.Ip = ip;
                 report.Date = DateTime.Now;
+
+                if (entities.Reports.Where(x => x.state != (int)State.Closed &&
+                    report.Latitude - x.latitude <= 0.0001 && report.Longitude - x.longitude <= 0.0001 && DbFunctions.DiffDays(report.Date, x.date) < 1
+                ).Count() > 0)
+                {
+                    return r;
+                }
 
                 if (report.IsValid() == false)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
