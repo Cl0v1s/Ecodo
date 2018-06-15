@@ -49,6 +49,8 @@ namespace FuiteAPI
                     throw new Exception("Vous ne pouvez plus publier de signalements.");
 
                 report.Ip = ip;
+                report.Date = DateTime.Now;
+
                 if (report.IsValid() == false)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
                 Report res = report.Report;
@@ -75,66 +77,16 @@ namespace FuiteAPI
             return r;
         }
 
-        public void UploadPicture(string fileName, Stream stream)
-        {
-            if (this.AddCORS() == false)
-                return ;
-            string pFileName = "picture";
-            Result r = new Result();
-            if(stream == null ||stream.Length <=0 )
-            {
-                r.Code = 3;
-                r.Message = "Le nom de fichier ne peut être vide.";
-                return;
-            }
-            FileStream fileStream = null;
-            //Get the file upload path store in web services web.config file.  
-            string strTempFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("FileUploadPath");
-            try
-            {
+        
 
-                if (!string.IsNullOrEmpty(strTempFolderPath))
-                {
-                    if (!string.IsNullOrEmpty(pFileName))
-                    {
-                        string strFileFullPath = strTempFolderPath + pFileName;
-                        fileStream = new FileStream(strFileFullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                        // write file stream into the specified file  
-                        using (System.IO.FileStream fs = fileStream)
-                        {
-                            int readCount;
-                            var buffer = new byte[8192];
-                            while ((readCount = stream.Read(buffer, 0, buffer.Length)) != 0)
-                            {
-                                fs.Write(buffer, 0, readCount);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        r.Code = 3;
-                        r.Message = "Le nom de fichier ne peut être vide.";
-                    }
-                }
-                else
-                {
-                    r.Code = 3;
-                    r.Message = "Chemin invalide.";
-                }
-            }
-            catch (Exception ex)
-            {
-                r.Code = 3;
-                r.Message = ex.Message;
-                return;
-            }
-            return ;
-        }
-
-        public Result SetReport(string ticket,ReportContract report)
+        public Result SetReport(SetReportRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+
+            string ticket = request.ticket;
+            ReportContract report = request.report;
+
             Result re = new Result();
             try
             {
@@ -187,10 +139,12 @@ namespace FuiteAPI
             return re;
         }
 
-        public ResultReports GetReport(string ticket, int id)
+        public ResultReports GetReport(GetReportRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+            string ticket = request.ticket;
+            int id = request.id;
             ResultReports r = new ResultReports();
             try
             {
@@ -201,6 +155,9 @@ namespace FuiteAPI
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
                 ReportContract report = new ReportContract(reports[0]);
+                if (report.Date <= DateTime.MinValue || report.Date >= DateTime.MaxValue)
+                    report.Date = DateTime.Now;
+
                 r.Data = new ReportContract[] { report };
             }
             catch(Exception e)
@@ -211,10 +168,15 @@ namespace FuiteAPI
             return r;
         }
 
-        public ResultReports GetReports(string ticket, State state, int minIndex, int maxIndex)
+        public ResultReports GetReports(GetReportsRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+            string ticket = request.ticket;
+            State state = request.state;
+            int minIndex = request.minIndex;
+            int maxIndex = request.maxIndex;
+
             ResultReports re = new ResultReports();
             try
             {
@@ -230,6 +192,8 @@ namespace FuiteAPI
                 {
                     ReportContract rep = new ReportContract(r);
                     rep.Picture = "";
+                    if (rep.Date >= DateTime.MaxValue || rep.Date <= DateTime.MinValue)
+                        rep.Date = DateTime.Now;
                     results.Add(rep);
                 }
                 re.Data = results.ToArray();
@@ -243,10 +207,12 @@ namespace FuiteAPI
             return re;
         }
 
-        public ResultChanges GetChanges(string ticket, int reportid)
+        public ResultChanges GetChanges(GetChangesRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+            string ticket = request.ticket;
+            int reportid = request.reportId;
             ResultChanges re = new ResultChanges();
             try
             {
@@ -257,6 +223,12 @@ namespace FuiteAPI
                 }
                 FuiteKey entities = new FuiteKey();
                 Change[] changes = entities.Changes.Where(x => x.Report_id == reportid).ToArray();
+                foreach(Change c in changes)
+                {
+                    if (c.date <= DateTime.MinValue || c.date >= DateTime.MaxValue)
+                        c.date = DateTime.Now;
+                }
+
                 re.Data = changes;
             }
             catch (Exception e)
@@ -268,10 +240,12 @@ namespace FuiteAPI
             return re;
         }
 
-        public Result SetBanIp(string ticket, string ip)
+        public Result SetBanIp(BanIpRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+            string ticket = request.ticket;
+            string ip = request.ip;
             Result re = new Result();
             try
             {
@@ -295,10 +269,13 @@ namespace FuiteAPI
             return re;
         }
 
-        public ResultIp IsIpBan(string ticket, string ip)
+        public ResultIp IsIpBan(BanIpRequest request)
         {
             if (this.AddCORS() == false)
                 return null;
+            string ticket = request.ticket;
+            string ip = request.ip;
+
             ResultIp re = new ResultIp();
             re.Data = false;
             try

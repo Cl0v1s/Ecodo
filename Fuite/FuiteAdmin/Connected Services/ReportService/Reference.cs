@@ -624,6 +624,203 @@ namespace FuiteAdmin.ReportService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Request", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetReportsRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetChangesRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetReportRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.BanIpRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.SetReportRequest))]
+    public partial class Request : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ticketField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ticket {
+            get {
+                return this.ticketField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ticketField, value) != true)) {
+                    this.ticketField = value;
+                    this.RaisePropertyChanged("ticket");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReportsRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class GetReportsRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int maxIndexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int minIndexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.State stateField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int maxIndex {
+            get {
+                return this.maxIndexField;
+            }
+            set {
+                if ((this.maxIndexField.Equals(value) != true)) {
+                    this.maxIndexField = value;
+                    this.RaisePropertyChanged("maxIndex");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int minIndex {
+            get {
+                return this.minIndexField;
+            }
+            set {
+                if ((this.minIndexField.Equals(value) != true)) {
+                    this.minIndexField = value;
+                    this.RaisePropertyChanged("minIndex");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FuiteAdmin.ReportService.State state {
+            get {
+                return this.stateField;
+            }
+            set {
+                if ((this.stateField.Equals(value) != true)) {
+                    this.stateField = value;
+                    this.RaisePropertyChanged("state");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetChangesRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class GetChangesRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int reportIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int reportId {
+            get {
+                return this.reportIdField;
+            }
+            set {
+                if ((this.reportIdField.Equals(value) != true)) {
+                    this.reportIdField = value;
+                    this.RaisePropertyChanged("reportId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReportRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class GetReportRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BanIpRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class BanIpRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ipField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ip {
+            get {
+                return this.ipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ipField, value) != true)) {
+                    this.ipField = value;
+                    this.RaisePropertyChanged("ip");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SetReportRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class SetReportRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.ReportContract reportField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FuiteAdmin.ReportService.ReportContract report {
+            get {
+                return this.reportField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.reportField, value) != true)) {
+                    this.reportField = value;
+                    this.RaisePropertyChanged("report");
+                }
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ReportService.IReportService")]
     public interface IReportService {
@@ -635,40 +832,40 @@ namespace FuiteAdmin.ReportService {
         System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> AddReportAsync(FuiteAdmin.ReportService.ReportContract report);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetReport", ReplyAction="http://tempuri.org/IReportService/SetReportResponse")]
-        FuiteAdmin.ReportService.Result SetReport(string ticket, FuiteAdmin.ReportService.ReportContract report);
+        FuiteAdmin.ReportService.Result SetReport(FuiteAdmin.ReportService.SetReportRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetReport", ReplyAction="http://tempuri.org/IReportService/SetReportResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetReportAsync(string ticket, FuiteAdmin.ReportService.ReportContract report);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetReportAsync(FuiteAdmin.ReportService.SetReportRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReports", ReplyAction="http://tempuri.org/IReportService/GetReportsResponse")]
-        FuiteAdmin.ReportService.ResultReports GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
+        FuiteAdmin.ReportService.ResultReports GetReports(FuiteAdmin.ReportService.GetReportsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReports", ReplyAction="http://tempuri.org/IReportService/GetReportsResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(FuiteAdmin.ReportService.GetReportsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetChanges", ReplyAction="http://tempuri.org/IReportService/GetChangesResponse")]
-        FuiteAdmin.ReportService.ResultChanges GetChanges(string ticket, int reportid);
+        FuiteAdmin.ReportService.ResultChanges GetChanges(FuiteAdmin.ReportService.GetChangesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetChanges", ReplyAction="http://tempuri.org/IReportService/GetChangesResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(string ticket, int reportid);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(FuiteAdmin.ReportService.GetChangesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
-        FuiteAdmin.ReportService.ResultReports GetReport(string ticket, int id);
+        FuiteAdmin.ReportService.ResultReports GetReport(FuiteAdmin.ReportService.GetReportRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(FuiteAdmin.ReportService.GetReportRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
-        FuiteAdmin.ReportService.Result SetBanIp(string ticket, string ip);
+        FuiteAdmin.ReportService.Result SetBanIp(FuiteAdmin.ReportService.BanIpRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(string ticket, string ip);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(FuiteAdmin.ReportService.BanIpRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
-        FuiteAdmin.ReportService.ResultIp IsIpBan(string ticket, string ip);
+        FuiteAdmin.ReportService.ResultIp IsIpBan(FuiteAdmin.ReportService.BanIpRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(string ticket, string ip);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(FuiteAdmin.ReportService.BanIpRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -706,52 +903,52 @@ namespace FuiteAdmin.ReportService {
             return base.Channel.AddReportAsync(report);
         }
         
-        public FuiteAdmin.ReportService.Result SetReport(string ticket, FuiteAdmin.ReportService.ReportContract report) {
-            return base.Channel.SetReport(ticket, report);
+        public FuiteAdmin.ReportService.Result SetReport(FuiteAdmin.ReportService.SetReportRequest request) {
+            return base.Channel.SetReport(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetReportAsync(string ticket, FuiteAdmin.ReportService.ReportContract report) {
-            return base.Channel.SetReportAsync(ticket, report);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetReportAsync(FuiteAdmin.ReportService.SetReportRequest request) {
+            return base.Channel.SetReportAsync(request);
         }
         
-        public FuiteAdmin.ReportService.ResultReports GetReports(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
-            return base.Channel.GetReports(ticket, state, minIndex, maxIndex);
+        public FuiteAdmin.ReportService.ResultReports GetReports(FuiteAdmin.ReportService.GetReportsRequest request) {
+            return base.Channel.GetReports(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(string ticket, FuiteAdmin.ReportService.State state, int minIndex, int maxIndex) {
-            return base.Channel.GetReportsAsync(ticket, state, minIndex, maxIndex);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(FuiteAdmin.ReportService.GetReportsRequest request) {
+            return base.Channel.GetReportsAsync(request);
         }
         
-        public FuiteAdmin.ReportService.ResultChanges GetChanges(string ticket, int reportid) {
-            return base.Channel.GetChanges(ticket, reportid);
+        public FuiteAdmin.ReportService.ResultChanges GetChanges(FuiteAdmin.ReportService.GetChangesRequest request) {
+            return base.Channel.GetChanges(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(string ticket, int reportid) {
-            return base.Channel.GetChangesAsync(ticket, reportid);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultChanges> GetChangesAsync(FuiteAdmin.ReportService.GetChangesRequest request) {
+            return base.Channel.GetChangesAsync(request);
         }
         
-        public FuiteAdmin.ReportService.ResultReports GetReport(string ticket, int id) {
-            return base.Channel.GetReport(ticket, id);
+        public FuiteAdmin.ReportService.ResultReports GetReport(FuiteAdmin.ReportService.GetReportRequest request) {
+            return base.Channel.GetReport(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(string ticket, int id) {
-            return base.Channel.GetReportAsync(ticket, id);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(FuiteAdmin.ReportService.GetReportRequest request) {
+            return base.Channel.GetReportAsync(request);
         }
         
-        public FuiteAdmin.ReportService.Result SetBanIp(string ticket, string ip) {
-            return base.Channel.SetBanIp(ticket, ip);
+        public FuiteAdmin.ReportService.Result SetBanIp(FuiteAdmin.ReportService.BanIpRequest request) {
+            return base.Channel.SetBanIp(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(string ticket, string ip) {
-            return base.Channel.SetBanIpAsync(ticket, ip);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(FuiteAdmin.ReportService.BanIpRequest request) {
+            return base.Channel.SetBanIpAsync(request);
         }
         
-        public FuiteAdmin.ReportService.ResultIp IsIpBan(string ticket, string ip) {
-            return base.Channel.IsIpBan(ticket, ip);
+        public FuiteAdmin.ReportService.ResultIp IsIpBan(FuiteAdmin.ReportService.BanIpRequest request) {
+            return base.Channel.IsIpBan(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(string ticket, string ip) {
-            return base.Channel.IsIpBanAsync(ticket, ip);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(FuiteAdmin.ReportService.BanIpRequest request) {
+            return base.Channel.IsIpBanAsync(request);
         }
     }
 }

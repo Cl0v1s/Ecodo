@@ -133,6 +133,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ReportContract.cs" />
+    <Compile Include="Requests.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Auth.cs" />
     <Compile Include="ReportService.svc.cs">

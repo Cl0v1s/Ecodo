@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
     <link rel="stylesheet" href="Static/css/views/Details.css" />
     <script src="Static/js/leaflet.js"></script>
+    <script src="Static/js/lz-string.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="report-header  clearfix">

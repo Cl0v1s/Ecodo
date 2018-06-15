@@ -14,8 +14,12 @@ namespace FuiteAdmin
             string ticket = (string)Session["Ticket"];
 
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-
-            ReportService.ResultReports response = client.GetReports(ticket, ReportService.State.New, -1, Int32.MaxValue);
+            ReportService.GetReportsRequest request = new ReportService.GetReportsRequest();
+            request.ticket = ticket;
+            request.state = ReportService.State.New;
+            request.minIndex = -1;
+            request.maxIndex = Int32.MaxValue;
+            ReportService.ResultReports response = client.GetReports(request);
             if (response.Code != 0)
                 throw new Exception(response.Message);
             this.Reports = response.Data.OrderBy(x => x.Date).ToArray();

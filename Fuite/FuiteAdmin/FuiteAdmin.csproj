@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LZStringCSharp, Version=1.3.0.26157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LZStringCSharp.1.3.0.26157\lib\net40\LZStringCSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -73,13 +76,13 @@
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultReports.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultChanges.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultIp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultReports.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\ReportService\ReportService.disco" />
@@ -114,18 +117,9 @@
     <Content Include="Static\images\marker-icon.png" />
     <Content Include="Static\images\marker-shadow.png" />
     <Content Include="Static\js\leaflet.js" />
+    <Content Include="Static\js\lz-string.min.js" />
     <Content Include="Static\js\MarkerHighlighter.js" />
     <Content Include="Web.config" />
-    <None Include="Connected Services\ReportService\ReportService.wsdl" />
-    <None Include="Connected Services\ReportService\ReportService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ReportService\ReportService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ReportService\ReportService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Index.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -182,13 +176,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\ReportService\ReportService.wsdl" />
+    <None Include="Connected Services\ReportService\ReportService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\ReportService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\ReportService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ReportService\ReportService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ReportService\ReportService31.xsd">
+    <None Include="Connected Services\ReportService\ReportService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ReportService\ReportService32.xsd">
+    <None Include="Connected Services\ReportService\ReportService5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -199,7 +203,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

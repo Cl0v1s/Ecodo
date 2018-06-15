@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Ticket
+namespace FuiteAdmin
 {
     public partial class redirect : System.Web.UI.Page
     {

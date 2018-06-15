@@ -22,14 +22,21 @@ namespace FuiteAdmin
             string ticket = (string)Session["Ticket"];
             int id = Int32.Parse(Request.QueryString["id"]);
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-            ReportService.ResultReports result = client.GetReport(ticket, id);
+            ReportService.GetReportRequest request = new ReportService.GetReportRequest();
+            request.ticket = ticket;
+            request.id = id;
+            ReportService.ResultReports result = client.GetReport(request);
             if (result.Code != 0)
                 throw new HttpException(500, result.Message);
             if (result.Data.Length <= 0)
                 throw new HttpException(404, "Il n'existe pas de signalement possédant cet Id.");
             this.Report = (ReportService.ReportContract)result.Data[0];
 
-            ReportService.ResultIp response = client.IsIpBan(ticket, this.Report.Ip);
+            ReportService.BanIpRequest ipreq = new ReportService.BanIpRequest();
+            ipreq.ticket = ticket;
+            ipreq.ip = this.Report.Ip;
+
+            ReportService.ResultIp response = client.IsIpBan(ipreq);
             if (response.Code != 0)
                 throw new HttpException(500, response.Message);
             if (response.Data)
@@ -54,7 +61,10 @@ namespace FuiteAdmin
                     "Nouveau", "Affecté", "Traité"
                 };
                 ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-                ReportService.ResultChanges response = client.GetChanges(ticket, (int)value.Id);
+                ReportService.GetChangesRequest request = new ReportService.GetChangesRequest();
+                request.ticket = ticket;
+                request.reportId = (int)value.Id;
+                ReportService.ResultChanges response = client.GetChanges(request);
 
                 if (response.Code != 0)
                     throw new HttpException(500, response.Message);
@@ -92,7 +102,12 @@ namespace FuiteAdmin
             ReportService.ReportContract nreport = new ReportService.ReportContract();
             nreport.State = (ReportService.State)value;
             nreport.Id = report.Id;
-            ReportService.Result response =  client.SetReport(ticket, nreport);
+
+            ReportService.SetReportRequest request = new ReportService.SetReportRequest();
+            request.ticket = ticket;
+            request.report = nreport;
+
+            ReportService.Result response =  client.SetReport(request);
             if (response.Code != 0)
                 throw new HttpException(500, response.Message);
             this.Update();
@@ -103,7 +118,12 @@ namespace FuiteAdmin
         {
             string ticket = (string)Session["Ticket"];
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-            ReportService.Result result = client.SetBanIp(ticket, this.Report.Ip);
+
+            ReportService.BanIpRequest request = new ReportService.BanIpRequest();
+            request.ticket = ticket;
+            request.ip = this.Report.Ip;
+
+            ReportService.Result result = client.SetBanIp(request);
             if (result.Code != 0)
                 throw new HttpException(500, result.Message);
             this.Update();
