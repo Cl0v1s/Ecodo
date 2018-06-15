@@ -28,6 +28,7 @@ namespace FuiteAPI
         public string ip { get; set; }
         public int id { get; set; }
         public System.DateTime date { get; set; }
+        public int quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Change> Changes { get; set; }

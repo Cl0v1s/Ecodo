@@ -52,10 +52,16 @@ namespace FuiteAPI
                 report.Ip = ip;
                 report.Date = DateTime.Now;
 
-                if (entities.Reports.Where(x => x.state != (int)State.Closed &&
+                Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed &&
                     report.Latitude - x.latitude <= 0.0001 && report.Longitude - x.longitude <= 0.0001 && DbFunctions.DiffDays(report.Date, x.date) < 1
-                ).Count() > 0)
+                ).ToArray();
+                if (reports.Count() > 0)
                 {
+                    foreach(Report re in reports)
+                    {
+                        re.quantity += 1;
+                    }
+                    entities.SaveChanges();
                     return r;
                 }
 

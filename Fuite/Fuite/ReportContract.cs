@@ -20,6 +20,7 @@ namespace FuiteAPI
         State state = State.New;
         DateTime date;
         int? id;
+        int quantity;
 
 
         public bool IsValid()
@@ -41,6 +42,7 @@ namespace FuiteAPI
             this.state = (State)reports.state;
             this.date = reports.date;
             this.Ip = reports.ip;
+            this.Quantity = reports.quantity;
         }
 
         public Report Report
@@ -169,6 +171,19 @@ namespace FuiteAPI
             set
             {
                 this.description = value;
+            }
+        }
+
+        [DataMember]
+        public int Quantity
+        {
+            get
+            {
+                return this.quantity;
+            }
+            set
+            {
+                this.quantity = value;
             }
         }
     }

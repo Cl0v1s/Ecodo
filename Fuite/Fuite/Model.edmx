@@ -34,6 +34,7 @@
           <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Change_Report">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -90,6 +91,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Changes" Relationship="Self.FK_Change_Report" FromRole="Report" ToRole="Change" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Change_Report">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -140,6 +142,7 @@
           <EntitySetMapping Name="Reports">
             <EntityTypeMapping TypeName="FuiteData.Report">
               <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="picture" ColumnName="picture" />

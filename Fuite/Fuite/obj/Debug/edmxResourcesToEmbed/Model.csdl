@@ -30,6 +30,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
     <NavigationProperty Name="Changes" Relationship="Self.FK_Change_Report" FromRole="Report" ToRole="Change" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Change_Report">
     <End Role="Report" Type="Self.Report" Multiplicity="1" />

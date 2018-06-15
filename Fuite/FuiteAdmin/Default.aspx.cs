@@ -22,7 +22,7 @@ namespace FuiteAdmin
             ReportService.ResultReports response = client.GetReports(request);
             if (response.Code != 0)
                 throw new Exception(response.Message);
-            this.Reports = response.Data.OrderBy(x => x.Date).ToArray();
+            this.Reports = response.Data.OrderBy(x => x.Quantity).ToArray();
             foreach(ReportService.ReportContract report in this.Reports)
             {
                 Control control = LoadControl("Report/ReportItem.ascx");

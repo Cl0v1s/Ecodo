@@ -44,6 +44,9 @@ namespace FuiteAdmin.ReportService {
         private string PictureField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FuiteAdmin.ReportService.State StateField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -143,6 +146,19 @@ namespace FuiteAdmin.ReportService {
                 if ((object.ReferenceEquals(this.PictureField, value) != true)) {
                     this.PictureField = value;
                     this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
                 }
             }
         }

@@ -9,7 +9,7 @@
     <div class="report-header  clearfix">
         <div class="round text-center">
             <span class="info id float-left">
-                <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>
+                <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>  <label class="font-weight-bold">Nb:</label><%= this.Report.Quantity %>
             </span>
 
             <div class="info geolocation ">

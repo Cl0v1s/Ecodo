@@ -29,6 +29,7 @@
     <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Change_Report">
     <End Role="Report" Type="Self.Report" Multiplicity="1" />

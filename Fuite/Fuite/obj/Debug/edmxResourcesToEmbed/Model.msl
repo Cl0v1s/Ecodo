@@ -23,6 +23,7 @@
     <EntitySetMapping Name="Reports">
       <EntityTypeMapping TypeName="FuiteData.Report">
         <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="picture" ColumnName="picture" />

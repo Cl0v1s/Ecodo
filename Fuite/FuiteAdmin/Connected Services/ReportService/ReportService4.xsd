@@ -11,6 +11,7 @@
       <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="Picture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
       <xs:element minOccurs="0" name="State" type="tns:State" />
     </xs:sequence>
   </xs:complexType>
