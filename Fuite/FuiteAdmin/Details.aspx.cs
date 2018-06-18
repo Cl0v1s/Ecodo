@@ -30,7 +30,7 @@ namespace FuiteAdmin
                 throw new HttpException(500, result.Message);
             if (result.Data.Length <= 0)
                 throw new HttpException(404, "Il n'existe pas de signalement possédant cet Id.");
-            this.Report = (ReportService.ReportContract)result.Data[0];
+            this.Report = (ReportService.ReportRequest)result.Data[0];
 
             ReportService.BanIpRequest ipreq = new ReportService.BanIpRequest();
             ipreq.ticket = ticket;
@@ -44,11 +44,11 @@ namespace FuiteAdmin
 
         }
 
-        public ReportService.ReportContract Report
+        public ReportService.ReportRequest Report
         {
             get
             {
-                return (ReportService.ReportContract)ViewState["Report"];
+                return (ReportService.ReportRequest)ViewState["Report"];
             }
             set
             {
@@ -61,6 +61,39 @@ namespace FuiteAdmin
                     "Nouveau", "Affecté", "Traité"
                 };
                 ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
+
+                // Récupération des photos
+                ReportService.GetPicturesRequest req = new ReportService.GetPicturesRequest();
+                req.ticket = ticket;
+                req.reportId = (int)value.Id;
+                ReportService.ResultPictures resp = client.GetPictures(req);
+
+                if (resp.Code != 0)
+                    throw new HttpException(500, resp.Message);
+
+                foreach(ReportService.Picture pic in resp.Data)
+                {
+                    HtmlGenericControl div1 = new HtmlGenericControl("div");
+                    div1.Attributes["class"] = "col-md-4";
+                    HtmlGenericControl div2 = new HtmlGenericControl("div");
+                    div2.Attributes["class"] = "thumbnail mb-2";
+                    HtmlAnchor a = new HtmlAnchor();
+                    a.HRef = pic.data;
+                    a.Target = "_blank";
+
+                    HtmlImage img = new HtmlImage();
+                    img.Src = pic.data;
+                    img.Attributes["class"] = "img-thumbnail";
+                    img.Style.Add("width", "100%");
+
+                    a.Controls.Add(img);
+                    div2.Controls.Add(a);
+                    div1.Controls.Add(div2);
+                    this.ReportPictures.Controls.Add(div1);
+                }
+
+
+                // Récupération des changements
                 ReportService.GetChangesRequest request = new ReportService.GetChangesRequest();
                 request.ticket = ticket;
                 request.reportId = (int)value.Id;
@@ -92,14 +125,14 @@ namespace FuiteAdmin
 
         protected void updateState_Click(object sender, EventArgs e)
         {
-            ReportService.ReportContract report = (ReportService.ReportContract)ViewState["Report"];
+            ReportService.ReportRequest report = (ReportService.ReportRequest)ViewState["Report"];
 
             string ticket = (string)Session["Ticket"];
             int value = Int32.Parse(this.reportState.Items[this.reportState.SelectedIndex].Value);
             if (value == (int)report.State)
                 return;
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
-            ReportService.ReportContract nreport = new ReportService.ReportContract();
+            ReportService.ReportRequest nreport = new ReportService.ReportRequest();
             nreport.State = (ReportService.State)value;
             nreport.Id = report.Id;
 

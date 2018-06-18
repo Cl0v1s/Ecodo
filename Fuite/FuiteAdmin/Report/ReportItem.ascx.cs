@@ -10,14 +10,14 @@ namespace FuiteAdmin.Report
     public partial class ReportItem : System.Web.UI.UserControl
     {
 
-        private ReportService.ReportContract report;
+        private ReportService.ReportRequest report;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        public ReportService.ReportContract Report
+        public ReportService.ReportRequest Report
         {
             get
             {

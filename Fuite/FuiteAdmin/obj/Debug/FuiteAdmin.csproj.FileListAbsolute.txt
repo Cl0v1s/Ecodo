@@ -56,3 +56,4 @@ D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\System.Reflection.Metadata.dll
 D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\System.Security.Cryptography.Primitives.dll
 D:\Fuite\Fuite\FuiteAdmin\bin\roslyn\System.ValueTuple.dll
+D:\Fuite\Fuite\FuiteAdmin\obj\Debug\FuiteAdmin.csprojAssemblyReference.cache

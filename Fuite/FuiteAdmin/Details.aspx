@@ -9,7 +9,7 @@
     <div class="report-header  clearfix">
         <div class="round text-center">
             <span class="info id float-left">
-                <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %>  <label class="font-weight-bold">Nb:</label><%= this.Report.Quantity %>
+                <label class="font-weight-bold">ID:</label> #<%= this.Report.Id %> 
             </span>
 
             <div class="info geolocation ">
@@ -20,10 +20,16 @@
                 <label class="font-weight-bold">Date:</label> <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %>
             </span>
 
+            <span class="info quantity">
+                <label class="font-weight-bold">Signalement(s):</label> <%= this.Report.Quantity %>
+            </span>
+
             <hr />
 
             <div class="report-picture">
-                <img class="picture" width="100%" height="auto" src="<%= this.Report.Picture %>" />
+                <div runat="server"  id="ReportPictures" class="row justify-content-center">
+
+                </div>
             </div>
 
 

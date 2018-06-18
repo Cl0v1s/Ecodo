@@ -43,9 +43,19 @@ namespace FuiteAPI
     {
 
         [DataMember]
-        public ReportContract[] Data
+        public ReportRequest[] Data
         {
             get; set;
+        }
+    }
+
+    [DataContract]
+    public class ResultPictures : Result
+    {
+        [DataMember]
+        public Picture[] Data
+        {
+            get;set;
         }
     }
 

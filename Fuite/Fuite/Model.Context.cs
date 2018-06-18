@@ -28,5 +28,6 @@ namespace FuiteAPI
         public virtual DbSet<Ban> Bans { get; set; }
         public virtual DbSet<Change> Changes { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
     }
 }

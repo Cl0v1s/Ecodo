@@ -28,6 +28,12 @@
   <wsdl:message name="IReportService_GetReports_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportsResponse" />
   </wsdl:message>
+  <wsdl:message name="IReportService_GetPictures_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPictures" />
+  </wsdl:message>
+  <wsdl:message name="IReportService_GetPictures_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPicturesResponse" />
+  </wsdl:message>
   <wsdl:message name="IReportService_GetChanges_InputMessage">
     <wsdl:part name="parameters" element="tns:GetChanges" />
   </wsdl:message>
@@ -64,6 +70,10 @@
     <wsdl:operation name="GetReports">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/GetReports" message="tns:IReportService_GetReports_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportService/GetReportsResponse" message="tns:IReportService_GetReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPictures">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/GetPictures" message="tns:IReportService_GetPictures_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/GetPicturesResponse" message="tns:IReportService_GetPictures_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetChanges">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/GetChanges" message="tns:IReportService_GetChanges_InputMessage" />

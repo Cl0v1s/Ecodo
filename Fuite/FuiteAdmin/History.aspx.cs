@@ -40,7 +40,7 @@ namespace FuiteAdmin
             if (state != ReportService.State.New)
                 results.Data = results.Data.Reverse().ToArray();
 
-            foreach (ReportService.ReportContract report in results.Data)
+            foreach (ReportService.ReportRequest report in results.Data)
             {
                 HtmlTableRow tr = new HtmlTableRow();
                 HtmlTableCell td = new HtmlTableCell();

@@ -19,7 +19,7 @@ namespace FuiteAPI
         /// <returns>True si opération réussie</returns>
         [OperationContract]
         [WebInvoke(Method ="*",ResponseFormat = WebMessageFormat.Json)]
-        Result AddReport(ReportContract report);
+        Result AddReport(ReportRequest report);
 
         /// <summary>
         /// Modifie l'état d'une fuite 
@@ -39,6 +39,10 @@ namespace FuiteAPI
         [WebInvoke(Method = "*",
         ResponseFormat = WebMessageFormat.Json)]
         ResultReports GetReports(GetReportsRequest request);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", ResponseFormat = WebMessageFormat.Json)]
+        ResultPictures GetPictures(GetPicturesRequest request);
 
         /// <summary>
         /// Récupère la liste de tous les repots de fuite dans la base de données

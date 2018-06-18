@@ -23,7 +23,7 @@ namespace FuiteAdmin
             if (response.Code != 0)
                 throw new Exception(response.Message);
             this.Reports = response.Data.OrderBy(x => x.Quantity).ToArray();
-            foreach(ReportService.ReportContract report in this.Reports)
+            foreach(ReportService.ReportRequest report in this.Reports)
             {
                 Control control = LoadControl("Report/ReportItem.ascx");
                 ((Report.ReportItem)control).Report = report;
@@ -31,7 +31,7 @@ namespace FuiteAdmin
             }
         }
 
-        public ReportService.ReportContract[] Reports
+        public ReportService.ReportRequest[] Reports
         {
             get; set;
         }

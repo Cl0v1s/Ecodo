@@ -29,7 +29,7 @@ namespace FuiteAPI
             return true;
         }
 
-        public Result AddReport(ReportContract report)
+        public Result AddReport(ReportRequest report)
         {
             if (this.AddCORS() == false)
                 return null;
@@ -51,7 +51,7 @@ namespace FuiteAPI
 
                 report.Ip = ip;
                 report.Date = DateTime.Now;
-
+                Picture picture;
                 Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed &&
                     report.Latitude - x.latitude <= 0.0001 && report.Longitude - x.longitude <= 0.0001 && DbFunctions.DiffDays(report.Date, x.date) < 1
                 ).ToArray();
@@ -60,6 +60,10 @@ namespace FuiteAPI
                     foreach(Report re in reports)
                     {
                         re.quantity += 1;
+                        picture = new Picture();
+                        picture.Report_id = re.id;
+                        picture.data = report.Picture;
+                        entities.Pictures.Add(picture);
                     }
                     entities.SaveChanges();
                     return r;
@@ -75,6 +79,12 @@ namespace FuiteAPI
                 change.Report_id = res.id;
                 change.state = (int)State.New;
                 entities.Changes.Add(change);
+
+                picture = new Picture();
+                picture.Report_id = res.id;
+                picture.data = report.Picture;
+                entities.Pictures.Add(picture);
+
                 entities.SaveChanges();
 
             }
@@ -99,7 +109,7 @@ namespace FuiteAPI
                 return null;
 
             string ticket = request.ticket;
-            ReportContract report = request.report;
+            ReportRequest report = request.report;
 
             Result re = new Result();
             try
@@ -126,8 +136,6 @@ namespace FuiteAPI
                     r.latitude = (int)report.Latitude;
                 if (report.Longitude != null)
                     r.longitude = (int)report.Longitude;
-                if (report.Picture != null)
-                    r.picture = report.Picture;
                 if (report.State < State.All)
                     r.state = (int)report.State;
                 if (report.Description != null)
@@ -168,11 +176,11 @@ namespace FuiteAPI
                 Report[] reports = entities.Reports.Where(x => x.id == id).ToArray();
                 if (reports.Length <= 0)
                     throw new ArgumentOutOfRangeException();
-                ReportContract report = new ReportContract(reports[0]);
+                ReportRequest report = new ReportRequest(reports[0]);
                 if (report.Date <= DateTime.MinValue || report.Date >= DateTime.MaxValue)
                     report.Date = DateTime.Now;
 
-                r.Data = new ReportContract[] { report };
+                r.Data = new ReportRequest[] { report };
             }
             catch(Exception e)
             {
@@ -201,10 +209,10 @@ namespace FuiteAPI
                 }
                 FuiteKey entities = new FuiteKey();
                 Report[] reports = entities.Reports.Where(x => x.state == (int)state && x.id >= minIndex && x.id <= maxIndex).ToArray();
-                List<ReportContract> results = new List<ReportContract>();
+                List<ReportRequest> results = new List<ReportRequest>();
                 foreach (Report r in reports)
                 {
-                    ReportContract rep = new ReportContract(r);
+                    ReportRequest rep = new ReportRequest(r);
                     rep.Picture = "";
                     if (rep.Date >= DateTime.MaxValue || rep.Date <= DateTime.MinValue)
                         rep.Date = DateTime.Now;
@@ -213,6 +221,39 @@ namespace FuiteAPI
                 re.Data = results.ToArray();
             }
             catch(Exception e)
+            {
+                if (re.Code == 0)
+                    re.Code = -1;
+                re.Message = e.Message;
+            }
+            return re;
+        }
+
+        public ResultPictures GetPictures(GetPicturesRequest request)
+        {
+            if (this.AddCORS() == false)
+                return null;
+            string ticket = request.ticket;
+            int reportid = request.reportId;
+            ResultPictures re = new ResultPictures();
+            try
+            {
+                if (Auth.WithTicket(ticket) == null)
+                {
+                    re.Code = 2;
+                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
+                }
+                FuiteKey entities = new FuiteKey();
+                Picture[] pictures = entities.Pictures.Where(x => x.Report_id == reportid).ToArray();
+                /*foreach (Picture c in pictures)
+                {
+                    if (c.date <= DateTime.MinValue || c.date >= DateTime.MaxValue)
+                        c.date = DateTime.Now;
+                }*/
+
+                re.Data = pictures;
+            }
+            catch (Exception e)
             {
                 if (re.Code == 0)
                     re.Code = -1;

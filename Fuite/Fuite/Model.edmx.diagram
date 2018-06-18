@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="FuiteData.Change" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FuiteData.Report" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="FuiteData.FK_Change_Report" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FuiteData.Picture" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="FuiteData.FK_Picture_Report" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

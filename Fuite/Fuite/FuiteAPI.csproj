@@ -129,10 +129,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Picture.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Report.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportContract.cs" />
     <Compile Include="Requests.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Auth.cs" />

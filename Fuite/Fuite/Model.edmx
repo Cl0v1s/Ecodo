@@ -22,13 +22,20 @@
           <Property Name="state" Type="int" Nullable="false" />
           <Property Name="Operator_id" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report_id" Type="int" Nullable="false" />
+          <Property Name="data" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="state" Type="int" Nullable="false" />
           <Property Name="description" Type="text" />
-          <Property Name="picture" Type="text" Nullable="false" />
           <Property Name="longitude" Type="float" Nullable="false" />
           <Property Name="latitude" Type="float" Nullable="false" />
           <Property Name="ip" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -48,13 +55,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Picture_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="Report_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FuiteDataStoreContainer">
           <EntitySet Name="Ban" EntityType="Self.Ban" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Change" EntityType="Self.Change" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
             <End Role="Report" EntitySet="Report" />
             <End Role="Change" EntitySet="Change" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Picture_Report" Association="Self.FK_Picture_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="Picture" EntitySet="Picture" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -84,7 +108,6 @@
           </Key>
           <Property Name="state" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="longitude" Type="Double" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -92,6 +115,7 @@
           <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Changes" Relationship="Self.FK_Change_Report" FromRole="Report" ToRole="Change" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pictures" Relationship="FuiteData.FK_Picture_Report" FromRole="Report" ToRole="Picture" />
         </EntityType>
         <Association Name="FK_Change_Report">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -113,7 +137,32 @@
             <End Role="Report" EntitySet="Reports" />
             <End Role="Change" EntitySet="Changes" />
           </AssociationSet>
+          <EntitySet Name="Pictures" EntityType="FuiteData.Picture" />
+          <AssociationSet Name="FK_Picture_Report" Association="FuiteData.FK_Picture_Report">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Picture" EntitySet="Pictures" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report_id" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Picture_Report">
+          <End Type="FuiteData.Report" Role="Report" Multiplicity="1" />
+          <End Type="FuiteData.Picture" Role="Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="Report_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -145,12 +194,20 @@
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="picture" ColumnName="picture" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="FuiteData.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

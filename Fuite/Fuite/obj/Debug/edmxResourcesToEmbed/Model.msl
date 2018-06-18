@@ -26,12 +26,20 @@
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="picture" ColumnName="picture" />
           <ScalarProperty Name="longitude" ColumnName="longitude" />
           <ScalarProperty Name="latitude" ColumnName="latitude" />
           <ScalarProperty Name="ip" ColumnName="ip" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pictures">
+      <EntityTypeMapping TypeName="FuiteData.Picture">
+        <MappingFragment StoreEntitySet="Picture">
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

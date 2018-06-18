@@ -15,9 +15,9 @@ namespace FuiteAdmin.ReportService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ReportContract", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
-    public partial class ReportContract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ReportRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -208,6 +208,7 @@ namespace FuiteAdmin.ReportService {
     [System.Runtime.Serialization.DataContractAttribute(Name="Result", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultReports))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultPictures))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultChanges))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultIp))]
     public partial class Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -274,10 +275,33 @@ namespace FuiteAdmin.ReportService {
     public partial class ResultReports : FuiteAdmin.ReportService.Result {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FuiteAdmin.ReportService.ReportContract[] DataField;
+        private FuiteAdmin.ReportService.ReportRequest[] DataField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FuiteAdmin.ReportService.ReportContract[] Data {
+        public FuiteAdmin.ReportService.ReportRequest[] Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultPictures", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class ResultPictures : FuiteAdmin.ReportService.Result {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FuiteAdmin.ReportService.Picture[] DataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FuiteAdmin.ReportService.Picture[] Data {
             get {
                 return this.DataField;
             }
@@ -332,6 +356,83 @@ namespace FuiteAdmin.ReportService {
                     this.DataField = value;
                     this.RaisePropertyChanged("Data");
                 }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Picture", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class Picture : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Report_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string dataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Report_id {
+            get {
+                return this.Report_idField;
+            }
+            set {
+                if ((this.Report_idField.Equals(value) != true)) {
+                    this.Report_idField = value;
+                    this.RaisePropertyChanged("Report_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string data {
+            get {
+                return this.dataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataField, value) != true)) {
+                    this.dataField = value;
+                    this.RaisePropertyChanged("data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -645,6 +746,7 @@ namespace FuiteAdmin.ReportService {
     [System.Runtime.Serialization.DataContractAttribute(Name="Request", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetReportsRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetPicturesRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetChangesRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetReportRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.BanIpRequest))]
@@ -747,6 +849,29 @@ namespace FuiteAdmin.ReportService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetPicturesRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.SerializableAttribute()]
+    public partial class GetPicturesRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int reportIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int reportId {
+            get {
+                return this.reportIdField;
+            }
+            set {
+                if ((this.reportIdField.Equals(value) != true)) {
+                    this.reportIdField = value;
+                    this.RaisePropertyChanged("reportId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GetChangesRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
     public partial class GetChangesRequest : FuiteAdmin.ReportService.Request {
@@ -821,10 +946,10 @@ namespace FuiteAdmin.ReportService {
     public partial class SetReportRequest : FuiteAdmin.ReportService.Request {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FuiteAdmin.ReportService.ReportContract reportField;
+        private FuiteAdmin.ReportService.ReportRequest reportField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FuiteAdmin.ReportService.ReportContract report {
+        public FuiteAdmin.ReportService.ReportRequest report {
             get {
                 return this.reportField;
             }
@@ -842,10 +967,10 @@ namespace FuiteAdmin.ReportService {
     public interface IReportService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/AddReport", ReplyAction="http://tempuri.org/IReportService/AddReportResponse")]
-        FuiteAdmin.ReportService.Result AddReport(FuiteAdmin.ReportService.ReportContract report);
+        FuiteAdmin.ReportService.Result AddReport(FuiteAdmin.ReportService.ReportRequest report);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/AddReport", ReplyAction="http://tempuri.org/IReportService/AddReportResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> AddReportAsync(FuiteAdmin.ReportService.ReportContract report);
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> AddReportAsync(FuiteAdmin.ReportService.ReportRequest report);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetReport", ReplyAction="http://tempuri.org/IReportService/SetReportResponse")]
         FuiteAdmin.ReportService.Result SetReport(FuiteAdmin.ReportService.SetReportRequest request);
@@ -858,6 +983,12 @@ namespace FuiteAdmin.ReportService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReports", ReplyAction="http://tempuri.org/IReportService/GetReportsResponse")]
         System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(FuiteAdmin.ReportService.GetReportsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetPictures", ReplyAction="http://tempuri.org/IReportService/GetPicturesResponse")]
+        FuiteAdmin.ReportService.ResultPictures GetPictures(FuiteAdmin.ReportService.GetPicturesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetPictures", ReplyAction="http://tempuri.org/IReportService/GetPicturesResponse")]
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultPictures> GetPicturesAsync(FuiteAdmin.ReportService.GetPicturesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetChanges", ReplyAction="http://tempuri.org/IReportService/GetChangesResponse")]
         FuiteAdmin.ReportService.ResultChanges GetChanges(FuiteAdmin.ReportService.GetChangesRequest request);
@@ -911,11 +1042,11 @@ namespace FuiteAdmin.ReportService {
                 base(binding, remoteAddress) {
         }
         
-        public FuiteAdmin.ReportService.Result AddReport(FuiteAdmin.ReportService.ReportContract report) {
+        public FuiteAdmin.ReportService.Result AddReport(FuiteAdmin.ReportService.ReportRequest report) {
             return base.Channel.AddReport(report);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> AddReportAsync(FuiteAdmin.ReportService.ReportContract report) {
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> AddReportAsync(FuiteAdmin.ReportService.ReportRequest report) {
             return base.Channel.AddReportAsync(report);
         }
         
@@ -933,6 +1064,14 @@ namespace FuiteAdmin.ReportService {
         
         public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportsAsync(FuiteAdmin.ReportService.GetReportsRequest request) {
             return base.Channel.GetReportsAsync(request);
+        }
+        
+        public FuiteAdmin.ReportService.ResultPictures GetPictures(FuiteAdmin.ReportService.GetPicturesRequest request) {
+            return base.Channel.GetPictures(request);
+        }
+        
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultPictures> GetPicturesAsync(FuiteAdmin.ReportService.GetPicturesRequest request) {
+            return base.Channel.GetPicturesAsync(request);
         }
         
         public FuiteAdmin.ReportService.ResultChanges GetChanges(FuiteAdmin.ReportService.GetChangesRequest request) {

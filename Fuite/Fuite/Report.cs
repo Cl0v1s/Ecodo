@@ -18,11 +18,11 @@ namespace FuiteAPI
         public Report()
         {
             this.Changes = new HashSet<Change>();
+            this.Pictures = new HashSet<Picture>();
         }
     
         public int state { get; set; }
         public string description { get; set; }
-        public string picture { get; set; }
         public double longitude { get; set; }
         public double latitude { get; set; }
         public string ip { get; set; }
@@ -32,5 +32,7 @@ namespace FuiteAPI
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Change> Changes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Picture> Pictures { get; set; }
     }
 }
