@@ -1,5 +1,4 @@
 function PUSH(opt) {
-    App.Instance.SaveReport();
     var transition = ((<any>window).cordova && (<any>window).cordova.plugins && (<any>window).cordova.plugins.nativepagetransitions) ? (<any>window).cordova.plugins.nativepagetransitions : null;
     if (transition == null) {
         transition = ((<any>window).cordova && (<any>window).cordova.plugins && (<any>window).cordova.plugins.NativePageTransitions) ? (<any>window).cordova.plugins.NativePageTransitions : null;

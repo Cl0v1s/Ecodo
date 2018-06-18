@@ -10,16 +10,39 @@
     <script src="cordova.js"></script>
     <script src="static/js/vendor/ratchet.min.js"></script>
     <script src="static/js/index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
     <header class="bar bar-nav">
         <h1 class="title">Ecodo</h1>
     </header>
     <div class="content">
-        <div id="loading">
-            <span class="fuite"></span>
+        <div class="round camera" id="camera">
+            <img id="picture">
         </div>
-    </div>
+        <textarea type="text" id="description" class="form-control" placeholder="Informations optionelles..." aria-label="Informations optionnelles"></textarea>
 
+        <div class="text-center pl-4 pr-4">
+            <label class="checkbox-bootstrap checkbox-lg" style="font-size: 12px">
+                <input type="checkbox" id="rgpd">
+                <span class="checkbox-placeholder"  ></span>
+                J'autorise Suez à enregistrer les données transmises dans mon signalement.<br />
+                <span class="font-italic" style="font-size: 8px">Ces données rassemblent : coordonnées GPS, adresse IP, photographie et texte d'informations supplémentaires.</span>
+            </label>
+        </div>
+        <button class="round submit clickable" id="submit">
+            <span>Envoyer</span>
+            <div class="loading"></div>
+        </button>
+        <div class="text-center no-bg round">
+        </div>
+        <div class="jumbotron text-justify">
+            <center><a class="icon icon-down-nav pull-down"></a></center>
+            Les informations portées sur ce formulaire sont obligatoires pour signaler une fuite. Elles font l’objet d’un traitement informatisé destiné à gérer au mieux les fuites existantes sur le réseau d'eau potable de Bordeaux Métropôle. Les destinataires des données sont : les services du pôle eau et le service informatique de Suez Bordeaux.
+            Conformément à la loi "informatique et libertés" du 6 janvier 1978 modifiée, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent. Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant, veuillez vous adresser à Thierry Fernandez (thierry.fernandez@sgacub.fr).
+        </div>
+
+    </div>
 </body>
 </html>

@@ -10,6 +10,8 @@ class App {
     public static readonly DEBUG: boolean = false;
     public report: Report;
 
+    private ready: boolean = true;
+    private button: AlertButton;
 
     public static readonly Instance: App = new App();
 
@@ -18,28 +20,17 @@ class App {
         //this.report = new Report();
         if (App.DEBUG) {
             window.addEventListener("load", () => {
-                this.Init().then(() => { this.Route() }) });
+                this.Init().then(() => { this.Run() }) });
         }
         else {
-            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route() }) });
+            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Run() }) });
         }
     }
 
-    public SaveReport() {
-        localStorage.setItem("report", JSON.stringify(this.report));
-    }
-
-    private LoadReport() {
-        this.report = new Report(JSON.parse(localStorage.getItem("report")));
-    }
 
     private Init(): Promise<any> {
         return new Promise((resolve, reject) => {
-            if (localStorage.getItem("report") == null) {
-                this.report = new Report();
-                this.SaveReport();
-            }
-            this.LoadReport();
+            this.report = new Report();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p)
             });
@@ -47,20 +38,70 @@ class App {
         });
     }
 
-    private Route() {
-        var screen: Page;
-        if (window.location.href.indexOf("picture") != -1) {
-            screen = new PicturePage();
-        }
-        else if (window.location.href.indexOf("description") != -1) {
-            screen = new DescriptionPage();
-        }
-        else if (window.location.href.indexOf("rgpd") != -1)
-            screen = new RGPDPage();
-        else 
-            screen = new LoadingPage();
+    private Run() {
+        this.button = new AlertButton("#submit");
+        document.querySelector("#submit").addEventListener("click", (ev) => {
+            if (this.CheckForm())
+                this.Submit(<HTMLElement>ev.target);
+        });
+        Camera.Instance.Attach("#camera #picture");
+    }
 
-        screen.GoTo();
+    private CheckForm(): boolean {
+        var pic = (<HTMLImageElement>document.querySelector("#picture")).src;
+        if (pic.length <= 0) {
+            this.button.Error("Vous devez prendre la fuite en photo avant de poursuivre.");
+            return false;
+        }
+        App.Instance.report.Picture = pic;
+        if (App.Instance.report.Latitude == null || App.Instance.report.Longitude == null) {
+            this.button.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
+            return false;
+        }
+
+        var desc = (<HTMLTextAreaElement>document.querySelector("#description")).value;
+        App.Instance.report.Description = desc;
+
+        var rgpd = (<HTMLInputElement>document.querySelector("#rgpd"));
+        if (rgpd.checked == false) {
+            rgpd.parentElement.classList.add("attention");
+            setTimeout(() => {
+                rgpd.parentElement.classList.remove("attention");
+            }, 1000);
+            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
+            return false;
+        }
+        return true;
+    }
+
+    public Submit(target: HTMLElement): void {
+        if (this.ready == false)
+            return;
+        this.ready = false;
+        var button = new AlertButton("#submit");
+        target.classList.remove("clickable");
+        fetch(App.Endpoint + "/AddReport", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(App.Instance.report),
+        }).then((response) => {
+            return response.json();
+        }, (error) => {
+            target.classList.add("clickable");
+            this.ready = true;
+            button.Error(error);
+            //this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
+            alert(error);
+        }).then((json) => {
+            target.classList.add("clickable");
+            this.ready = true;
+            if (json.Code == 0)
+                button.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
+            else
+                button.Error(json.Message);
+        });
     }
 }
 

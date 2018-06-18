@@ -1,0 +1,342 @@
+/**
+ * ----------------------------------------
+ * animation shake-horizontal
+ * ----------------------------------------
+ */
+@-webkit-keyframes shake-horizontal {
+    0%, 100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    10%, 30%, 50%, 70% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    20%, 40%, 60% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    80% {
+        -webkit-transform: translateX(8px);
+        transform: translateX(8px);
+    }
+
+    90% {
+        -webkit-transform: translateX(-8px);
+        transform: translateX(-8px);
+    }
+}
+
+@keyframes shake-horizontal {
+    0%, 100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    10%, 30%, 50%, 70% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    20%, 40%, 60% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    80% {
+        -webkit-transform: translateX(8px);
+        transform: translateX(8px);
+    }
+
+    90% {
+        -webkit-transform: translateX(-8px);
+        transform: translateX(-8px);
+    }
+}
+
+.attention {
+    -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+/**
+ * ----------------------------------------
+ * animation grow
+ * ----------------------------------------
+ */
+@-webkit-keyframes grow {
+    25% {
+        -webkit-transform: scale(1.05,1.05);
+        transform: scale(1.05,1.05);
+    }
+
+    75% {
+        -webkit-transform: scale(0.90,0.90);
+        transform: scale(0.90,0.90);
+    }
+}
+
+@keyframes grow {
+
+
+    25% {
+        -webkit-transform: scale(1.05,1.05);
+        transform: scale(1.05,1.05);
+    }
+
+    75% {
+        -webkit-transform: scale(0.90,0.90);
+        transform: scale(0.90,0.90);
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * animation loading
+ * ----------------------------------------
+ */
+@-webkit-keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0)
+    }
+
+    100% {
+        -webkit-transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+.loading {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    background-color: #333;
+    border-radius: 100%;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+
+
+:root {
+    --primary-color: #4384C0;
+    --background-color: white;
+    --radius: 10px;
+    --shadow: 0px 2px 5px 5px rgba(0,0,0,0.1);
+    --space: 30px;
+    --primary-gradient: linear-gradient(rgba(77,203,249,1), #4384C0);
+}
+
+html 
+{
+    height: 100%;
+}
+
+body
+{
+    background-color: var(--background-color);
+    height: 100%;
+}
+
+
+div#loading
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: var(--primary-gradient);
+    z-index: 10;
+}
+
+    div#loading .fuite {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+
+    }
+
+    div#loading .fuite::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../images/fuite.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        -webkit-animation: grow 1.0s infinite ease-in-out;
+        animation: grow 1.0s infinite ease-in-out;
+    }
+
+div#loading .fuite::after {
+    content: "";
+    position: absolute;
+    bottom: -110px;
+    width: 150px;
+    height: 150px;
+    background-image: url("../images/suez.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+
+.block
+{
+    background-color: white;
+}
+
+.no-bg 
+{
+    background-color: rgba(0,0,0,0);
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.camera 
+{
+    background: var(--primary-gradient);
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .camera::before {
+        content: "Appuyez ici pour prendre une photographie de la fuite";
+        bottom: var(--space);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+    }
+
+.camera::after {
+    content: "";
+    background-image: url("../images/camera.svg");
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+}
+
+.camera #picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+
+}
+
+.round 
+{
+    border-radius: var(--radius);
+    padding: var(--space);
+    margin: var(--space);
+    box-shadow: var(--shadow);
+}
+
+button {
+    border: 0;
+    padding-left: calc(var(--space)*'2');
+    padding-right: calc(var(--space)*'2');
+    border-radius: 40px;
+    transition: all 0.2s ease;
+    position: relative;
+    outline: none;
+}
+
+    button.submit {
+        display: block;
+        /*background-color: var(--primary-color); /*#50a750; /**/
+        background: var(--primary-gradient);
+        color: white;
+        width: 90%;
+        margin: auto;
+        margin-bottom: 25px;
+        min-height: 100px;
+    }
+
+button.clickable .loading
+{
+    display: none;
+}
+
+button.clickable span {
+    display: inline;
+}
+
+button:not(.clickable) span {
+    display: none;
+}
+
+    button.error {
+        background: #cb2d3e; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    button.error::after 
+    {
+        content: "";
+        transition: all 10s ease;
+        background-color: rgba(0,0,0,0.3);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 10px;
+    }
+
+        button.error.started::after {
+            width: 0;
+        }
+
+    button.success {
+        background: #56ab2f; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #a8e063, #56ab2f); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+
+textarea
+{
+    display: block;
+    resize:none;
+    width: 95% !important;
+    height: 220px;
+    margin: auto;
+    margin-bottom: var(--space);
+}

@@ -1,0 +1,19 @@
+{
+  "name": "fuite-pwa",
+  "version": "0.0.0",
+  "description": "FuitePWA",
+  "main": "server.js",
+  "author": {
+    "name": "Administrateur"
+  },
+  "scripts": {
+    "require": "browserify requires.js -o static/js/requires.js"
+  },
+  "dependencies": {
+    "browserify": "^16.2.2",
+    "connect": "^3.6.6",
+    "es6-promise": "^4.2.4",
+    "serve-static": "^1.13.2",
+    "typescript": "^2.9.1"
+  }
+}
