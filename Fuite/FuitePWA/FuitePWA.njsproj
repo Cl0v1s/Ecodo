@@ -68,8 +68,8 @@
     <TypeScriptCompile Include="ts\App.ts" />
     <TypeScriptCompile Include="ts\DescriptionPage.ts" />
     <TypeScriptCompile Include="ts\Geolocator.ts" />
-    <TypeScriptCompile Include="ts\LoadingScreen.ts" />
-    <TypeScriptCompile Include="ts\PUSH.d.ts" />
+    <TypeScriptCompile Include="ts\LoadingPage.ts" />
+    <TypeScriptCompile Include="ts\PUSH.ts" />
     <TypeScriptCompile Include="ts\Report.ts" />
     <TypeScriptCompile Include="ts\Page.ts" />
     <TypeScriptCompile Include="ts\RGPDPage.ts" />

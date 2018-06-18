@@ -4,8 +4,13 @@ class Report {
     public Description: string = null;
     public Picture: string = null;
 
-    public Report() {
-
+    constructor(obj = null) {
+        if (obj == null)
+            return;
+        this.Latitude = obj.Latitude;
+        this.Longitude = obj.Longitude;
+        this.Description = obj.Description;
+        this.Picture = obj.Picture;
     }
 
     public static IsValid(report: Report) {

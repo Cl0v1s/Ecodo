@@ -223,7 +223,7 @@ div#loading .fuite::after {
 .camera 
 {
     background: var(--primary-gradient);
-    height: 250px;
+    height: 200px;
     position: relative;
     overflow: hidden;
 }
@@ -242,7 +242,7 @@ div#loading .fuite::after {
     content: "";
     background-image: url("../images/camera.svg");
     position: absolute;
-    top: 0;
+    top: -20px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -333,5 +333,10 @@ button:not(.clickable) span {
 
 textarea
 {
+    display: block;
     resize:none;
+    width: 95% !important;
+    height: 220px;
+    margin: auto;
+    margin-bottom: var(--space);
 }

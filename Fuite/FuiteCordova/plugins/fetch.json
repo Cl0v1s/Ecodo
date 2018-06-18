@@ -39,10 +39,10 @@
         "is_top_level": false,
         "variables": {}
     },
-    "cordova-plugin-httpd": {
+    "com.telerik.plugins.nativepagetransitions": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-httpd"
+            "id": "com.telerik.plugins.nativepagetransitions"
         },
         "is_top_level": true,
         "variables": {}

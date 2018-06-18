@@ -26,7 +26,7 @@ class PicturePage implements Page {
         }
 
         PUSH({
-            url: App.Local + "/description.html"
+            url: "description.html"
         });
     }
 }

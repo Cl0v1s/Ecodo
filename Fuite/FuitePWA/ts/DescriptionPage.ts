@@ -15,7 +15,7 @@ class DescriptionPage implements Page {
         var desc = (<HTMLTextAreaElement>document.querySelector("#description")).value;
         App.Instance.report.Description = desc;
         PUSH({
-            url: App.Local + "/rgpd.html"
+            url: "rgpd.html"
         });
     }
 }

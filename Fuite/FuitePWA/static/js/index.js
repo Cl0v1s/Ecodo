@@ -40,31 +40,24 @@ class App {
         else {
             document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route(); }); });
         }
-        window.addEventListener("push", () => { this.Route(); });
+    }
+    SaveReport() {
+        localStorage.setItem("report", JSON.stringify(this.report));
+    }
+    LoadReport() {
+        this.report = new Report(JSON.parse(localStorage.getItem("report")));
     }
     Init() {
         return new Promise((resolve, reject) => {
-            this.report = new Report();
+            if (localStorage.getItem("report") == null) {
+                this.report = new Report();
+                this.SaveReport();
+            }
+            this.LoadReport();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p);
             });
-            if (App.DEBUG == false) {
-                var httpd = (window.cordova && window.cordova.plugins && window.cordova.plugins.CorHttpd) ? window.cordova.plugins.CorHttpd : null;
-                var options = {
-                    www_root: '',
-                    port: 8055,
-                    localhost_only: true
-                };
-                alert(httpd);
-                httpd.startServer(options, (url) => {
-                    App.Local = url;
-                    resolve();
-                }, (error) => {
-                    alert(error);
-                });
-            }
-            else
-                resolve();
+            resolve();
         });
     }
     Route() {
@@ -83,7 +76,6 @@ class App {
     }
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-App.Local = ".";
 App.DEBUG = false;
 App.Instance = new App();
 /*class App {
@@ -242,13 +234,17 @@ class AlertButton {
     }
 }
 class Report {
-    constructor() {
+    constructor(obj = null) {
         this.Latitude = null;
         this.Longitude = null;
         this.Description = null;
         this.Picture = null;
-    }
-    Report() {
+        if (obj == null)
+            return;
+        this.Latitude = obj.Latitude;
+        this.Longitude = obj.Longitude;
+        this.Description = obj.Description;
+        this.Picture = obj.Picture;
     }
     static IsValid(report) {
         if (report.Latitude == null || report.Longitude == null || report.Picture == null)
@@ -305,18 +301,40 @@ Camera.Instance = new Camera();
 /// <reference path="Page.ts">
 class LoadingPage {
     GoTo() {
-        alert(App.Local + "/picture.html");
-        fetch(App.Local + "/picture.html").then((response) => {
-            return response.text();
-        }, (error) => {
-            alert(error);
-        }).then((txt) => {
-            alert(txt);
-        });
         PUSH({
-            url: App.Local + "/picture.html"
+            url: "picture.html"
         });
     }
+}
+function PUSH(opt) {
+    App.Instance.SaveReport();
+    var transition = (window.cordova && window.cordova.plugins && window.cordova.plugins.nativepagetransitions) ? window.cordova.plugins.nativepagetransitions : null;
+    if (transition == null) {
+        transition = (window.cordova && window.cordova.plugins && window.cordova.plugins.NativePageTransitions) ? window.cordova.plugins.NativePageTransitions : null;
+    }
+    if (transition == null) {
+        transition = (window.plugins && window.plugins.NativePageTransitions) ? window.plugins.NativePageTransitions : null;
+    }
+    if (transition == null) {
+        transition = (window.plugins && window.plugins.nativepagetransitions) ? window.plugins.nativepagetransitions : null;
+    }
+    if (opt.url == null)
+        throw new Error("Url must be set.");
+    var options = {
+        direction: 'up',
+        duration: 500,
+        slowdownfactor: 3,
+        slidePixels: 20,
+        iosdelay: 0,
+        androiddelay: 0,
+        fixedPixelsTop: 0,
+        fixedPixelsBottom: 60
+    };
+    setTimeout(function () {
+        window.location.href = opt.url;
+    }, options.duration / 10);
+    transition.slide(options, function () {
+    });
 }
 /// <reference path="Page.ts">
 class PicturePage {
@@ -339,7 +357,7 @@ class PicturePage {
             return;
         }
         PUSH({
-            url: App.Local + "/description.html"
+            url: "description.html"
         });
     }
 }
@@ -355,7 +373,7 @@ class DescriptionPage {
         var desc = document.querySelector("#description").value;
         App.Instance.report.Description = desc;
         PUSH({
-            url: App.Local + "/rgpd.html"
+            url: "rgpd.html"
         });
     }
 }
@@ -376,10 +394,9 @@ class RGPDPage {
             setTimeout(() => {
                 rgpd.parentElement.classList.remove("attention");
             }, 1000);
-            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus ! :)");
+            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
             return;
         }
-        console.log(App.Instance.report);
         this.Submit(document.querySelector("#submit"));
     }
     Submit(target) {
@@ -398,13 +415,14 @@ class RGPDPage {
         }, (error) => {
             target.classList.add("clickable");
             this.ready = true;
-            this.button.Error("Une erreur r�seau a eu lieu. Veuillez v�rifier votre connexion � internet.");
+            this.button.Error(error);
+            //this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
             alert(error);
         }).then((json) => {
             target.classList.add("clickable");
             this.ready = true;
             if (json.Code == 0)
-                this.button.Success("Votre rapport de fuite a bien �t� pris en compte ! Merci beaucoup :D");
+                this.button.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
             else
                 this.button.Error(json.Message);
         });

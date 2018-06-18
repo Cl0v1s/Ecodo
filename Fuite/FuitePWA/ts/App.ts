@@ -6,7 +6,6 @@
 class App {
 
     public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-    public static Local: string = ".";
 
     public static readonly DEBUG: boolean = false;
     public report: Report;
@@ -24,32 +23,27 @@ class App {
         else {
             document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route() }) });
         }
-        window.addEventListener("push", () => { this.Route() });
+    }
+
+    public SaveReport() {
+        localStorage.setItem("report", JSON.stringify(this.report));
+    }
+
+    private LoadReport() {
+        this.report = new Report(JSON.parse(localStorage.getItem("report")));
     }
 
     private Init(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.report = new Report();
+            if (localStorage.getItem("report") == null) {
+                this.report = new Report();
+                this.SaveReport();
+            }
+            this.LoadReport();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p)
             });
-            if (App.DEBUG == false) {
-                var httpd = ((<any>window).cordova && (<any>window).cordova.plugins && (<any>window).cordova.plugins.CorHttpd) ? (<any>window).cordova.plugins.CorHttpd : null;
-                var options = {
-                    www_root: '', // relative path to app's www directory
-                    port: 8055,
-                    localhost_only: true
-                };
-                alert(httpd);
-                httpd.startServer(options,(url) => {
-                    App.Local = url;
-                    resolve();
-                }, (error) => {
-                    alert(error);
-                });
-            }
-            else
-                resolve();
+            resolve();
         });
     }
 

@@ -1,4 +1,4 @@
-class RGPDPage implements Page {
+ï»¿class RGPDPage implements Page {
     private button: AlertButton;
     private ready: boolean = true;
 
@@ -16,11 +16,9 @@ class RGPDPage implements Page {
             setTimeout(() => {
                 rgpd.parentElement.classList.remove("attention");
             }, 1000);
-            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus ! :)");
+            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
             return;
         }
-
-        console.log(App.Instance.report);
 
         this.Submit(document.querySelector("#submit"));
     }
@@ -41,13 +39,14 @@ class RGPDPage implements Page {
         }, (error) => {
             target.classList.add("clickable");
             this.ready = true;
-            this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
+            this.button.Error(error);
+            //this.button.Error("Une erreur rÃ©seau a eu lieu. Veuillez vÃ©rifier votre connexion Ã  internet.");
             alert(error);
         }).then((json) => {
             target.classList.add("clickable");
             this.ready = true;
             if (json.Code == 0)
-                this.button.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
+                this.button.Success("Votre rapport de fuite a bien Ã©tÃ© pris en compte ! Merci beaucoup :D");
             else
                 this.button.Error(json.Message);
         });
