@@ -45,6 +45,7 @@
     <Content Include="static\css\vendor\bootstrap.min.css" />
     <Content Include="static\css\index.css" />
     <Content Include="static\css\vendor\ratchet.min.css" />
+    <Content Include="static\css\vendor\wave.css" />
     <Content Include="static\images\camera.svg" />
     <Content Include="static\images\fuite.png" />
     <Content Include="static\js\index.js.map" />
