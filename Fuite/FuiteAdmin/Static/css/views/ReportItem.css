@@ -2,7 +2,7 @@
 {
     position: relative;
     cursor: pointer;
-    padding-top: 50px;;
+    padding-top: 50px;
 }
 
 .report-item a
@@ -10,16 +10,17 @@
     text-decoration:none;
 }
 
-.report-item span.id
-{
-    position: absolute;
-    top:var(--small-space);
-    left: var(--small-space);
-    color: rgba(0,0,0,0.4);
-    font-weight: bold;
-    font-size: 23px;
-    margin: 0;
-}
+    .report-item span.id {
+        position: absolute;
+        top: 15px;
+        /*top: var(--small-space);*/
+        left: 15px;
+        /*left: var(--small-space);*/
+        color: rgba(0,0,0,0.4);
+        font-weight: bold;
+        font-size: 23px;
+        margin: 0;
+    }
 
    .report-item span.show {
         text-decoration: underline;

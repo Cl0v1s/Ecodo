@@ -25,19 +25,23 @@ header+div
 
 #menu {
     --width: 300px;
-    background-color: var(--background-color);
-    background: var(--background-gradient);
-    padding: var(--small-space);
+    background-color: #37536D;
+    /*background-color: var(--background-color);*/
+    background: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    /*background: var(--background-gradient);*/
+    padding: 15px;
+    /*padding: var(--small-space);*/
     position: absolute;
     top: 0;
-    right: calc(var(--width) * -0.85);
+    /*right: calc(var(--width) * -0.85);*/
+    right: -255px;
     height: 100%;
     width: var(--width);
     text-align: center;
     z-index: 2;
     transition: all 0.2s ease;
-    padding-left: var(--space);
-
+    padding-left: 30px;
+    /*padding-left: var(--space);*/
 }
 
     #menu::before {

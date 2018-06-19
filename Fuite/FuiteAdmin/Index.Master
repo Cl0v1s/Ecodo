@@ -17,7 +17,7 @@
 <body>
     <form id="form1" runat="server">
         <header>
-            <a href="Default.aspx"><img src="Static/images/fuite.png" width="auto" height="70" /><br />Retour</a>
+            <a href="Default.aspx"><img src="Static/images/fuite.png" width="auto" height="40" /><br />Retour</a>
         </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
