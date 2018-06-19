@@ -11,4 +11,3 @@ D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csproj.CoreCompileInputs.cache
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csproj.CopyComplete
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.dll
 D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.pdb
-D:\Fuite\Fuite\Fuite\obj\Debug\FuiteAPI.csprojAssemblyReference.cache

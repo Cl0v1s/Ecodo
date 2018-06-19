@@ -29,11 +29,28 @@ namespace FuiteAPI
             return true;
         }
 
+        private static double DistanceGeo(double lat1, double lon1, double lat2, double lon2)
+        {
+            var R = 6371e3; // metres
+            var φ1 = Math.PI / 180 * lat1;
+            var φ2 = Math.PI / 180 * lat2;
+            var Δφ = Math.PI / 180 * (lat2 - lat1);
+            var Δλ = Math.PI / 180 * (lon2 - lon1);
+
+            var a = Math.Sin(Δφ / 2) * Math.Sin(Δφ / 2) +
+                    Math.Cos(φ1) * Math.Cos(φ2) *
+                    Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+            return R * c;
+        }
+
         public Result AddReport(ReportRequest report)
         {
             if (this.AddCORS() == false)
                 return null;
-            
+            System.Configuration.Configuration config =
+                System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
             Result r = new Result();
             try
             {
@@ -53,7 +70,8 @@ namespace FuiteAPI
                 report.Date = DateTime.Now;
                 Picture picture;
                 Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed &&
-                    report.Latitude - x.latitude <= 0.0001 && report.Longitude - x.longitude <= 0.0001 && DbFunctions.DiffDays(report.Date, x.date) < 1
+                    DistanceGeo((double)report.Latitude, (double)report.Longitude, x.latitude, x.longitude) < int.Parse(config.AppSettings.Settings["Distance"].Value)
+                    && DbFunctions.DiffDays(report.Date, x.date) < 1
                 ).ToArray();
                 if (reports.Count() > 0)
                 {
