@@ -49,8 +49,6 @@ namespace FuiteAPI
         {
             if (this.AddCORS() == false)
                 return null;
-            System.Configuration.Configuration config =
-                System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
             Result r = new Result();
             try
             {
@@ -69,14 +67,24 @@ namespace FuiteAPI
                 report.Ip = ip;
                 report.Date = DateTime.Now;
                 Picture picture;
-                Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed &&
-                    DistanceGeo((double)report.Latitude, (double)report.Longitude, x.latitude, x.longitude) < int.Parse(config.AppSettings.Settings["Distance"].Value)
-                    && DbFunctions.DiffDays(report.Date, x.date) < 1
+                Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed && DbFunctions.DiffDays(report.Date, x.date) < 1
                 ).ToArray();
+                for(int i = 0; i < reports.Length; i++)
+                {
+                    Report x = reports[i];
+                    if (x == null)
+                        continue;
+                    if(DistanceGeo((double)report.Latitude, (double)report.Longitude, x.latitude, x.longitude) > int.Parse(System.Configuration.ConfigurationManager.AppSettings["Distance"]))
+                    {
+                        reports[i] = null;
+                    }
+                }
                 if (reports.Count() > 0)
                 {
                     foreach(Report re in reports)
                     {
+                        if (re == null)
+                            continue;
                         re.quantity += 1;
                         picture = new Picture();
                         picture.Report_id = re.id;

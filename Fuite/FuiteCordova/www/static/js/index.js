@@ -51,7 +51,14 @@ class App {
             resolve();
         });
     }
+    FirstRun() {
+        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
+            PUSH({ url: "app.html" });
+        }
+        localStorage.setItem("first", "false");
+    }
     Run() {
+        this.FirstRun();
         this.button = new AlertButton("#submit");
         document.querySelector("#submit").addEventListener("click", (ev) => {
             if (this.CheckForm())
@@ -100,9 +107,7 @@ class App {
         }, (error) => {
             target.classList.add("clickable");
             this.ready = true;
-            button.Error(error);
-            //this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-            alert(error);
+            this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
         }).then((json) => {
             target.classList.add("clickable");
             this.ready = true;
@@ -114,7 +119,7 @@ class App {
     }
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-App.DEBUG = false;
+App.DEBUG = true;
 App.Instance = new App();
 /*class App {
     private static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
@@ -411,57 +416,6 @@ class DescriptionPage {
         App.Instance.report.Description = desc;
         PUSH({
             url: "rgpd.html"
-        });
-    }
-}
-class RGPDPage {
-    constructor() {
-        this.ready = true;
-    }
-    GoTo() {
-        this.button = new AlertButton("#submit");
-        document.querySelector("#submit").addEventListener("click", () => {
-            this.Send();
-        });
-    }
-    Send() {
-        var rgpd = document.querySelector("#rgpd");
-        if (rgpd.checked == false) {
-            rgpd.parentElement.classList.add("attention");
-            setTimeout(() => {
-                rgpd.parentElement.classList.remove("attention");
-            }, 1000);
-            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
-            return;
-        }
-        this.Submit(document.querySelector("#submit"));
-    }
-    Submit(target) {
-        if (this.ready == false)
-            return;
-        this.ready = false;
-        target.classList.remove("clickable");
-        fetch(App.Endpoint + "/AddReport", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(App.Instance.report),
-        }).then((response) => {
-            return response.json();
-        }, (error) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            this.button.Error(error);
-            //this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-            alert(error);
-        }).then((json) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            if (json.Code == 0)
-                this.button.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
-            else
-                this.button.Error(json.Message);
         });
     }
 }

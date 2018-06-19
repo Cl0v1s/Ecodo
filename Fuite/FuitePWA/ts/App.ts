@@ -7,7 +7,7 @@ class App {
 
     public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
 
-    public static readonly DEBUG: boolean = false;
+    public static readonly DEBUG: boolean = true;
     public report: Report;
 
     private ready: boolean = true;
@@ -38,7 +38,17 @@ class App {
         });
     }
 
+    private FirstRun() {
+        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
+            PUSH({ url: "app.html" });
+        }
+        localStorage.setItem("first", "false");
+    }
+
     private Run() {
+
+        this.FirstRun();
+
         this.button = new AlertButton("#submit");
         document.querySelector("#submit").addEventListener("click", (ev) => {
             if (this.CheckForm())
@@ -91,9 +101,7 @@ class App {
         }, (error) => {
             target.classList.add("clickable");
             this.ready = true;
-            button.Error(error);
-            //this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-            alert(error);
+            this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
         }).then((json) => {
             target.classList.add("clickable");
             this.ready = true;

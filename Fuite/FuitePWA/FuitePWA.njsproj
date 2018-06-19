@@ -38,6 +38,7 @@
     <Compile Include="static\js\vendor\ratchet.min.js" />
     <Compile Include="ts\Camera.ts" />
     <Content Include="index.html" />
+    <Content Include="app.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="static\css\vendor\alertify.css" />
@@ -70,7 +71,6 @@
     <TypeScriptCompile Include="ts\PUSH.ts" />
     <TypeScriptCompile Include="ts\Report.ts" />
     <TypeScriptCompile Include="ts\Page.ts" />
-    <TypeScriptCompile Include="ts\RGPDPage.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

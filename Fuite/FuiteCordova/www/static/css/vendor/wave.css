@@ -1,9 +1,9 @@
 .water {
     position: absolute;
-    height: 20%;
+    height: 30%;
     width: 100%;
     z-index: 5;
-    bottom: 0;
+    bottom: -10px;
     left: 0;
     background: #32bafa;
     -webkit-transform: translate(0, 50%);
@@ -28,16 +28,16 @@
 .water__wave_back {
     right: 0;
     fill: #2c7fbe;
-    -webkit-animation: wave-back 2s infinite linear;
-    animation: wave-back 2s infinite linear;
+    -webkit-animation: wave-back 5s infinite linear;
+    animation: wave-back 5s infinite linear;
 }
 
 .water__wave_front {
     left: 0;
     fill: #32bafa;
     margin-bottom: -1px;
-    -webkit-animation: wave-front 1s infinite linear;
-    animation: wave-front 1s infinite linear;
+    -webkit-animation: wave-front 3.5s infinite linear;
+    animation: wave-front 3.5s infinite linear;
 }
 
 .bubble {

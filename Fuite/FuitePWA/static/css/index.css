@@ -1,3 +1,14 @@
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Build";
+    src: url("../build.ttf");
+}
+
 /**
  * ----------------------------------------
  * animation shake-horizontal
@@ -145,6 +156,11 @@
     --primary-gradient: linear-gradient(rgba(77,203,249,1), #4384C0);
 }
 
+*
+{
+    font-family: "Open Sans";
+}
+
 html 
 {
     height: 100%;
@@ -278,6 +294,12 @@ button {
     transition: all 0.2s ease;
     position: relative;
     outline: none;
+    -webkit-appearance: none;
+}
+
+button:focus
+{
+    -webkit-appearance: none;
 }
 
     button.submit {
@@ -375,9 +397,10 @@ input[type=checkbox]:checked + div.redux {
     background-color: #e9ecef;
 }
 
-header h1
-{
+header h1 {
     position: relative;
-    z-index:10;
-    color: white !important;
+    z-index: 10;
+    color: rgba(76,76,76,0.4) !important;
+    font-family: "Build";
+    font-size: 36px !important;
 }
