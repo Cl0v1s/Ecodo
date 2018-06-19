@@ -13,15 +13,6 @@ namespace FuiteAdmin {
     public partial class Details {
         
         /// <summary>
-        /// Contrôle ReportPictures.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportPictures;
-        
-        /// <summary>
         /// Contrôle ban.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,15 @@ namespace FuiteAdmin {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button updateState;
+        
+        /// <summary>
+        /// Contrôle ReportPictures.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportPictures;
         
         /// <summary>
         /// Contrôle reportHistory.
