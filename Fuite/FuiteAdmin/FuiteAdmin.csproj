@@ -98,6 +98,7 @@
     <Content Include="History.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Report\ReportItem.ascx" />
+    <Content Include="Report\ReportPicture.ascx" />
     <Content Include="Static\css\index.css" />
     <Content Include="Static\css\vendor\bootstrap.min.css" />
     <Content Include="Static\css\vendor\images\layers-2x.png" />
@@ -110,6 +111,7 @@
     <Content Include="Static\css\views\Default.css" />
     <Content Include="Static\css\views\Details.css" />
     <Content Include="Static\css\views\History.css" />
+    <Content Include="Static\css\views\ReportPicture.css" />
     <Content Include="Static\css\views\ReportItem.css" />
     <Content Include="Static\images\layers-2x.png" />
     <Content Include="Static\images\layers.png" />
@@ -173,6 +175,13 @@
     </Compile>
     <Compile Include="Report\ReportItem.ascx.designer.cs">
       <DependentUpon>ReportItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportPicture.ascx.cs">
+      <DependentUpon>ReportPicture.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ReportPicture.ascx.designer.cs">
+      <DependentUpon>ReportPicture.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

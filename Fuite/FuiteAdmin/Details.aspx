@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="FuiteAdmin.Details" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Static/css/vendor/leaflet.css" />
     <link rel="stylesheet" href="Static/css/views/Details.css" />
+    <link rel="stylesheet" href="Static/css/views/ReportPicture.css" />
     <script src="Static/js/leaflet.js"></script>
     <script src="Static/js/lz-string.min.js"></script>
 </asp:Content>
@@ -57,7 +59,7 @@
                 <br /><br />
                 <span class="ban float-right text-center">
                     <asp:CheckBox runat="server" ID="ban_check" Text="Supprimer tout le contenu de cet utilisateur depuis 24 heures" />
-                    <asp:Button runat="server" ID="ban" CssClass="button" Text="Supprimer le contenu" OnClientClick="return confirm('Etes-vous sûr de vouloir supprimer ce contenu ?')" OnClick="ban_Click" />
+                    <asp:Button runat="server" ID="ban" CssClass="button" Text="Supprimer le signalement" OnClientClick="return confirm('Etes-vous sûr de vouloir supprimer ce contenu ?')" OnClick="ban_Click" />
                 </span>
 
             </div>
