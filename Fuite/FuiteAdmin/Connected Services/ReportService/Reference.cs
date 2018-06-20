@@ -210,7 +210,6 @@ namespace FuiteAdmin.ReportService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultReports))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultPictures))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultChanges))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.ResultIp))]
     public partial class Result : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -339,29 +338,6 @@ namespace FuiteAdmin.ReportService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ResultIp", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
-    [System.SerializableAttribute()]
-    public partial class ResultIp : FuiteAdmin.ReportService.Result {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool DataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((this.DataField.Equals(value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Picture", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
     public partial class Picture : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -376,7 +352,13 @@ namespace FuiteAdmin.ReportService {
         private string dataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ipField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -415,6 +397,19 @@ namespace FuiteAdmin.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime date {
+            get {
+                return this.dateField;
+            }
+            set {
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int id {
             get {
                 return this.idField;
@@ -423,6 +418,19 @@ namespace FuiteAdmin.ReportService {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ip {
+            get {
+                return this.ipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ipField, value) != true)) {
+                    this.ipField = value;
+                    this.RaisePropertyChanged("ip");
                 }
             }
         }
@@ -749,7 +757,7 @@ namespace FuiteAdmin.ReportService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetPicturesRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetChangesRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.GetReportRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.BanIpRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.RemoveContentIpRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FuiteAdmin.ReportService.SetReportRequest))]
     public partial class Request : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -918,12 +926,34 @@ namespace FuiteAdmin.ReportService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BanIpRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RemoveContentIpRequest", Namespace="http://schemas.datacontract.org/2004/07/FuiteAPI")]
     [System.SerializableAttribute()]
-    public partial class BanIpRequest : FuiteAdmin.ReportService.Request {
+    public partial class RemoveContentIpRequest : FuiteAdmin.ReportService.Request {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool pictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool reportField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string ip {
@@ -934,6 +964,32 @@ namespace FuiteAdmin.ReportService {
                 if ((object.ReferenceEquals(this.ipField, value) != true)) {
                     this.ipField = value;
                     this.RaisePropertyChanged("ip");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool picture {
+            get {
+                return this.pictureField;
+            }
+            set {
+                if ((this.pictureField.Equals(value) != true)) {
+                    this.pictureField = value;
+                    this.RaisePropertyChanged("picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool report {
+            get {
+                return this.reportField;
+            }
+            set {
+                if ((this.reportField.Equals(value) != true)) {
+                    this.reportField = value;
+                    this.RaisePropertyChanged("report");
                 }
             }
         }
@@ -1002,17 +1058,11 @@ namespace FuiteAdmin.ReportService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/GetReport", ReplyAction="http://tempuri.org/IReportService/GetReportResponse")]
         System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultReports> GetReportAsync(FuiteAdmin.ReportService.GetReportRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
-        FuiteAdmin.ReportService.Result SetBanIp(FuiteAdmin.ReportService.BanIpRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/RemoveContentIp", ReplyAction="http://tempuri.org/IReportService/RemoveContentIpResponse")]
+        FuiteAdmin.ReportService.Result RemoveContentIp(FuiteAdmin.ReportService.RemoveContentIpRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/SetBanIp", ReplyAction="http://tempuri.org/IReportService/SetBanIpResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(FuiteAdmin.ReportService.BanIpRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
-        FuiteAdmin.ReportService.ResultIp IsIpBan(FuiteAdmin.ReportService.BanIpRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/IsIpBan", ReplyAction="http://tempuri.org/IReportService/IsIpBanResponse")]
-        System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(FuiteAdmin.ReportService.BanIpRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/RemoveContentIp", ReplyAction="http://tempuri.org/IReportService/RemoveContentIpResponse")]
+        System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> RemoveContentIpAsync(FuiteAdmin.ReportService.RemoveContentIpRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1090,20 +1140,12 @@ namespace FuiteAdmin.ReportService {
             return base.Channel.GetReportAsync(request);
         }
         
-        public FuiteAdmin.ReportService.Result SetBanIp(FuiteAdmin.ReportService.BanIpRequest request) {
-            return base.Channel.SetBanIp(request);
+        public FuiteAdmin.ReportService.Result RemoveContentIp(FuiteAdmin.ReportService.RemoveContentIpRequest request) {
+            return base.Channel.RemoveContentIp(request);
         }
         
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> SetBanIpAsync(FuiteAdmin.ReportService.BanIpRequest request) {
-            return base.Channel.SetBanIpAsync(request);
-        }
-        
-        public FuiteAdmin.ReportService.ResultIp IsIpBan(FuiteAdmin.ReportService.BanIpRequest request) {
-            return base.Channel.IsIpBan(request);
-        }
-        
-        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.ResultIp> IsIpBanAsync(FuiteAdmin.ReportService.BanIpRequest request) {
-            return base.Channel.IsIpBanAsync(request);
+        public System.Threading.Tasks.Task<FuiteAdmin.ReportService.Result> RemoveContentIpAsync(FuiteAdmin.ReportService.RemoveContentIpRequest request) {
+            return base.Channel.RemoveContentIpAsync(request);
         }
     }
 }

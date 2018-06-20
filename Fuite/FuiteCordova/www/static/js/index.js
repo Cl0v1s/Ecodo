@@ -112,7 +112,7 @@ class App {
             target.classList.add("clickable");
             this.ready = true;
             if (json.Code == 0)
-                button.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
+                button.Success(json.Message);
             else
                 button.Error(json.Message);
         });

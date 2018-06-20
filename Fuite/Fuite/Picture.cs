@@ -17,5 +17,7 @@ namespace FuiteAPI
         public int id { get; set; }
         public int Report_id { get; set; }
         public string data { get; set; }
+        public System.DateTime date { get; set; }
+        public string ip { get; set; }
     }
 }

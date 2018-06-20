@@ -85,31 +85,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetBanIp">
+  <xs:element name="RemoveContentIp">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="request" nillable="true" type="q13:BanIpRequest" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="request" nillable="true" type="q13:RemoveContentIpRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetBanIpResponse">
+  <xs:element name="RemoveContentIpResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="SetBanIpResult" nillable="true" type="q14:Result" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsIpBan">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="request" nillable="true" type="q15:BanIpRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsIpBanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="IsIpBanResult" nillable="true" type="q16:ResultIp" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FuiteAPI" minOccurs="0" name="RemoveContentIpResult" nillable="true" type="q14:Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

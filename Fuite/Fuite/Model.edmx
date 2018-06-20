@@ -5,13 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FuiteData.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Ban">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ip" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Change">
           <Key>
             <PropertyRef Name="id" />
@@ -29,6 +22,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Report_id" Type="int" Nullable="false" />
           <Property Name="data" Type="text" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -68,7 +63,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FuiteDataStoreContainer">
-          <EntitySet Name="Ban" EntityType="Self.Ban" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Change" EntityType="Self.Change" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
@@ -85,13 +79,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FuiteData" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Ban">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Change">
           <Key>
             <PropertyRef Name="id" />
@@ -130,7 +117,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FuiteKey" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bans" EntityType="Self.Ban" />
           <EntitySet Name="Changes" EntityType="Self.Change" />
           <EntitySet Name="Reports" EntityType="Self.Report" />
           <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
@@ -150,6 +136,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Report_id" Type="Int32" Nullable="false" />
           <Property Name="data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Picture_Report">
           <End Type="FuiteData.Report" Role="Report" Multiplicity="1" />
@@ -169,14 +157,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FuiteDataStoreContainer" CdmEntityContainer="FuiteKey">
-          <EntitySetMapping Name="Bans">
-            <EntityTypeMapping TypeName="FuiteData.Ban">
-              <MappingFragment StoreEntitySet="Ban">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Changes">
             <EntityTypeMapping TypeName="FuiteData.Change">
               <MappingFragment StoreEntitySet="Change">
@@ -205,6 +185,8 @@
           <EntitySetMapping Name="Pictures">
             <EntityTypeMapping TypeName="FuiteData.Picture">
               <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="data" ColumnName="data" />
                 <ScalarProperty Name="Report_id" ColumnName="Report_id" />
                 <ScalarProperty Name="id" ColumnName="id" />

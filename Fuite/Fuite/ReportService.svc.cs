@@ -61,30 +61,26 @@ namespace FuiteAPI
                        prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
                 string ip = endpoint.Address;
 
-                if (entities.Bans.Where(x => x.ip == ip).Count() > 0)
-                    throw new Exception("Vous ne pouvez plus publier de signalements.");
-
                 report.Ip = ip;
                 report.Date = DateTime.Now;
                 Picture picture;
                 Report[] reports = entities.Reports.Where(x => x.state != (int)State.Closed && DbFunctions.DiffDays(report.Date, x.date) < 1
                 ).ToArray();
+                List<Report> existing = new List<Report>();
                 for(int i = 0; i < reports.Length; i++)
                 {
                     Report x = reports[i];
                     if (x == null)
                         continue;
-                    if(DistanceGeo((double)report.Latitude, (double)report.Longitude, x.latitude, x.longitude) > int.Parse(System.Configuration.ConfigurationManager.AppSettings["Distance"]))
+                    if(DistanceGeo((double)report.Latitude, (double)report.Longitude, x.latitude, x.longitude) <= int.Parse(System.Configuration.ConfigurationManager.AppSettings["Distance"]))
                     {
-                        reports[i] = null;
+                        existing.Add(x);
                     }
                 }
-                if (reports.Count() > 0)
+                if (existing.Count() > 0)
                 {
-                    foreach(Report re in reports)
+                    foreach(Report re in existing)
                     {
-                        if (re == null)
-                            continue;
                         re.quantity += 1;
                         picture = new Picture();
                         picture.Report_id = re.id;
@@ -92,12 +88,14 @@ namespace FuiteAPI
                         entities.Pictures.Add(picture);
                     }
                     entities.SaveChanges();
+                    r.Message = "Votre photo a été ajoutée à un signalement déjà existant. Merci Beaucoup !";
                     return r;
                 }
 
                 if (report.IsValid() == false)
                     throw new ArgumentException("Vous devez préciser un rapport de fuite complet.");
                 Report res = report.Report;
+                res.quantity = 1;
                 entities.Reports.Add(res);
                 entities.SaveChanges();
 
@@ -112,6 +110,7 @@ namespace FuiteAPI
                 entities.Pictures.Add(picture);
 
                 entities.SaveChanges();
+                r.Message = "Votre signalement a bien été enregistré ! Merci beaucoup !";
 
             }
             catch(Exception e)
@@ -321,62 +320,72 @@ namespace FuiteAPI
             return re;
         }
 
-        public Result SetBanIp(BanIpRequest request)
+        public Result RemoveContentIp(RemoveContentIpRequest request)
         {
-            if (this.AddCORS() == false)
-                return null;
-            string ticket = request.ticket;
-            string ip = request.ip;
-            Result re = new Result();
+            Result result = new Result();
             try
             {
-                if (Auth.WithTicket(ticket) == null)
+                if (request.ip == null || String.IsNullOrWhiteSpace(request.ip))
                 {
-                    re.Code = 2;
-                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
+                    if (request.picture)
+                        this.RemovePicture(request.id);
+                    if (request.report)
+                        this.RemoveReport(request.id);
                 }
-                FuiteKey entities = new FuiteKey();
-                Ban ban = new Ban();
-                ban.ip = ip;
-                entities.Bans.Add(ban);
-                entities.SaveChanges();
+                else
+                {
+                    if (request.picture)
+                        this.RemovePictures(request.ip);
+                    if (request.report)
+                        this.RemoveReports(request.ip);
+                }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                if (re.Code == 0)
-                    re.Code = -1;
-                re.Message = e.Message;
+                if (result.Code == 0)
+                    result.Code = -1;
+                result.Message = e.Message;
             }
-            return re;
+
+            return result;
         }
 
-        public ResultIp IsIpBan(BanIpRequest request)
+        private void RemovePicture(int id)
         {
-            if (this.AddCORS() == false)
-                return null;
-            string ticket = request.ticket;
-            string ip = request.ip;
-
-            ResultIp re = new ResultIp();
-            re.Data = false;
-            try
-            {
-                if (Auth.WithTicket(ticket) == null)
-                {
-                    re.Code = 2;
-                    throw new ArgumentException("Vous devez être identifié pour réaliser cette tâche.");
-                }
-                FuiteKey entities = new FuiteKey();
-                if (entities.Bans.Where(x => x.ip == ip).Count() > 0)
-                    re.Data = true;
-            }
-            catch (Exception e)
-            {
-                if (re.Code == 0)
-                    re.Code = -1;
-                re.Message = e.Message;
-            }
-            return re;
+            FuiteKey entities = new FuiteKey();
+            Picture pic = entities.Pictures.Where(x => x.id == id).FirstOrDefault();
+            if (pic == null)
+                return;
+            entities.Pictures.Remove(pic);
+            entities.SaveChanges();
         }
+
+        private void RemoveReport(int id)
+        {
+            FuiteKey entities = new FuiteKey();
+            Report pic = entities.Reports.Where(x => x.id == id).FirstOrDefault();
+            if (pic == null)
+                return;
+            entities.Reports.Remove(pic);
+            entities.SaveChanges();
+        }
+
+        private void RemovePictures(string ip)
+        {
+            FuiteKey entities = new FuiteKey();
+            IQueryable<Picture> pic = entities.Pictures.Where(x => x.ip == ip && DbFunctions.DiffDays(DateTime.Now, x.date) <= 1);
+            entities.Pictures.RemoveRange(pic);
+            entities.SaveChanges();
+        }
+
+        private void RemoveReports(string ip)
+        {
+            FuiteKey entities = new FuiteKey();
+            IQueryable<Report> pic = entities.Reports.Where(x => x.ip == ip && DbFunctions.DiffDays(DateTime.Now, x.date) <= 1);
+            entities.Reports.RemoveRange(pic);
+            entities.SaveChanges();
+        }
+
+        
     }
 }

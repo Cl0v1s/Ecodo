@@ -79,9 +79,6 @@
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultChanges.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultIp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\ReportService\FuiteAdmin.ReportService.ResultReports.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

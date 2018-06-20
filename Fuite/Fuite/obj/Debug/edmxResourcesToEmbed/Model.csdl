@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FuiteData" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Ban">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
   <EntityType Name="Change">
     <Key>
       <PropertyRef Name="id" />
@@ -45,7 +38,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="FuiteKey" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Bans" EntityType="Self.Ban" />
     <EntitySet Name="Changes" EntityType="Self.Change" />
     <EntitySet Name="Reports" EntityType="Self.Report" />
     <AssociationSet Name="FK_Change_Report" Association="Self.FK_Change_Report">
@@ -65,6 +57,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Report_id" Type="Int32" Nullable="false" />
     <Property Name="data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Picture_Report">
     <End Type="FuiteData.Report" Role="Report" Multiplicity="1" />

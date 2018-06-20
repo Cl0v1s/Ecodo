@@ -61,12 +61,7 @@ namespace FuiteAPI
         [OperationContract]
         [WebInvoke(Method = "*",
         ResponseFormat = WebMessageFormat.Json)]
-        Result SetBanIp(BanIpRequest request);
-
-        [OperationContract]
-        [WebInvoke(Method = "*",
-        ResponseFormat = WebMessageFormat.Json)]
-        ResultIp IsIpBan(BanIpRequest request);
+        Result RemoveContentIp(RemoveContentIpRequest request);
     }
 
     /// <summary>

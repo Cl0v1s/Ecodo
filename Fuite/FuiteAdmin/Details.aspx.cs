@@ -32,16 +32,6 @@ namespace FuiteAdmin
                 throw new HttpException(404, "Il n'existe pas de signalement possédant cet Id.");
             this.Report = (ReportService.ReportRequest)result.Data[0];
 
-            ReportService.BanIpRequest ipreq = new ReportService.BanIpRequest();
-            ipreq.ticket = ticket;
-            ipreq.ip = this.Report.Ip;
-
-            ReportService.ResultIp response = client.IsIpBan(ipreq);
-            if (response.Code != 0)
-                throw new HttpException(500, response.Message);
-            if (response.Data)
-                this.ban.Visible = false;
-
         }
 
         public ReportService.ReportRequest Report
@@ -144,7 +134,6 @@ namespace FuiteAdmin
             if (response.Code != 0)
                 throw new HttpException(500, response.Message);
             this.Update();
-            //TODO: ajouter un message de validation
         }
 
         protected void ban_Click(object sender, EventArgs e)
@@ -152,15 +141,23 @@ namespace FuiteAdmin
             string ticket = (string)Session["Ticket"];
             ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
 
-            ReportService.BanIpRequest request = new ReportService.BanIpRequest();
+            ReportService.RemoveContentIpRequest request = new ReportService.RemoveContentIpRequest();
             request.ticket = ticket;
-            request.ip = this.Report.Ip;
+            request.report = true;
+            request.picture = false;
 
-            ReportService.Result result = client.SetBanIp(request);
+            if (this.ban_check.Checked)
+            {
+                request.picture = true;
+                request.ip = this.Report.Ip;
+            }
+            else
+                request.id = (int)this.Report.Id;
+
+            ReportService.Result result = client.RemoveContentIp(request);
             if (result.Code != 0)
                 throw new HttpException(500, result.Message);
-            this.Update();
-            //TODO: ajouter un message de validation
+            Response.Redirect("History.aspx");
         }
     }
 }

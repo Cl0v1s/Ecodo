@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1018701e9cb24cb793c33854a7f9803c" Name="Diagram1">
-        <EntityTypeShape EntityType="FuiteData.Ban" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FuiteData.Change" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FuiteData.Report" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="FuiteData.FK_Change_Report" ManuallyRouted="false" />

@@ -38,9 +38,15 @@ namespace FuiteAPI
         public int id { get; set; }
     }
 
-    public class BanIpRequest : Request
+    public class RemoveContentIpRequest : Request
     {
         public string ip { get; set; }
+
+        public bool picture { get; set; }
+
+        public bool report { get; set; }
+
+        public int id { get; set; }
     }
 
     [DataContract]

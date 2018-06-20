@@ -46,17 +46,11 @@
   <wsdl:message name="IReportService_GetReport_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportResponse" />
   </wsdl:message>
-  <wsdl:message name="IReportService_SetBanIp_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetBanIp" />
+  <wsdl:message name="IReportService_RemoveContentIp_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveContentIp" />
   </wsdl:message>
-  <wsdl:message name="IReportService_SetBanIp_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetBanIpResponse" />
-  </wsdl:message>
-  <wsdl:message name="IReportService_IsIpBan_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsIpBan" />
-  </wsdl:message>
-  <wsdl:message name="IReportService_IsIpBan_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IsIpBanResponse" />
+  <wsdl:message name="IReportService_RemoveContentIp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveContentIpResponse" />
   </wsdl:message>
   <wsdl:portType name="IReportService">
     <wsdl:operation name="AddReport">
@@ -83,13 +77,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IReportService/GetReport" message="tns:IReportService_GetReport_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportService/GetReportResponse" message="tns:IReportService_GetReport_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetBanIp">
-      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/SetBanIp" message="tns:IReportService_SetBanIp_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/SetBanIpResponse" message="tns:IReportService_SetBanIp_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="IsIpBan">
-      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/IsIpBan" message="tns:IReportService_IsIpBan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/IsIpBanResponse" message="tns:IReportService_IsIpBan_OutputMessage" />
+    <wsdl:operation name="RemoveContentIp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportService/RemoveContentIp" message="tns:IReportService_RemoveContentIp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportService/RemoveContentIpResponse" message="tns:IReportService_RemoveContentIp_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="ReportService" />
