@@ -83,6 +83,8 @@ namespace FuiteAPI
                     {
                         re.quantity += 1;
                         picture = new Picture();
+                        picture.date = DateTime.Now;
+                        picture.ip = ip;
                         picture.Report_id = re.id;
                         picture.data = report.Picture;
                         entities.Pictures.Add(picture);
@@ -107,6 +109,8 @@ namespace FuiteAPI
                 picture = new Picture();
                 picture.Report_id = res.id;
                 picture.data = report.Picture;
+                picture.date = DateTime.Now;
+                picture.ip = ip;
                 entities.Pictures.Add(picture);
 
                 entities.SaveChanges();
@@ -270,11 +274,6 @@ namespace FuiteAPI
                 }
                 FuiteKey entities = new FuiteKey();
                 Picture[] pictures = entities.Pictures.Where(x => x.Report_id == reportid).ToArray();
-                /*foreach (Picture c in pictures)
-                {
-                    if (c.date <= DateTime.MinValue || c.date >= DateTime.MaxValue)
-                        c.date = DateTime.Now;
-                }*/
 
                 re.Data = pictures;
             }
