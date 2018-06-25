@@ -7,7 +7,7 @@ class App {
 
     public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
 
-    public static readonly DEBUG: boolean = false;
+    public static readonly DEBUG: boolean = true;
     public report: Report;
 
     private ready: boolean = true;
@@ -30,6 +30,9 @@ class App {
 
     private Init(): Promise<any> {
         return new Promise((resolve, reject) => {
+            document.addEventListener("backbutton", function (e) {
+                e.preventDefault();
+            }, false);
             this.report = new Report();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p)
@@ -45,7 +48,6 @@ class App {
         else if (window.location.href.indexOf("index") != -1 &&  localStorage.getItem("first") != "false")
             PUSH({ url: "disclaimer.html" });
 
-        localStorage.setItem("first", "false");
     }
 
     private Run() {

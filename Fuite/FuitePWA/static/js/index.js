@@ -44,6 +44,9 @@ class App {
     }
     Init() {
         return new Promise((resolve, reject) => {
+            document.addEventListener("backbutton", function (e) {
+                e.preventDefault();
+            }, false);
             this.report = new Report();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p);
@@ -57,7 +60,6 @@ class App {
         }
         else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
             PUSH({ url: "disclaimer.html" });
-        localStorage.setItem("first", "false");
     }
     Run() {
         this.FirstRun();
@@ -121,7 +123,7 @@ class App {
     }
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-App.DEBUG = false;
+App.DEBUG = true;
 App.Instance = new App();
 /*class App {
     private static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";

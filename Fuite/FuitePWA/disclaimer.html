@@ -42,7 +42,8 @@
 
     </header>
     <div class="content" style="background-color: white;">
-        <div class="jumbotron text-justify mb-4 mt-4">
+        <div class="text-justify mt-4 p-4">
+            <h1>Informations</h1>
             ECODO ne prend pas en compte les fuites chez les particuliers.<br /><br />
 
             L’application est faite pour que vous puissiez nous alerter concernant les fuites sur les contrats du domaine public géré par Suez et la région Nouvelle Aquitaine en est le pilote.
@@ -50,9 +51,11 @@
             Merci de votre participation pour éviter le gaspillage d’eau et améliorer l’état de notre réseau d’eau à tous.
 
             <br /><br />
-            <img src="static/images/suez.png" style="width:100%; height: auto;" />
+            <p class="text-center">
+                <img src="static/images/suez.png" style="width:70%; height: auto;" />
+            </p>
         </div>
-        <button class="submit" onclick="PUSH({ url: 'app.html' });">
+        <button class="submit" style="margin-top:-20px;" onclick="localStorage.setItem('first', 'false');PUSH({ url: 'app.html' });">
             D'accord
         </button>
     </div>
