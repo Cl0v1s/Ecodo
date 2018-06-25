@@ -1,0 +1,33 @@
+﻿.report-item
+{
+    position: relative;
+    cursor: pointer;
+    padding-top: 50px;
+}
+
+.report-item a
+{
+    text-decoration: underline;
+}
+
+    .report-item span.id {
+        position: absolute;
+        top: 15px;
+        /*top: var(--small-space);*/
+        left: 15px;
+        /*left: var(--small-space);*/
+        color: rgba(0,0,0,0.4);
+        font-weight: bold;
+        font-size: 23px;
+        margin: 0;
+        text-decoration: none;
+    }
+
+   .report-item span.show {
+        text-decoration:none !important;
+    }
+
+.report-item span
+{
+    display: block;
+}

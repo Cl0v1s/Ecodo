@@ -1,0 +1,76 @@
+﻿#form1
+{
+    height: 100%;
+}
+
+header+div 
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.map 
+{
+    position: absolute;
+    width: 100%;
+    max-height:100%;
+    height: 1500px;
+    top:0;
+    left:0;
+    z-index:0;
+}
+
+#menu {
+    --width: 300px;
+    background-color: white;
+    /*background-color: #37536D;*/
+    /*background-color: var(--background-color);*/
+    /*background: linear-gradient(180deg, #2af598 0%, #009efd 100%);*/
+    /*background: var(--background-gradient);*/
+    padding: 15px;
+    padding-top: 100px;
+    /*padding: var(--small-space);*/
+    position: absolute;
+    top: 0;
+    /*right: calc(var(--width) * -0.85);*/
+    right: -255px;
+    height: 100%;
+    width: var(--width);
+    text-align: center;
+    z-index: 2;
+    transition: all 0.2s ease;
+    padding-left: 30px;
+    box-shadow: 0px 2px 10px 5px rgba(0,0,0,0.2);
+    /*padding-left: var(--space);*/
+}
+
+    #menu::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        content: "";
+        display: block;
+        width: 50px;
+        height: 50px;
+        background-image: url("../../images/arrow.svg");
+        background-repeat: no-repeat;
+        background-position: 0 center;
+        -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+        animation: heartbeat 1.5s ease-in-out infinite both;
+        background-size: contain;
+    }
+    #toggle-menu {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        /* For mobile, it's typically better to position checkbox on top of clickable
+          area and turn opacity to 0 instead. */
+    }
+
+
+        #menu.opened, #menu:hover, #toggle-menu:checked ~ #menu {
+            right: 0;
+        }

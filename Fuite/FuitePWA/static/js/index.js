@@ -55,6 +55,8 @@ class App {
         if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
             PUSH({ url: "app.html" });
         }
+        else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
+            PUSH({ url: "disclaimer.html" });
         localStorage.setItem("first", "false");
     }
     Run() {
@@ -119,7 +121,7 @@ class App {
     }
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-App.DEBUG = true;
+App.DEBUG = false;
 App.Instance = new App();
 /*class App {
     private static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";

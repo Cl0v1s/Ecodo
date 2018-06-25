@@ -1,0 +1,28 @@
+﻿.report-picture thumbnail {
+    position: relative;
+}
+
+.report-picture .date {
+    display: block !important;
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    top: 0;
+    left: 50%;
+    width: 60%;
+    margin: auto;
+    padding: 5px;
+    color: white;
+    margin: auto;
+    transform: translateX(-50%);
+    margin-top: 5px;
+}
+
+.report-picture .ban {
+    margin:0;
+    margin-bottom:20px;
+    width: 100%;
+    border-top: 0;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    box-shadow: none;
+}

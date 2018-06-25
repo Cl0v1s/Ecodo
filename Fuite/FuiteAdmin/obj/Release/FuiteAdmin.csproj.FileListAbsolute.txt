@@ -56,3 +56,4 @@ D:\Fuite\Fuite\FuiteAdmin\obj\Release\FuiteAdmin.csproj.CoreCompileInputs.cache
 D:\Fuite\Fuite\FuiteAdmin\obj\Release\FuiteAdmin.csproj.CopyComplete
 D:\Fuite\Fuite\FuiteAdmin\obj\Release\FuiteAdmin.dll
 D:\Fuite\Fuite\FuiteAdmin\obj\Release\FuiteAdmin.pdb
+D:\Fuite\Fuite\FuiteAdmin\bin\LZStringCSharp.dll

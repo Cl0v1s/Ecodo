@@ -1,5 +1,4 @@
-﻿<!DOCYTPE html>
-<html>
+<!DOCTYPE html>
 <head>
     <title>Fuite</title>
     <meta charset="utf-8" />
@@ -12,10 +11,10 @@
     <script src="static/js/vendor/ratchet.min.js"></script>
     <script src="static/js/index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <body>
-    <header class="bar bar-nav position-relative" style="overflow:hidden">
+    <div id="loading">
+        <span class="fuite"></span>
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" style="display: none;">
             <symbol id="wave">
                 <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"></path>
@@ -38,23 +37,5 @@
 
             </div>
         </svg>
-        <h1 class="title">Ecodo</h1>
-
-    </header>
-    <div class="content" style="background-color: white;">
-        <div class="jumbotron text-justify mb-4 mt-4">
-            ECODO ne prend pas en compte les fuites chez les particuliers.<br /><br />
-
-            L’application est faite pour que vous puissiez nous alerter concernant les fuites sur les contrats du domaine public géré par Suez et la région Nouvelle Aquitaine en est le pilote.
-            <br /><br />
-            Merci de votre participation pour éviter le gaspillage d’eau et améliorer l’état de notre réseau d’eau à tous.
-
-            <br /><br />
-            <img src="static/images/suez.png" style="width:100%; height: auto;" />
-        </div>
-        <button class="submit" onclick="PUSH({ url: 'app.html' });">
-            D'accord
-        </button>
     </div>
 </body>
-</html>

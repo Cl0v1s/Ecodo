@@ -7,7 +7,7 @@ class App {
 
     public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
 
-    public static readonly DEBUG: boolean = true;
+    public static readonly DEBUG: boolean = false;
     public report: Report;
 
     private ready: boolean = true;
@@ -42,6 +42,9 @@ class App {
         if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
             PUSH({ url: "app.html" });
         }
+        else if (window.location.href.indexOf("index") != -1 &&  localStorage.getItem("first") != "false")
+            PUSH({ url: "disclaimer.html" });
+
         localStorage.setItem("first", "false");
     }
 

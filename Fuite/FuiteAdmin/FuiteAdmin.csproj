@@ -113,11 +113,8 @@
     <Content Include="Static\css\views\History.css" />
     <Content Include="Static\css\views\ReportPicture.css" />
     <Content Include="Static\css\views\ReportItem.css" />
-    <Content Include="Static\images\layers-2x.png" />
-    <Content Include="Static\images\layers.png" />
-    <Content Include="Static\images\marker-icon-2x.png" />
-    <Content Include="Static\images\marker-icon.png" />
-    <Content Include="Static\images\marker-shadow.png" />
+    <Content Include="Static\images\arrow.svg" />
+    <Content Include="Static\images\fuite.png" />
     <Content Include="Static\js\leaflet.js" />
     <Content Include="Static\js\lz-string.min.js" />
     <Content Include="Static\js\MarkerHighlighter.js" />
@@ -205,6 +202,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

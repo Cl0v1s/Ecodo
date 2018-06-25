@@ -37,8 +37,9 @@
     <Compile Include="static\js\index.js" />
     <Compile Include="static\js\vendor\ratchet.min.js" />
     <Compile Include="ts\Camera.ts" />
-    <Content Include="index.html" />
+    <Content Include="disclaimer.html" />
     <Content Include="app.html" />
+    <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="static\css\vendor\alertify.css" />
