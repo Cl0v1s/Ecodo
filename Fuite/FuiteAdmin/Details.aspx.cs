@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace FuiteAdmin
 {
@@ -167,6 +168,43 @@ namespace FuiteAdmin
             if (result.Code != 0)
                 throw new HttpException(500, result.Message);
             Response.Redirect("History.aspx");
+        }
+
+        protected void BanPicture_Click(object sender, EventArgs e)
+        {
+            string ticket = (string)Session["Ticket"];
+            List<ReportService.Picture> pictures = new List<ReportService.Picture>();
+            foreach(Control ctrl in this.ReportPictures.Controls)
+            {
+                if (!(ctrl is Report.ReportPicture))
+                    continue;
+                CheckBox check = (CheckBox)ctrl.FindControl("check");
+                if (check == null || check.Checked == false)
+                    continue;
+                pictures.Add(((Report.ReportPicture)ctrl).Picture);
+            }
+
+            foreach(ReportService.Picture picture in pictures)
+            {
+                ReportService.ReportServiceClient client = new ReportService.ReportServiceClient();
+                ReportService.RemoveContentIpRequest request = new ReportService.RemoveContentIpRequest();
+                request.ticket = ticket;
+                if (this.BanPicture_check.Checked)
+                {
+                    request.picture = true;
+                    request.report = true;
+                    request.ip = picture.ip;
+                }
+                else
+                {
+                    request.picture = true;
+                    request.id = picture.id;
+                }
+                ReportService.Result result = client.RemoveContentIp(request);
+                if (result.Code != 0)
+                    throw new HttpException(500, result.Message);
+            }
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

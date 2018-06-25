@@ -85,11 +85,12 @@
             <div class="report-picture">
                 <div runat="server" id="ReportPictures" class="row justify-content-center">
                 </div>
+                <hr />
+                <span class="">
+                    <asp:CheckBox runat="server" ID="BanPicture_check" Text="Supprimer tout le contenu des utilisateurs concernés depuis 24 heures" />
+                    <asp:Button runat="server" ID="BanPicture" CssClass="button" Text="Supprimer le(s) photographie(s) sélectionnées" OnClientClick="return confirm('Etes-vous sûr de vouloir supprimer ce contenu ?')" OnClick="BanPicture_Click"  />
+                </span>
             </div>
-
-
-            <hr />
-
         </div>
     </div>
 

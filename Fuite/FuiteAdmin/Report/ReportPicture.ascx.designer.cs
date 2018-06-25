@@ -13,21 +13,12 @@ namespace FuiteAdmin.Report {
     public partial class ReportPicture {
         
         /// <summary>
-        /// Contrôle ban_check.
+        /// Contrôle check.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ban_check;
-        
-        /// <summary>
-        /// Contrôle ban.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ban;
+        protected global::System.Web.UI.WebControls.CheckBox check;
     }
 }

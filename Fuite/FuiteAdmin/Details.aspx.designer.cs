@@ -58,6 +58,24 @@ namespace FuiteAdmin {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportPictures;
         
         /// <summary>
+        /// Contrôle BanPicture_check.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox BanPicture_check;
+        
+        /// <summary>
+        /// Contrôle BanPicture.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BanPicture;
+        
+        /// <summary>
         /// Contrôle reportHistory.
         /// </summary>
         /// <remarks>
