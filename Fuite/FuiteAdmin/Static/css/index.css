@@ -260,8 +260,10 @@ body {
 
     .button.small
     {
-        padding: 5px;
+        padding: 10px;
         margin: 0;
+        padding-left:10px;
+        padding-right: 10px;
     }
 
     .button:hover {
@@ -308,9 +310,8 @@ body {
         }
 
 
-header {
+.navbar {
     background-color: white;
-    text-align: center;
     margin: 0;
     padding: 10px;
     /*padding: var(--space);*/
@@ -321,12 +322,6 @@ header {
     position: relative;
 }
 
-    header h1
-    {
-        display: inline-block;
-        color: white;
-
-    }
 
 
  

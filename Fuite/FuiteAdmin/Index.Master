@@ -16,9 +16,21 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <header>
-            <a href="Default.aspx"><img src="Static/images/fuite.png" width="auto" height="40" /><br />Retour</a>
-        </header>
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <img src="Static/images/fuite.png" width="25px" height="auto" />
+              <a class="navbar-brand" href="/">Ecodo Administrateur</a>
+            </div>
+            <div class="nav navbar-nav">
+            
+                <a href="http://bdxintra01.lde/portal">Retour Portail</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                  <a class="button small" href="History.aspx">Voir tous les signalements</a>
+            </div>
+          </div>
+        </nav>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

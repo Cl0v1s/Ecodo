@@ -43,7 +43,6 @@
     <label for="toggle-menu">
         <input type="checkbox" id="toggle-menu">
         <div id="menu">
-            <a class="button" href="History.aspx">Voir tous les signalements</a>
             <div runat="server" id="reportList">
             </div>
         </div>
