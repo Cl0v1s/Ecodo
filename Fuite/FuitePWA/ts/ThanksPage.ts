@@ -5,7 +5,9 @@ class ThanksPage implements Page {
 
 
     public GoTo() {
-        alert("ok");
+        document.querySelector(".submit").addEventListener("click", () => {
+            PUSH({ url: 'app.html' });
+        });
     }
 
 

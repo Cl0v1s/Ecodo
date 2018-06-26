@@ -64,8 +64,9 @@ class App {
             this.page = new DisclaimerPage();
         else if (window.location.href.indexOf("app.html") != -1)
             this.page = new FormPage();
-        else if (window.location.href.indexOf("thanks.html") != -1)
+        else if (window.location.href.indexOf("thanks.html") != -1) {
             this.page = new ThanksPage();
+        }
         this.page.GoTo();
     }
 }
@@ -316,11 +317,13 @@ function PUSH(opt) {
 /// <reference path="Page.ts">
 class LoadingPage {
     GoTo() {
-        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
-            PUSH({ url: "app.html" });
-        }
-        else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
-            PUSH({ url: "disclaimer.html" });
+        setTimeout(() => {
+            if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
+                PUSH({ url: "app.html" });
+            }
+            else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
+                PUSH({ url: "disclaimer.html" });
+        }, 1000);
     }
 }
 /// <reference path="Page.ts">
@@ -400,7 +403,9 @@ class FormPage {
 /// <reference path="Page.ts">
 class ThanksPage {
     GoTo() {
-        alert("ok");
+        document.querySelector(".submit").addEventListener("click", () => {
+            PUSH({ url: 'app.html' });
+        });
     }
 }
 //# sourceMappingURL=index.js.map
