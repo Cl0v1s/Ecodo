@@ -37,6 +37,7 @@
     <Compile Include="static\js\index.js" />
     <Compile Include="static\js\vendor\ratchet.min.js" />
     <Compile Include="ts\Camera.ts" />
+    <Content Include="thanks.html" />
     <Content Include="disclaimer.html" />
     <Content Include="app.html" />
     <Content Include="index.html" />
@@ -52,7 +53,7 @@
     <Content Include="static\images\fuite.png" />
     <Content Include="static\js\index.js.map" />
     <Content Include="tsconfig.json" />
-    <Content Include="ts\PicturePage.ts" />
+    <Content Include="ts\DisclaimerPage.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\images\" />
@@ -66,7 +67,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="ts\AlertManager.ts" />
     <TypeScriptCompile Include="ts\App.ts" />
-    <TypeScriptCompile Include="ts\DescriptionPage.ts" />
+    <TypeScriptCompile Include="ts\ThanksPage.ts" />
+    <TypeScriptCompile Include="ts\FormPage.ts" />
     <TypeScriptCompile Include="ts\Geolocator.ts" />
     <TypeScriptCompile Include="ts\LoadingPage.ts" />
     <TypeScriptCompile Include="ts\PUSH.ts" />

@@ -3,15 +3,20 @@
 /// <reference path="Camera.ts">
 
 
+/// <reference path="LoadingPage.ts">
+/// <reference path="DisclaimerPage.ts">
+/// <reference path="FormPage.ts">
+/// <reference path="ThanksPage.ts">
+
+
 class App {
 
     public static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
 
-    public static readonly DEBUG: boolean = true;
+    public static readonly DEBUG: boolean = false;
     public report: Report;
 
-    private ready: boolean = true;
-    private button: AlertButton;
+    private page: Page;
 
     public static readonly Instance: App = new App();
 
@@ -20,10 +25,10 @@ class App {
         //this.report = new Report();
         if (App.DEBUG) {
             window.addEventListener("load", () => {
-                this.Init().then(() => { this.Run() }) });
+                this.Init().then(() => { this.Route() }) });
         }
         else {
-            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Run() }) });
+            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route() }) });
         }
     }
 
@@ -41,81 +46,20 @@ class App {
         });
     }
 
-    private FirstRun() {
-        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
-            PUSH({ url: "app.html" });
-        }
-        else if (window.location.href.indexOf("index") != -1 &&  localStorage.getItem("first") != "false")
-            PUSH({ url: "disclaimer.html" });
+    private Route(): void {
+        if (window.location.href.indexOf("index.html") != -1)
+            this.page = new LoadingPage();
+        else if (window.location.href.indexOf("disclaimer.html") != -1)
+            this.page = new DisclaimerPage();
+        else if (window.location.href.indexOf("app.html") != -1)
+            this.page = new FormPage();
+        else if (window.location.href.indexOf("thanks.html") != -1)
+            this.page = new ThanksPage();
 
+        this.page.GoTo();
     }
 
-    private Run() {
-
-        this.FirstRun();
-
-        this.button = new AlertButton("#submit");
-        document.querySelector("#submit").addEventListener("click", (ev) => {
-            if (this.CheckForm())
-                this.Submit(<HTMLElement>ev.target);
-        });
-        Camera.Instance.Attach("#camera #picture");
-    }
-
-    private CheckForm(): boolean {
-        var pic = (<HTMLImageElement>document.querySelector("#picture")).src;
-        if (pic.length <= 0) {
-            this.button.Error("Vous devez prendre la fuite en photo avant de poursuivre.");
-            return false;
-        }
-        App.Instance.report.Picture = pic;
-        if (App.Instance.report.Latitude == null || App.Instance.report.Longitude == null) {
-            this.button.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
-            return false;
-        }
-
-        var desc = (<HTMLTextAreaElement>document.querySelector("#description")).value;
-        App.Instance.report.Description = desc;
-
-        var rgpd = (<HTMLInputElement>document.querySelector("#rgpd"));
-        if (rgpd.checked == false) {
-            rgpd.parentElement.classList.add("attention");
-            setTimeout(() => {
-                rgpd.parentElement.classList.remove("attention");
-            }, 1000);
-            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
-            return false;
-        }
-        return true;
-    }
-
-    public Submit(target: HTMLElement): void {
-        if (this.ready == false)
-            return;
-        this.ready = false;
-        var button = new AlertButton("#submit");
-        target.classList.remove("clickable");
-        fetch(App.Endpoint + "/AddReport", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(App.Instance.report),
-        }).then((response) => {
-            return response.json();
-        }, (error) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-        }).then((json) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            if (json.Code == 0)
-                button.Success(json.Message);
-            else
-                button.Error(json.Message);
-        });
-    }
+    
 }
 
 

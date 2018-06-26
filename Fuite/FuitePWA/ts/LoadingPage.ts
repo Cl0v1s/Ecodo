@@ -4,8 +4,10 @@
 class LoadingPage implements Page {
 
     public GoTo() {
-        PUSH({
-            url: "picture.html"
-        });
+        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
+            PUSH({ url: "app.html" });
+        }
+        else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
+            PUSH({ url: "disclaimer.html" });
     }
 }

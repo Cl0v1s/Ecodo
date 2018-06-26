@@ -12,18 +12,10 @@ function PUSH(opt) {
     if (opt.url == null)
         throw new Error("Url must be set.");
     var options = {
-        direction: 'up',
-        duration: 500,
-        slowdownfactor: 3,
-        slidePixels: 20,
-        iosdelay: 0,
-        androiddelay: 0,
-        fixedPixelsTop: 0,
-        fixedPixelsBottom: 60
+        direction: 'left',
+        href: opt.url,
     };
-    setTimeout(function () {
-        window.location.href = opt.url;
-    }, options.duration/10);
     transition.slide(options, function () {
     });
+    //window.location.href = opt.url;
 }

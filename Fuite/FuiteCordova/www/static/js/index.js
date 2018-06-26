@@ -29,21 +29,27 @@ Geolocator.Instance = new Geolocator();
 /// <reference path="Geolocator.ts">
 /// <reference path="Report.ts">
 /// <reference path="Camera.ts">
+/// <reference path="LoadingPage.ts">
+/// <reference path="DisclaimerPage.ts">
+/// <reference path="FormPage.ts">
+/// <reference path="ThanksPage.ts">
 class App {
     constructor() {
-        this.ready = true;
         //this.report = new Report();
         if (App.DEBUG) {
             window.addEventListener("load", () => {
-                this.Init().then(() => { this.Run(); });
+                this.Init().then(() => { this.Route(); });
             });
         }
         else {
-            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Run(); }); });
+            document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route(); }); });
         }
     }
     Init() {
         return new Promise((resolve, reject) => {
+            document.addEventListener("backbutton", function (e) {
+                e.preventDefault();
+            }, false);
             this.report = new Report();
             Geolocator.Instance.SubscribeLocation((p) => {
                 App.Instance.report.UpdatePosition(p);
@@ -51,73 +57,16 @@ class App {
             resolve();
         });
     }
-    FirstRun() {
-        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
-            PUSH({ url: "app.html" });
-        }
-        else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
-            PUSH({ url: "disclaimer.html" });
-        localStorage.setItem("first", "false");
-    }
-    Run() {
-        this.FirstRun();
-        this.button = new AlertButton("#submit");
-        document.querySelector("#submit").addEventListener("click", (ev) => {
-            if (this.CheckForm())
-                this.Submit(ev.target);
-        });
-        Camera.Instance.Attach("#camera #picture");
-    }
-    CheckForm() {
-        var pic = document.querySelector("#picture").src;
-        if (pic.length <= 0) {
-            this.button.Error("Vous devez prendre la fuite en photo avant de poursuivre.");
-            return false;
-        }
-        App.Instance.report.Picture = pic;
-        if (App.Instance.report.Latitude == null || App.Instance.report.Longitude == null) {
-            this.button.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
-            return false;
-        }
-        var desc = document.querySelector("#description").value;
-        App.Instance.report.Description = desc;
-        var rgpd = document.querySelector("#rgpd");
-        if (rgpd.checked == false) {
-            rgpd.parentElement.classList.add("attention");
-            setTimeout(() => {
-                rgpd.parentElement.classList.remove("attention");
-            }, 1000);
-            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
-            return false;
-        }
-        return true;
-    }
-    Submit(target) {
-        if (this.ready == false)
-            return;
-        this.ready = false;
-        var button = new AlertButton("#submit");
-        target.classList.remove("clickable");
-        fetch(App.Endpoint + "/AddReport", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(App.Instance.report),
-        }).then((response) => {
-            return response.json();
-        }, (error) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            this.button.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-        }).then((json) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            if (json.Code == 0)
-                button.Success(json.Message);
-            else
-                button.Error(json.Message);
-        });
+    Route() {
+        if (window.location.href.indexOf("index.html") != -1)
+            this.page = new LoadingPage();
+        else if (window.location.href.indexOf("disclaimer.html") != -1)
+            this.page = new DisclaimerPage();
+        else if (window.location.href.indexOf("app.html") != -1)
+            this.page = new FormPage();
+        else if (window.location.href.indexOf("thanks.html") != -1)
+            this.page = new ThanksPage();
+        this.page.GoTo();
     }
 }
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
@@ -343,14 +292,6 @@ class Camera {
     }
 }
 Camera.Instance = new Camera();
-/// <reference path="Page.ts">
-class LoadingPage {
-    GoTo() {
-        PUSH({
-            url: "picture.html"
-        });
-    }
-}
 function PUSH(opt) {
     var transition = (window.cordova && window.cordova.plugins && window.cordova.plugins.nativepagetransitions) ? window.cordova.plugins.nativepagetransitions : null;
     if (transition == null) {
@@ -365,60 +306,101 @@ function PUSH(opt) {
     if (opt.url == null)
         throw new Error("Url must be set.");
     var options = {
-        direction: 'up',
-        duration: 500,
-        slowdownfactor: 3,
-        slidePixels: 20,
-        iosdelay: 0,
-        androiddelay: 0,
-        fixedPixelsTop: 0,
-        fixedPixelsBottom: 60
+        direction: 'left',
+        href: opt.url,
     };
-    setTimeout(function () {
-        window.location.href = opt.url;
-    }, options.duration / 10);
     transition.slide(options, function () {
     });
+    //window.location.href = opt.url;
 }
 /// <reference path="Page.ts">
-class PicturePage {
+class LoadingPage {
     GoTo() {
-        Camera.Instance.Attach("#camera #picture");
-        this.button = new AlertButton("#submit");
-        document.querySelector("#submit").addEventListener("click", () => {
-            this.Next();
+        if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") == "false") {
+            PUSH({ url: "app.html" });
+        }
+        else if (window.location.href.indexOf("index") != -1 && localStorage.getItem("first") != "false")
+            PUSH({ url: "disclaimer.html" });
+    }
+}
+/// <reference path="Page.ts">
+class DisclaimerPage {
+    GoTo() {
+        document.querySelector(".submit").addEventListener("click", () => {
+            localStorage.setItem('first', 'false');
+            PUSH({ url: 'app.html' });
         });
     }
-    Next() {
+}
+/// <reference path="Page.ts">
+class FormPage {
+    constructor() {
+        this.ready = true;
+    }
+    GoTo() {
+        this.button = new AlertButton("#submit");
+        document.querySelector("#submit").addEventListener("click", (ev) => {
+            if (this.CheckForm())
+                this.Submit(ev.target);
+        });
+        Camera.Instance.Attach("#camera #picture");
+    }
+    CheckForm() {
         var pic = document.querySelector("#picture").src;
         if (pic.length <= 0) {
             this.button.Error("Vous devez prendre la fuite en photo avant de poursuivre.");
-            return;
+            return false;
         }
         App.Instance.report.Picture = pic;
         if (App.Instance.report.Latitude == null || App.Instance.report.Longitude == null) {
             this.button.Error("Vous devez autoriser la g�olocalisation pour pouvoir signaler une fuite.");
-            return;
+            return false;
         }
-        PUSH({
-            url: "description.html"
+        var desc = document.querySelector("#description").value;
+        App.Instance.report.Description = desc;
+        var rgpd = document.querySelector("#rgpd");
+        if (rgpd.checked == false) {
+            rgpd.parentElement.classList.add("attention");
+            setTimeout(() => {
+                rgpd.parentElement.classList.remove("attention");
+            }, 1000);
+            this.button.Error("Vous devez confirmer votre consentement en cochant la case ci-dessus !");
+            return false;
+        }
+        return true;
+    }
+    Submit(target) {
+        if (this.ready == false)
+            return;
+        this.ready = false;
+        var button = new AlertButton("#submit");
+        target.classList.remove("clickable");
+        fetch(App.Endpoint + "/AddReport", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(App.Instance.report),
+        }).then((response) => {
+            return response.json();
+        }, (error) => {
+            target.classList.add("clickable");
+            this.ready = true;
+            this.button.Error("Une erreur r�seau a eu lieu. Veuillez v�rifier votre connexion � internet.");
+        }).then((json) => {
+            target.classList.add("clickable");
+            this.ready = true;
+            if (json.Code == 0)
+                PUSH({ url: "thanks.html" });
+            else
+                button.Error(json.Message);
         });
     }
 }
 /// <reference path="Page.ts">
-class DescriptionPage {
+class ThanksPage {
     GoTo() {
-        this.button = new AlertButton("#submit");
-        document.querySelector("#submit").addEventListener("click", () => {
-            this.Next();
-        });
-    }
-    Next() {
-        var desc = document.querySelector("#description").value;
-        App.Instance.report.Description = desc;
-        PUSH({
-            url: "rgpd.html"
-        });
+        alert("ok");
     }
 }
 //# sourceMappingURL=index.js.map
