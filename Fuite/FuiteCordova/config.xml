@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.suez.ecodosimple" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="fr-FR">
-  <name>Ecodosimple</name>
-  <description>
-  </description>
+  <name>Ecodo</name>
+  <description>L'application Ecodo a été conçue afin de permettre aux habitants de Bordeaux métropôle de signaler l'existance d'une fuite d'eau sur la voie publique aux services appropriés.</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">Clovis Portron</author>
   <vs:template-name>BlankJS</vs:template-name>
   <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
