@@ -20,7 +20,7 @@
           <div class="container-fluid">
             <div class="navbar-header">
                 <img src="Static/images/fuite.png" width="25px" height="auto" />
-              <a class="navbar-brand" href="/">Ecodo Administrateur</a>
+              <a class="navbar-brand" href="Default.aspx">Ecodo Administrateur</a>
             </div>
             <div class="nav navbar-nav">
             
