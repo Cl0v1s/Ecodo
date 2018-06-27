@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace FuiteAdmin.Report
 {
+    /// <summary>
+    /// Contrôle présentant le résumé associé à un report
+    /// </summary>
     public partial class ReportItem : System.Web.UI.UserControl
     {
 

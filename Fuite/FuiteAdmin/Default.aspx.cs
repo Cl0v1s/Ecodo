@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace FuiteAdmin
 {
+    /// <summary>
+    /// Page de présentation des nouveaux reports de fuite avec maps openstreetmap
+    /// </summary>
     public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)

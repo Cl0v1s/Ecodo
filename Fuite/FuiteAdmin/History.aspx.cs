@@ -9,6 +9,9 @@ using System.Web.UI.HtmlControls;
 
 namespace FuiteAdmin
 {
+    /// <summary>
+    /// Ecran d'affichage de tous les reports de fuite en fonction de leur état dans un tableau
+    /// </summary>
     public partial class History : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -16,6 +19,10 @@ namespace FuiteAdmin
             this.Update();
         }
 
+        /// <summary>
+        /// Met à jour la construction de la page 
+        /// </summary>
+        /// <param name="state">Etat des reports à afficher</param>
         private void Update(ReportService.State state = ReportService.State.New)
         {
             string ticket = (string)Session["Ticket"];
@@ -40,6 +47,7 @@ namespace FuiteAdmin
             if (state != ReportService.State.New)
                 results.Data = results.Data.Reverse().ToArray();
 
+            // Construction du tableau des reports
             foreach (ReportService.ReportRequest report in results.Data)
             {
                 HtmlTableRow tr = new HtmlTableRow();
@@ -64,6 +72,11 @@ namespace FuiteAdmin
             
         }
 
+        /// <summary>
+        /// Affichage des nouveaux reports
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void new_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.New);
@@ -72,6 +85,11 @@ namespace FuiteAdmin
             this.closed.CssClass = this.closed.CssClass.Replace(" selected", "");
         }
 
+        /// <summary>
+        /// Affichage des reports en cours de traitement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void current_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.Affected);
@@ -80,6 +98,11 @@ namespace FuiteAdmin
             this.closed.CssClass = this.closed.CssClass.Replace(" selected", "");
         }
 
+        /// <summary>
+        /// Affichage des reports terminés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void closed_Click(object sender, EventArgs e)
         {
             this.Update(ReportService.State.Closed);

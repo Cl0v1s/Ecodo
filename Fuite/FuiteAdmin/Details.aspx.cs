@@ -8,6 +8,9 @@ using System.Web.UI.WebControls;
 
 namespace FuiteAdmin
 {
+    /// <summary>
+    /// Ecran de présentation des détails associés à un report
+    /// </summary>
     public partial class Details : System.Web.UI.Page
     {
 
@@ -20,6 +23,9 @@ namespace FuiteAdmin
             this.BuildPictures();
         }
 
+        /// <summary>
+        /// Construit la liste des photographies dans la page 
+        /// </summary>
         private void BuildPictures()
         {
             if (this.Pictures == null)
@@ -33,7 +39,9 @@ namespace FuiteAdmin
         }
 
 
-
+        /// <summary>
+        /// Met à jour la construction de la page 
+        /// </summary>
         private void Update()
         {
             string ticket = (string)Session["Ticket"];
@@ -123,6 +131,11 @@ namespace FuiteAdmin
             }
         }
 
+        /// <summary>
+        /// Met à jour l'état du report
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void updateState_Click(object sender, EventArgs e)
         {
             ReportService.ReportRequest report = (ReportService.ReportRequest)ViewState["Report"];
@@ -146,6 +159,11 @@ namespace FuiteAdmin
             this.Update();
         }
 
+        /// <summary>
+        /// Supprime le présent rapport 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void ban_Click(object sender, EventArgs e)
         {
             string ticket = (string)Session["Ticket"];
@@ -170,6 +188,11 @@ namespace FuiteAdmin
             Response.Redirect("History.aspx");
         }
 
+        /// <summary>
+        /// Supprime du contenu (reports et photos) en fonction de leur id ou de l'IP de l'utilisateur l'ayant 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BanPicture_Click(object sender, EventArgs e)
         {
             string ticket = (string)Session["Ticket"];

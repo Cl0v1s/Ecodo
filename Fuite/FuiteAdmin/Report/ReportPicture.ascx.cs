@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace FuiteAdmin.Report
 {
+    /// <summary>
+    /// Element d'interface présentant une photographie associée à un report
+    /// </summary>
     public partial class ReportPicture : System.Web.UI.UserControl
     {
 
