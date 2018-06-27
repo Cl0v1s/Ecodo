@@ -1,6 +1,8 @@
 /// <reference path="Page.ts">
 
-
+/**
+ * Page controlant la logique derrière la page de remerciement
+ */
 class ThanksPage implements Page {
 
 

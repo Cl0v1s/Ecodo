@@ -1,6 +1,8 @@
 /// <reference path="Page.ts">
 
-
+/**
+ * Gère le comportement de la page d'avertissement lors du premier lancement de l'application
+ */
 class DisclaimerPage implements Page {
 
     public GoTo() {

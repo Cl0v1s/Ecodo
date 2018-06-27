@@ -1,3 +1,7 @@
+/**
+ * Permet de transiter avec animation de page en page 
+ * @param opt objet contenant les paramètres de la transition (notamment la page à laquelle l'application doit se rendre)
+ */
 function PUSH(opt) {
     var transition = ((<any>window).cordova && (<any>window).cordova.plugins && (<any>window).cordova.plugins.nativepagetransitions) ? (<any>window).cordova.plugins.nativepagetransitions : null;
     if (transition == null) {

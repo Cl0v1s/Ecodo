@@ -1,7 +1,18 @@
+/**
+ * Classe utilitaire permettant de g�rer la g�olocalisation
+ * */
 class Geolocator {
     constructor() {
+        /**
+         * Disponible ?
+         */
         this.enabled = false;
     }
+    /**
+     * Lance la mise � jour r�guli�re de la position et appelle la fonction func � intervalle r�gulier
+     * @param func Fonction � appeler lors de la mise � jour de la position
+     * @returns Vrai si g�olocalisation disponible, faux sinon
+     */
     SubscribeLocation(func) {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition((position) => {
@@ -12,6 +23,11 @@ class Geolocator {
         }
         return false;
     }
+    /**
+     * Demande � l'utilisateur s'il est possible d'utiliser la g�olocalisation sur son t�l�phone
+     * @param force = false Force la g�ololisation m�me si la fonction ne semble pas impl�ment�e (inutile ?)
+     * @returns Une promesse r�solue lors de l'acceptation paer l'utilisateur, rejett�e sinon
+     */
     askLocation(force = false) {
         return new Promise((resolve, reject) => {
             console.log(force);
@@ -25,6 +41,9 @@ class Geolocator {
         });
     }
 }
+/**
+ * Singleton
+ */
 Geolocator.Instance = new Geolocator();
 /// <reference path="Geolocator.ts">
 /// <reference path="Report.ts">
@@ -33,7 +52,13 @@ Geolocator.Instance = new Geolocator();
 /// <reference path="DisclaimerPage.ts">
 /// <reference path="FormPage.ts">
 /// <reference path="ThanksPage.ts">
+/**
+ * Point d'entrée de l'application, contrôle le déroulement général de l'exécution
+ */
 class App {
+    /**
+     * Construit une nouvelle application
+     */
     constructor() {
         //this.report = new Report();
         if (App.DEBUG) {
@@ -45,6 +70,10 @@ class App {
             document.addEventListener("deviceready", () => { this.Init().then(() => { this.Route(); }); });
         }
     }
+    /**
+     * Initialise l'application en lancant la géolocalisation et désactivant le bouton retour
+     * @returns Promesse résolue une fois le lancement terminé
+     */
     Init() {
         return new Promise((resolve, reject) => {
             document.addEventListener("backbutton", function (e) {
@@ -57,6 +86,9 @@ class App {
             resolve();
         });
     }
+    /**
+     * Construit l'objet Page correspondant à l'interface actuellement affichée par l'application
+     */
     Route() {
         if (window.location.href.indexOf("index.html") != -1)
             this.page = new LoadingPage();
@@ -70,145 +102,51 @@ class App {
         this.page.GoTo();
     }
 }
+/**
+ * Adresse de l'API
+ */
 App.Endpoint = "http://212.234.77.116/RechercheFuite/ReportService.svc";
+/**
+ * Passer à true pour tester dans la navigateur. NE PAS LAISSER A TRUE LORS DE LA COMPILATION MOBILE
+ */
 App.DEBUG = false;
+/**
+ * Singleton
+ */
 App.Instance = new App();
-/*class App {
-    private static readonly Endpoint: string = "http://212.234.77.116/RechercheFuite/ReportService.svc";
-    //private static readonly Endpoint: string = "http://localhost:49280/ReportService.svc";
-    
-    public static readonly DEBUG: boolean = true;
-    public static readonly Instance: App = new App();
-
-
-
-    private report: Report;
-    private ready: boolean = false;
-
-    constructor() {
-        if (App.DEBUG) {
-            window.addEventListener("load", () => { this.Launch() });
-        }
-        else {
-            document.addEventListener("deviceready", () => { this.Launch() });
-        }
-    }
-
-    public Launch() {
-        if (this.ready)
-            return;
-        document.querySelector("#loading").classList.add("d-none");
-        this.Attach();
-        this.Start();
-        this.ready = true;
-    }
-
-    private Attach(): void {
-        document.querySelector("#submit").addEventListener("click", (ev: Event) => { this.Submit(<HTMLElement>ev.target); });
-        document.querySelector("#submit span").addEventListener("click", (ev: Event) => { this.Submit((<HTMLElement>ev.target).parentElement); });
-        Camera.Instance.Attach("#camera #picture")
-        AlertManager.Instance.Attach("#submit");
-    }
-
-    private Start(): void {
-        this.report = new Report();
-        if (Geolocator.Instance.SubscribeLocation((p) => {
-            this.report.UpdatePosition(p)
-        }) == false)
-            AlertManager.Instance.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
-    }
-
-    private CheckForm(): boolean {
-
-
-        if (Geolocator.Instance.enabled == false) {
-            AlertManager.Instance.Error("Vous devez autoriser la géolocalisation pour pouvoir signaler une fuite.");
-            return false;
-        }
-
-        if (Camera.Instance.enabled == false) {
-            AlertManager.Instance.Error("Vous devez autoriser l'accès à la caméra pour pouvoir signaler une fuite.");
-            return false;
-        }
-
-        if (this.report == null || Report.IsValid(this.report) == false) {
-            if (this.report.Picture == null)
-                AlertManager.Instance.Error("Votre signalement doit inclure une photo de la fuite. :/");
-            if (this.report.Latitude == null || this.report.Longitude == null)
-                AlertManager.Instance.Error("Il y a un problème avec les coordonnées GPS... :/");
-            return false;
-        }
-
-        let rgpd: HTMLInputElement = document.querySelector("#rgpd");
-        if (rgpd.checked == false) {
-            rgpd.parentElement.classList.remove("attention");
-            setTimeout(() => {
-                rgpd.parentElement.classList.add("attention");
-            }, 50);
-            return false;
-        }
-
-        return true;
-    }
-
-    private FillReport(): void {
-        var pic = (<HTMLImageElement>document.querySelector("#picture")).src;
-        this.report.Picture = pic;
-        this.report.Description = (<HTMLTextAreaElement>document.querySelector("#description")).value;
-    }
-
-    public Submit(target: HTMLElement): void {
-        if (this.ready == false)
-            return;
-        this.ready = false;
-        target.classList.remove("clickable");
-        this.FillReport();
-        if (this.CheckForm() == false) {
-            target.classList.add("clickable");
-            this.ready = true;
-            return;
-        }
-        /*Compression
-        var pic = this.report.Picture;
-        pic = pic.replace("data:image/jpeg;base64,", "");
-        this.report.Picture = window.LZString.compress(pic);
-        fetch(App.Endpoint + "/AddReport", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(this.report),
-        }).then((response) => {
-            return response.json();
-        }, (error) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            AlertManager.Instance.Error("Une erreur réseau a eu lieu. Veuillez vérifier votre connexion à internet.");
-            alert(error);
-        }).then((json) => {
-            target.classList.add("clickable");
-            this.ready = true;
-            if (json.Code == 0)
-                AlertManager.Instance.Success("Votre rapport de fuite a bien été pris en compte ! Merci beaucoup :D");
-            else
-                AlertManager.Instance.Error(json.Message);
-            this.Start();
-        });
-    }
-}*/ 
 /// <reference path="Alertify.d.ts">
+/**
+ * Repr�sente un bouton capable de changer de message afin de pr�senter une nouvelle informations � l'utilisateur en r�ponse � son action sur ledit bouton
+ */
 class AlertButton {
+    /**
+     * Construit le bouton
+     * @param {string} target objet HTML � transformer en alerte Bouton
+     */
     constructor(target) {
         this.target = document.querySelector(target);
     }
+    /**
+     * Affiche un message de succ�s
+     * @param {string} message Message � afficher
+     */
     Success(message) {
         this.Push(message, "success");
         console.log(message);
     }
+    /**
+     * Affiche un message d'erreur
+     * @param {string} message Message � afficher
+     */
     Error(message) {
         this.Push(message, "error");
         console.error(message);
     }
+    /**
+     * Modifie l'apprence du bouton en le faisant afficher un message et lance son animation
+     * @param {string} message Message � afficher
+     * @param {string} type Type de message (erreur ou succ�s)
+     */
     Push(message, type) {
         if (this.target == null || this.target.classList.contains("attention"))
             return;
@@ -228,7 +166,14 @@ class AlertButton {
         }, 10000);
     }
 }
+/**
+ * Repr�sente une requ�te de cr�ation d'un nouveau report
+ */
 class Report {
+    /**
+     * COnstruction de la req�ete � partir d'un objet pr�-existant
+     * @param obj = null
+     */
     constructor(obj = null) {
         this.Latitude = null;
         this.Longitude = null;
@@ -241,16 +186,29 @@ class Report {
         this.Description = obj.Description;
         this.Picture = obj.Picture;
     }
+    /**
+     * Retourne si la requete est valide
+     * @param {Report} report Requete � tester
+     * @returns Vrai si valide, faux sinon
+     */
     static IsValid(report) {
         if (report.Latitude == null || report.Longitude == null || report.Picture == null)
             return false;
         return true;
     }
+    /**
+     * Met � jour la position du report courant
+     * @param position Objet de g�olocation contenant les coordonn�es g�od�siques.
+     */
     UpdatePosition(position) {
         this.Latitude = position.coords.latitude;
         this.Longitude = position.coords.longitude;
         console.log("Updated");
     }
+    /**
+     * R�cup�re les donn�es de formulaires associ�es � ce report
+     * @returns Les donn�es de formulaire
+     */
     FormData() {
         let data = new FormData();
         data.append("latitude", this.Latitude.toString());
@@ -261,11 +219,24 @@ class Report {
     }
 }
 /// <reference path="LZString.d.ts">
+/**
+ * Classe utilitaire permettant d'int�rragir avec l'appareil photo du t�l�phone
+ **/
 class Camera {
     constructor() {
+        /**
+         * Si la cam�ra est disponible
+         */
         this.enabled = false;
+        /**
+         * Donn�e de la photo en DATAURI
+         */
         this.data = null;
     }
+    /**
+     * Attache l'instance � un �l�ment DOM de l'interface
+     * @param {string} picture Selecteur CSS de l'�lement DOM � ammarer
+     */
     Attach(picture) {
         this.picture = document.querySelector(picture);
         if (!navigator.camera) {
@@ -277,6 +248,9 @@ class Camera {
             this.Capture();
         });
     }
+    /**
+     * Prend la photo et l'affiche dans l'�l�ment picture renseign�
+     */
     Capture() {
         var options = {
             quality: 20,
@@ -292,7 +266,14 @@ class Camera {
         }, function () { }, options);
     }
 }
+/**
+ * Singleton
+ */
 Camera.Instance = new Camera();
+/**
+ * Permet de transiter avec animation de page en page
+ * @param opt objet contenant les param�tres de la transition (notamment la page � laquelle l'application doit se rendre)
+ */
 function PUSH(opt) {
     var transition = (window.cordova && window.cordova.plugins && window.cordova.plugins.nativepagetransitions) ? window.cordova.plugins.nativepagetransitions : null;
     if (transition == null) {
@@ -315,6 +296,9 @@ function PUSH(opt) {
     //window.location.href = opt.url;
 }
 /// <reference path="Page.ts">
+/**
+ * Page g�rant le comportement de l'interface pr�sentant la page de chargement
+ */
 class LoadingPage {
     GoTo() {
         setTimeout(() => {
@@ -327,6 +311,9 @@ class LoadingPage {
     }
 }
 /// <reference path="Page.ts">
+/**
+ * G�re le comportement de la page d'avertissement lors du premier lancement de l'application
+ */
 class DisclaimerPage {
     GoTo() {
         document.querySelector(".submit").addEventListener("click", () => {
@@ -336,8 +323,14 @@ class DisclaimerPage {
     }
 }
 /// <reference path="Page.ts">
+/**
+ * G�re la page de formulaire permettant la construction effective dela requ�te de report
+ */
 class FormPage {
     constructor() {
+        /**
+         * Peut on envoyer ?
+         */
         this.ready = true;
     }
     GoTo() {
@@ -348,6 +341,10 @@ class FormPage {
         });
         Camera.Instance.Attach("#camera #picture");
     }
+    /**
+     * V�rifie les donn�es renseign�es dans le formulaire
+     * @returns vrai su formulaire valide, faux sinon
+     */
     CheckForm() {
         var pic = document.querySelector("#picture").src;
         if (pic.length <= 0) {
@@ -372,6 +369,10 @@ class FormPage {
         }
         return true;
     }
+    /**
+     * Envoie la requ�te de report
+     * @param {HTMLElement} target bouton dans lequel afficher l'etat de la requete
+     */
     Submit(target) {
         if (this.ready == false)
             return;
@@ -401,6 +402,9 @@ class FormPage {
     }
 }
 /// <reference path="Page.ts">
+/**
+ * Page controlant la logique derri�re la page de remerciement
+ */
 class ThanksPage {
     GoTo() {
         document.querySelector(".submit").addEventListener("click", () => {

@@ -1,8 +1,18 @@
 /// <reference path="Page.ts">
 
+/**
+ * Gère la page de formulaire permettant la construction effective dela requête de report
+ */
 class FormPage implements Page {
 
+    /**
+     * Bouton dans lequel afficher l'état de l'avancement de la requête au serveur
+     */
     private button: AlertButton;
+
+    /**
+     * Peut on envoyer ? 
+     */
     private ready: boolean = true;
 
     public GoTo() {
@@ -14,6 +24,10 @@ class FormPage implements Page {
         Camera.Instance.Attach("#camera #picture");
     }
 
+    /**
+     * Vérifie les données renseignées dans le formulaire 
+     * @returns vrai su formulaire valide, faux sinon
+     */
     private CheckForm(): boolean {
         var pic = (<HTMLImageElement>document.querySelector("#picture")).src;
         if (pic.length <= 0) {
@@ -41,6 +55,10 @@ class FormPage implements Page {
         return true;
     }
 
+    /**
+     * Envoie la requête de report
+     * @param {HTMLElement} target bouton dans lequel afficher l'etat de la requete
+     */
     public Submit(target: HTMLElement): void {
         if (this.ready == false)
             return;

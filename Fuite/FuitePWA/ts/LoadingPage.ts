@@ -1,6 +1,8 @@
 /// <reference path="Page.ts">
 
-
+/**
+ * Page gérant le comportement de l'interface présentant la page de chargement
+ */
 class LoadingPage implements Page {
 
     public GoTo() {
