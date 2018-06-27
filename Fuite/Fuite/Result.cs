@@ -8,6 +8,9 @@ using System.Text;
 
 namespace FuiteAPI
 {
+    /// <summary>
+    /// Représente le résultat d'une opération renvoyé à un utilisateur
+    /// </summary>
     [DataContract]
     public class Result
     {
@@ -30,6 +33,9 @@ namespace FuiteAPI
             get; set;
         }
 
+        /// <summary>
+        /// Code de résultat, 0 si ok, autre sinon
+        /// </summary>
         [DataMember]
         public int Code
         {
@@ -37,11 +43,16 @@ namespace FuiteAPI
         }
     }
 
-
+    /// <summary>
+    /// Représente le résultat d'une opération de récupération de un ou plusieurs reports
+    /// </summary>
     [DataContract]
     public class ResultReports : Result
     {
 
+        /// <summary>
+        /// Liste des reports contenus dans la réponse
+        /// </summary>
         [DataMember]
         public ReportRequest[] Data
         {
@@ -49,9 +60,15 @@ namespace FuiteAPI
         }
     }
 
+    /// <summary>
+    /// Représente le résultat d'une opération de récupération de photographies
+    /// </summary>
     [DataContract]
     public class ResultPictures : Result
     {
+        /// <summary>
+        /// Liste des photographies
+        /// </summary>
         [DataMember]
         public Picture[] Data
         {
@@ -59,11 +76,16 @@ namespace FuiteAPI
         }
     }
 
-
+    /// <summary>
+    /// Représente le résultat d'une opérations de récupération de changements
+    /// </summary>
     [DataContract]
     public class ResultChanges : Result
     {
 
+        /// <summary>
+        /// Liste des changements
+        /// </summary>
         [DataMember]
         public Change[] Data
         {
@@ -71,14 +93,4 @@ namespace FuiteAPI
         }
     }
 
-    [DataContract]
-    public class ResultIp : Result
-    {
-
-        [DataMember]
-        public bool Data
-        {
-            get; set;
-        }
-    }
 }

@@ -9,6 +9,10 @@ using System.IO;
 
 namespace FuiteAPI
 {
+
+    /// <summary>
+    /// Contrat définissant l'interface devant être exposée par l'API
+    /// </summary>
     [ServiceContract]
     public interface IReportService
     {
@@ -59,15 +63,20 @@ namespace FuiteAPI
         ResultChanges GetChanges(GetChangesRequest request);
 
         /// <summary>
-        /// Récupère un report de fuite en fonction des 
+        /// Récupère un report de fuite en fonction des paramètres contenus dans la requête
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">Paramètres de la requête</param>
+        /// <returns>Une liste contenant le rapport de fuite correspondant aux paramètres de la requête</returns>
         [OperationContract]
         [WebInvoke(Method = "*",
         ResponseFormat = WebMessageFormat.Json)]
         ResultReports GetReport(GetReportRequest request);
 
+        /// <summary>
+        /// Supprime le contenu (rapport et/ou photographies) en fonction d'une adresse IP ou d'un id selon la requête
+        /// </summary>
+        /// <param name="request">Paramètres de la requête</param>
+        /// <returns>Le résultat de l'opération</returns>
         [OperationContract]
         [WebInvoke(Method = "*",
         ResponseFormat = WebMessageFormat.Json)]

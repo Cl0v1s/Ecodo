@@ -5,8 +5,14 @@ using System.Web;
 
 namespace FuiteAPI
 {
+    /// <summary>
+    /// Classe partielle définissant des accesseurs utilitaires à la classe de modèle Change
+    /// </summary>
     public partial class Change
     {
+        /// <summary>
+        /// Permet d'accéder à l'opérateur associé à un changement
+        /// </summary>
         public WebSrvPortal.Auth.User Operator {
             get
             {

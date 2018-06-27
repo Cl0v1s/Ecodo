@@ -17,6 +17,10 @@ namespace FuiteAPI
     public class ReportService : IReportService
     {
 
+        /// <summary>
+        /// Ajoute les headers CORS à une réponse afin de permettre l'accès depuis n'importe  où sur Internet
+        /// </summary>
+        /// <returns>False si requête OPTIONS, true sinon</returns>
         private bool AddCORS()
         {
             WebOperationContext.Current.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
@@ -29,6 +33,14 @@ namespace FuiteAPI
             return true;
         }
 
+        /// <summary>
+        /// Calcule la distance en mètres entre deux points géodésiques
+        /// </summary>
+        /// <param name="lat1">Latitude du point 1</param>
+        /// <param name="lon1">Longitude du point 1</param>
+        /// <param name="lat2">Latitude du point 2</param>
+        /// <param name="lon2">Longitude du point 2</param>
+        /// <returns></returns>
         private static double DistanceGeo(double lat1, double lon1, double lat2, double lon2)
         {
             var R = 6371e3; // metres
@@ -44,6 +56,7 @@ namespace FuiteAPI
 
             return R * c;
         }
+
 
         public Result AddReport(ReportRequest report)
         {
@@ -349,6 +362,10 @@ namespace FuiteAPI
             return result;
         }
 
+        /// <summary>
+        /// Supprime une photographie en fonction de son ID
+        /// </summary>
+        /// <param name="id">ID de la photo à supprimer</param>
         private void RemovePicture(int id)
         {
             FuiteKey entities = new FuiteKey();
@@ -359,6 +376,10 @@ namespace FuiteAPI
             entities.SaveChanges();
         }
 
+        /// <summary>
+        /// Supprime un report en fonction de son ID
+        /// </summary>
+        /// <param name="id">ID du report à supprimer</param>
         private void RemoveReport(int id)
         {
             FuiteKey entities = new FuiteKey();
@@ -369,6 +390,10 @@ namespace FuiteAPI
             entities.SaveChanges();
         }
 
+        /// <summary>
+        /// Supprime des photographies en fonction de l'adresse IP de l'utilisateur les ayant envoyé
+        /// </summary>
+        /// <param name="ip">IP des photographies à supprimer</param>
         private void RemovePictures(string ip)
         {
             FuiteKey entities = new FuiteKey();
@@ -377,6 +402,10 @@ namespace FuiteAPI
             entities.SaveChanges();
         }
 
+        /// <summary>
+        /// Supprime des reports en fonction de l'adresse IP de l'utilisateur les ayant envoyé
+        /// </summary>
+        /// <param name="ip">IP des reports à supprimer</param>
         private void RemoveReports(string ip)
         {
             FuiteKey entities = new FuiteKey();
