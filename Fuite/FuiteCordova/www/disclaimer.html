@@ -12,18 +12,25 @@
     <script src="static/js/vendor/ratchet.min.js"></script>
     <script src="static/js/index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #tick {
+            width: 50%;
+            max-height: 200px;
+            margin: auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="content" style="background-color: white;">
         <section class="text-justify mt-4 p-4">
-            <h1>Informations</h1>
-            ECODO ne prend pas en compte les fuites chez les particuliers.<br /><br />
-
-            L’application est faite pour que vous puissiez nous alerter concernant les fuites sur les contrats du domaine public géré par Suez et la région Nouvelle Aquitaine en est le pilote.
-            <br /><br />
-            Merci de votre participation pour éviter le gaspillage d’eau et améliorer l’état de notre réseau d’eau à tous.
-
-            <br /><br />
+            <img id="tick" src="static/images/info.svg" />
+            <p class="mt-4" style="color: white;">
+                ECODO ne prend pas en compte les fuites chez les particuliers.<br /><br />
+                L’application est faite pour que vous puissiez nous alerter concernant les fuites sur les contrats du domaine public géré par Suez et la région Nouvelle Aquitaine en est le pilote.
+                <br /><br />
+                Merci de votre participation pour éviter le gaspillage d’eau et améliorer l’état de notre réseau d’eau à tous.
+            </p>
             <p class="text-center">
                 <img src="static/images/suez.png" style="width:70%; height: auto;" />
             </p>
@@ -31,6 +38,9 @@
             <button class="submit" style="margin-top:-20px;">
                 D'accord
             </button>
+
+
+            
         </section>
 
     </div>

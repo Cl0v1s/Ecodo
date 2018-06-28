@@ -118,7 +118,9 @@
     <Content Include="Static\js\leaflet.js" />
     <Content Include="Static\js\lz-string.min.js" />
     <Content Include="Static\js\MarkerHighlighter.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Index.Master" />
   </ItemGroup>
   <ItemGroup>

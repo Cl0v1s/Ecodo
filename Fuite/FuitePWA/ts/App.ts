@@ -60,6 +60,13 @@ class App {
         return new Promise((resolve, reject) => {
             document.addEventListener("backbutton", function (e) {
                 e.preventDefault();
+                if ((<any>navigator).app) {
+                    (<any>navigator).app.exitApp();
+                } else if ((<any>navigator).device) {
+                    (<any>navigator).device.exitApp();
+                } else {
+                    window.close();
+                }
             }, false);
             this.report = new Report();
             Geolocator.Instance.SubscribeLocation((p) => {
