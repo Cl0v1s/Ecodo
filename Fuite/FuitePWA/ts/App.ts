@@ -89,7 +89,6 @@ class App {
         else if (window.location.href.indexOf("thanks.html") != -1) {
             this.page = new ThanksPage();
         }
-
         this.page.GoTo();
     }
 

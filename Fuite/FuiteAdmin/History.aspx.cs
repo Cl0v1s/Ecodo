@@ -58,7 +58,7 @@ namespace FuiteAdmin
                 td.InnerText = states[(int)report.State];
                 tr.Controls.Add(td);
                 td = new HtmlTableCell();
-                td.InnerText = report.Date.ToString("dd/MM/yy hh:mm");
+                td.InnerText = report.Date.ToString("dd/MM/yy HH:mm");
                 tr.Controls.Add(td);
                 td = new HtmlTableCell();
                 HtmlAnchor a = new HtmlAnchor();

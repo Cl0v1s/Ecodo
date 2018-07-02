@@ -114,7 +114,7 @@ namespace FuiteAdmin
                 {
                     HtmlTableRow tr = new HtmlTableRow();
                     HtmlTableCell td = new HtmlTableCell();
-                    td.InnerText = change.date.ToString("dd/MM/yy hh:mm");
+                    td.InnerText = change.date.ToString("dd/MM/yy HH:mm");
                     tr.Controls.Add(td);
                     td = new HtmlTableCell();
                     td.InnerText = states[(int)change.state];

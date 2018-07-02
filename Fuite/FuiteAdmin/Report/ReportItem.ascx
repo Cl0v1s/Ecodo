@@ -2,7 +2,7 @@
 <div class="report-item round" >
     <a runat="server" id="link" href="../Details.aspx">
         <span class="id">#<%= this.Report.Id %></span>
-        <span class="date mt-2">Le <%= this.Report.Date.ToString("dd/MM/yy hh:mm") %>
+        <span class="date mt-2">Le <%= this.Report.Date.ToString("dd/MM/yy HH:mm") %>
         </span><span class="ip">Par <%= this.Report.Ip %></span>
         <span>Signalement(s):<%= this.Report.Quantity %></span>
     </a>
